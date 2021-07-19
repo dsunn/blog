@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Whatever Blog</title>
-    <link>https://dsunn.github.io/blog/posts/</link>
-    <description>Recent content in Posts on Whatever Blog</description>
+    <title>general on Whatever Blog</title>
+    <link>https://dsunn.github.io/blog/tags/general/</link>
+    <description>Recent content in general on Whatever Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Jul 2021 16:34:14 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Jul 2021 16:34:14 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/general/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Test</title>
       <link>https://dsunn.github.io/blog/2021/07/test/</link>
