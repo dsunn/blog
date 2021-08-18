@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>openwrt on Whatever Blog</title>
+    <link>https://dsunn.github.io/blog/tags/openwrt/</link>
+    <description>Recent content in openwrt on Whatever Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Aug 2021 12:58:03 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/openwrt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ros通过dhcp6 option下发指定dns</title>
+      <link>https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/</link>
+      <pubDate>Wed, 18 Aug 2021 12:58:03 +0800</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/</guid>
+      <description>
+        
+          &lt;p&gt;我的网络架构是ros(主路由), dhcp服务跑在ros上; debian上跑clash作为透明代理. 先前我安装了openwrt作为旁路透明代理, 现在因为启用clash为网关, op就放一边, 也跑着, 作为网络中的一个设备, 算是一个backup的透明代理吧.&lt;/p&gt;
+
+&lt;p&gt;我debian上的clash, 跑的是fake-ip的dns模式, 转发模式是tproxy. 另用coredns架设了一个能科学且能分流查询的dns 服务器, 作为clash的fallback dns组, 另外架设了一个adguard home, 作为clash dns的延伸, adh上游唯一设置为clash dns, 我主要用adh拦截一些广告(实际作用不大), 和host的ip劫持. 这样, 就保证了终端设备的dns请求都最终到达clash, 而能使用到clash的dns的反投毒的功能, 以及fake-ip功能.&lt;/p&gt;
+
+&lt;p&gt;这样, 在ipv4方面, 通过ros的dhcp服务下发网关为clash, dns为adh(当然从上面的设置中可以知道, adh是把过滤后的请求唯一发给clash的). ipv6是主路由ros通告的, 网关自然为ros, ipv6的dns其实我在ros里并没有设置过, 但在实际使用中发现, 终端设备还是会获取到ipv6的upstream dns, 也就是说即使你在路由器中不设置ipv6的dns, 设备还是会循网关递归找到上游的dns服务器; windows会优先使用ipv6 dns(upstream)来解析, 这样导致dns请求不能到达clash.&lt;/p&gt;
+
+&lt;p&gt;一番google后, 现在是通过ros的ipv6 dhcp server中加入option 23来指定dns, 即adh的ipv6地址. 代码:&lt;/p&gt;
+
+&lt;p&gt;/ipv6 dhcp-server option&lt;br /&gt;
+ add code=23 name=dns value=0xfd80000000000000ccf2bbfffe0abcf1&lt;/p&gt;
+
+&lt;p&gt;此外, ros的ipv6-ND中不勾选advertise dns, 勾选other config.&lt;/p&gt;
+
+&lt;p&gt;但刚开始一直没生效, 经检查后发现是op在干扰, op虽然是透明代理, 而且目前我并没有用到它, 但它其实是在通告ipv6的dns. 关闭了op的&amp;quot;使用内置的ipv6管理&amp;quot;, 就正常了.&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
