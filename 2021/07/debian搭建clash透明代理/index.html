@@ -123,7 +123,7 @@
 
 <p>记录一下自己的搭建过程记录一下自己的搭建过程</p>
 
-<p>最好用root用户运行, 特别是后面用clash premium installer搭建时, 不用root会报错</p>
+<p>最好用root用户运行, 特别是当使用clash premium installer搭建时, 不用root会报错</p>
 
 <p>一. clash程序<br />
 - 下载clash premium (<a href="https://github.com/Dreamacro/clash/releases/tag/premium">https://github.com/Dreamacro/clash/releases/tag/premium</a>) 解压保存为/usr/local/bin/clash<br />
@@ -173,20 +173,20 @@ ip6tables-restore  &lt; /etc/iptables/rules.v6</p>
 
 <ol>
 <li>redirect模式<br />
-这模式下google home时有something went wrong, 可能其他google原生设备/app也会时有报错, 网上说可能google app内置查询设定了dns.<br /></li>
+这模式下redir port: 7892, google home时有something went wrong, 可能其他google原生设备/app也会时有报错, 网上说可能google app内置查询设定了dns.<br /></li>
 <li>准tproxy模式<br />
 但没用到tproxy端口, 依然用的是redir port: 7892, 我也不清楚是不是真正的tproxy模式. 这种模式联网都比较快, 但ch能进房间却没有声音, google app工作正常, 在yacd连接状况中显示为redir<br /></li>
 <li>tproxy模式<br />
-使用tproxy port: 7893, 也是全局代理; ch工作正常, google app工作正常, 在yacd连接状况中显示为tproxy<br /></li>
+使用tproxy port: 7893, 可代理tcp/udp; ch工作正常, google app工作正常, 在yacd连接状况中显示为tproxy<br /></li>
 <li>tun模式<br />
-虚拟了tun网卡, 也称为全局代理, ch等都正常<br /></li>
+虚拟了tun网卡, 代理tcp/udp, ch等都正常<br /></li>
 <li>所有模式都要排除clash主机自己的流量, 为防止循环(如192.168.10.87这句)<br />
 <br /></li>
 </ol>
 
 <p>四. 注意点<br />
 1. config.yaml中开启redir port: 7892, tproxy port: 7893, 开启clash dns, 监听port: 53<br />
-2. ipv6的dns解析开启, 据说可能对翻墙有影响(慢..?), 不如我开启了解析后, 并没特别的感觉,后来发现我的ipv6流量走的默认网关是ros, 没走到clash; 目前还没找到怎么象v4的dns一样设置ipv6能自动指定客户的网关和dns, 如果要让ipv6走网关, 现在还心须在客户机上手动设置.</p>
+2. ipv6的dns解析开启, 据说可能对翻墙有影响(慢..?), 不如我开启了解析后, 并没特别的感觉,后来发现我的ipv6流量走的默认网关是ros, 没走到clash; 目前还没找到怎么象v4的dns一样设置ipv6能自动指定客户的网关, ipv6指定dns后来找到在ros上设置的方法(见<a href="https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/">https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/</a>); 如果要让ipv6走网关, 现在还心须在客户机上手动设置.</p>
 
 <p>五. clash dns</p>
 
@@ -198,17 +198,17 @@ ip6tables-restore  &lt; /etc/iptables/rules.v6</p>
 - 查询结果与geoip-cn比对二组不一致, 即nameserver结果是geoip-cn而fallback不是, 或反之,  则取fallback的解析结果<br />
 clash dns比对后确定的解析结果, 只有在确定为直连时使用; 而若随后规则判定为代理的话, clash是发送FQDN到节点, 由节点解析连接, 这样有可能能获取对节点友好的cdn的ip.</p>
 
-<p>讨论一下不设置fallback的情形. 按clash的设计, 即使域名被污染了, 如果有规则判定该域名走代理, 则还是发送FQDN到节点, 理论上还是能够正确连接. 另一种情形下, 如域名应该走代理, 但却并没有规则设定走代理, 这时即使nameserver污染了该域名, 只要对geoip-cn的对比是正确的话, 比方把google.com解析为facebook.com, 则clash最后的模式(一般是大陆白名单) 还是会判定该域名走代理; 但如果nameserver把google.com解析为国内ip或保留地址时, clash最后会用这个被污染的解析结果走直连, 导致无法正确访问.</p>
+<p>讨论一下不设置fallback的情形. 按clash的设计, 即使域名被污染了, 如果有规则判定该域名走代理, 则还是发送FQDN到节点, 理论上还是能够正确连接. 另一种情形下, 如域名应该走代理, 但却并没有规则设定走代理, 这时即使nameserver污染了该域名的解析, 只要对geoip-cn的对比是正确的话, 比方把google.com解析为facebook.com, 则clash最后的模式(一般是大陆白名单) 还是会判定该域名走代理; 但如果nameserver把google.com解析为国内ip或保留地址时, clash最后会用这个被污染的解析结果走直连, 导致无法正确访问.</p>
 
 <p>用fake-ip时, 省掉一次dns查询, 根据域名规则, 如果走代理, 就把FQDN直接发给节点; 不走代理的, 再查询dns</p>
 
 <p>-coredns</p>
 
-<p>搭建过墙的dns server部分, 我参照了<a href="https://blog.minidump.info/2019/07/coredns-no-dns-poisoning/">https://blog.minidump.info/2019/07/coredns-no-dns-poisoning/</a> 该文的方案, 这是采用coredns来搭建dns服务器(虚拟了一个centos7的lxc, 网关为clash以便能翻墙查询)</p>
+<p>搭建过墙的dns server部分, 我参照了<a href="https://blog.minidump.info/2019/07/coredns-no-dns-poisoning/">https://blog.minidump.info/2019/07/coredns-no-dns-poisoning/</a> 该文的方案, 这是采用coredns来搭建dns服务器(虚拟了一个debian的lxc, 网关为clash以便能翻墙查询)</p>
 
-<p>coredns (<a href="https://github.com/coredns/coredns">https://github.com/coredns/coredns</a>), 有很多插件, 官方的和第三方的, 可方便用于dns分流, 该方案是采用按<a href="https://github.com/felixonmars/dnsmasq-china-list ">https://github.com/felixonmars/dnsmasq-china-list </a> 按域名分流查询, 命中名单的用国内114/223或isp的dns查询, 没命中名单的用国外dns查询, 支持各种查询方式. coredns可自己编译, 也可下载minidump编译的内核.</p>
+<p>coredns (<a href="https://github.com/coredns/coredns">https://github.com/coredns/coredns</a>), 有很多插件, 官方的和第三方的, 可方便用于dns分流, 该方案是采用按<a href="https://github.com/felixonmars/dnsmasq-china-list 按域名分流查询">https://github.com/felixonmars/dnsmasq-china-list 按域名分流查询</a>, 命中名单的用国内114/223或isp的dns查询, 没命中名单的用国外dns查询, 支持各种查询方式. coredns可自己编译, 也可下载minidump编译的内核.</p>
 
-<p>目前clash dns, nameserver我采用114/223,  事实上我是在主路由ros上的dns设置了114/223, clash nameserver就指向ros的ip; fallback 指向coredns. 在此之上, 虚拟一个lxc的centos7搭建adguard home, 上游指向clash的ip, adg过滤一些广告(感觉作用不强), 还能管理host劫持, ipv6解析开关等. 这些dns套娃用下来, dns是慢了一些, 不过尚属可以接受(adg 平均处理时间10到30ms); 感觉dns的延迟主要是查询dot/doh造成的, 套娃只是forward, 并无有感的影响, 毕竟dns查询机制本来就是层层向上查询.</p>
+<p>目前clash dns, nameserver我采用114/223, fallback 指向coredns. 在此之上, 虚拟一个debian的lxc搭建adguard home, 上游指向clash的ip, adg过滤一些广告(感觉作用不强), 还能管理host劫持, ipv6解析开关等. 这些dns套娃用下来, 并没感觉dns有慢的感觉, 毕竟dns查询机制本来就是层层向上查询.</p>
 
 <p>其他可能的dns方案:<br />
 a): 已实践通过.  nameserver设置为coredns, fallbabk不设置. 这种情形下, clash dns的解析就是nameserver的解析, 也就是coredns的解析结果; 由于coredns是按国内域名分流查询了, 原则上clash dns是未污染的.</p>
