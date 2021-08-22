@@ -180,7 +180,7 @@ ip6tables-restore  &lt; /etc/iptables/rules.v6</p>
 使用tproxy port: 7893, 可代理tcp/udp; ch工作正常, google app工作正常, 在yacd连接状况中显示为tproxy<br /></li>
 <li>tun模式<br />
 虚拟了tun网卡, 代理tcp/udp, ch等都正常<br /></li>
-<li>所有模式都要排除clash主机自己的流量, 为防止循环(如192.168.10.87这句)<br />
+<li>所有模式都要排除clash主机自己的流量, 为防止循环(如192.168.10.87这句, 但网上教程都把这一句iptables -t nat -A clash -d 192.168.10.87 -j RETURN中写成-d, 我下面都改为-s或src)<br />
 <br /></li>
 </ol>
 
@@ -230,7 +230,7 @@ iptables -t nat -A clash -d 172.16.0.0/12 -j RETURN<br />
 iptables -t nat -A clash -d 192.168.0.0/16 -j RETURN<br />
 iptables -t nat -A clash -d 224.0.0.0/4 -j RETURN<br />
 iptables -t nat -A clash -d 240.0.0.0/4 -j RETURN<br />
-iptables -t nat -A clash -d 192.168.10.87 -j RETURN<br />
+iptables -t nat -A clash -s 192.168.10.87 -j RETURN<br />
 iptables -t nat -A clash -p tcp -j RETURN -m mark --mark 0xff<br />
 iptables -t nat -A clash -p tcp -j REDIRECT --to-ports 7892<br />
 iptables -t nat -A PREROUTING -p tcp -j clash</p>
@@ -248,7 +248,7 @@ iptables -t nat -A clash -d 172.16.0.0/12 -j RETURN<br />
 iptables -t nat -A clash -d 192.168.0.0/16 -j RETURN<br />
 iptables -t nat -A clash -d 224.0.0.0/4 -j RETURN<br />
 iptables -t nat -A clash -d 240.0.0.0/4 -j RETURN<br />
-iptables -t nat -A clash -d 192.168.10.87 -j RETURN<br />
+iptables -t nat -A clash -s 192.168.10.87 -j RETURN<br />
 iptables -t nat -A clash -p tcp -j REDIRECT --to-port 7892<br />
 iptables -t nat -I PREROUTING -p tcp -d 8.8.8.8 -j REDIRECT --to-port 7892<br />
 iptables -t nat -I PREROUTING -p tcp -d 8.8.4.4 -j REDIRECT --to-port 7892<br />
@@ -265,7 +265,7 @@ iptables -t mangle -A clash -d 172.16.0.0/12 -j RETURN<br />
 iptables -t mangle -A clash -d 192.168.0.0/16 -j RETURN<br />
 iptables -t mangle -A clash -d 224.0.0.0/4 -j RETURN<br />
 iptables -t mangle -A clash -d 240.0.0.0/4 -j RETURN<br />
-iptables -t mangle -A clash -d 192.168.10.87 -j RETURN<br />
+iptables -t mangle -A clash -s 192.168.10.87 -j RETURN<br />
 iptables -t mangle -A clash -p udp -j TPROXY --on-port 7892 --tproxy-mark 1<br />
 iptables -t mangle -A PREROUTING -p udp -j clash</p>
 
@@ -284,7 +284,7 @@ iptables -t mangle -A clash -d 172.16.0.0/12 -j RETURN<br />
 iptables -t mangle -A clash -d 192.168.0.0/16 -j RETURN<br />
 iptables -t mangle -A clash -d 224.0.0.0/4 -j RETURN<br />
 iptables -t mangle -A clash -d 240.0.0.0/4 -j RETURN<br />
-iptables -t mangle -A clash -d 192.168.10.87 -j RETURN<br />
+iptables -t mangle -A clash -s 192.168.10.87 -j RETURN<br />
 iptables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 1<br />
 iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 1<br />
 iptables -t mangle -A clash -p tcp -j RETURN -m mark --mark 1<br />
@@ -334,7 +334,7 @@ ipset add clashhost6 fe80::d466:a5ff:fed9:6028/64</p>
 <p>ip6tables -t mangle -N clash<br />
 ip6tables -t mangle -F clash<br />
 ip6tables -t mangle -A clash -m set --match-set localnetwork6 dst -j RETURN<br />
-ip6tables -t mangle -A clash -m set --match-set clashhost6 dst -j RETURN</p>
+ip6tables -t mangle -A clash -m set --match-set clashhost6 src -j RETURN</p>
 
 <p>ip -6 rule add fwmark 0x162 table 0x162<br />
 ip -6 route add local ::/0 dev lo table 0x162</p>
@@ -391,7 +391,7 @@ ipset add clashhost6 fe80::d466:a5ff:fed9:6028/64</p>
 ip route add local default dev lo table 100<br />
 iptables -t mangle -N clash<br />
 iptables -t mangle -A clash -m set --match-set localnetwork dst -j RETURN<br />
-iptables -t mangle -A clash -m set --match-set clashhost dst -j RETURN<br />
+iptables -t mangle -A clash -m set --match-set clashhost src -j RETURN<br />
 iptables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 1<br />
 iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 1<br />
 iptables -t mangle -A clash -p tcp -j RETURN -m mark --mark 1<br />
