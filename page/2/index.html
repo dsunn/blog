@@ -1,37 +1,31 @@
 
 <!DOCTYPE html>
-<html lang="en" data-figures="" class="page">
+<html lang="en" data-figures="" class="home">
   <head>
-<title>讨论下科学环境下的dns | Whatever Blog</title>
+	<meta name="generator" content="Hugo 0.85.0" />
+<title>Whatever Blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <meta property="og:locale" content="en" />
 
-<meta property="og:type" content="article">
-<meta name="description" content="讨论下我在局域网中dns的设置.
-原则1: (科学环境下,) 在哪科学, dns请求发往哪
-原则2: dns的路径分清, 除特例外, 终端只用网关的dns
-我局域网拓扑:
-ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通过dhcp下发: clash作为各终端设备的 …">
+<meta property="og:type" content="website">
+<meta name="description" content="never stop thinking">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="讨论下科学环境下的dns" />
-<meta property="og:url" content="https://dsunn.github.io/blog/2021/09/about_dns/" />
-<meta property="og:title" content="讨论下科学环境下的dns" />
-<meta property="og:description" content="讨论下我在局域网中dns的设置.
-原则1: (科学环境下,) 在哪科学, dns请求发往哪
-原则2: dns的路径分清, 除特例外, 终端只用网关的dns
-我局域网拓扑:
-ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通过dhcp下发: clash作为各终端设备的 …" />
+<meta name="twitter:title" content="Whatever Blog" />
+<meta property="og:url" content="https://dsunn.github.io/blog/" />
+<meta property="og:title" content="Whatever Blog" />
+<meta property="og:description" content="never stop thinking" />
 <meta property="og:image" content="https://dsunn.github.io/blog/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://dsunn.github.io/blog/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://dsunn.github.io/blog/icons/favicon-32x32.png">
 <link rel="manifest" href="https://dsunn.github.io/blog/icons/site.webmanifest">
 
-<link rel="canonical" href="https://dsunn.github.io/blog/2021/09/about_dns/">
+<link rel="canonical" href="https://dsunn.github.io/blog/">
+<link rel="alternate" type="application/rss+xml" href="https://dsunn.github.io/blog/index.xml" title="Whatever Blog" />
 
     
 
@@ -81,28 +75,36 @@ ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通�
 </header>
 
     <main>
+
   
+
 <div class="grid-inverse wrap content">
-  <article class="post_content">
-    <h1 class="post_title">讨论下科学环境下的dns</h1>
+  <ul class="posts" id="posts">
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://dsunn.github.io/blog/2021/07/clash/" title="Debian搭建clash透明代理">Debian搭建clash透明代理</a>
+      </h3>
+      
   <div class="post_meta">
     <span><svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg></span>
     <span class="post_date">
-      Sep 1, 2021</span>
-    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/dns' title="dns" class="post_tag button button_translucent">dns
+      Jul 13, 2021</span>
+    <span class="post_time"> · 7 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/clash' title="clash" class="post_tag button button_translucent">clash
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=%e8%ae%a8%e8%ae%ba%e4%b8%8b%e7%a7%91%e5%ad%a6%e7%8e%af%e5%a2%83%e4%b8%8b%e7%9a%84dns&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2fabout_dns%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Debian%e6%90%ad%e5%bb%baclash%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f07%2fclash%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2fabout_dns%2f&t=%e8%ae%a8%e8%ae%ba%e4%b8%8b%e7%a7%91%e5%ad%a6%e7%8e%af%e5%a2%83%e4%b8%8b%e7%9a%84dns" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f07%2fclash%2f&t=Debian%e6%90%ad%e5%bb%baclash%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -112,7 +114,7 @@ ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通�
   <use xlink:href="#linkedin"></use>
 </svg>
     </a>
-    <a href="https://dsunn.github.io/blog/2021/09/about_dns/" title="Copy Link" class="link link_yank">
+    <a href="https://dsunn.github.io/blog/2021/07/clash/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -121,34 +123,58 @@ ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通�
   </span>
   </div>
 
-    
-    <p>讨论下我在局域网中dns的设置.</p>
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">
+            
+              写在前面:
+为使得clash设计的dns防污染能更好地工作, 客户端的dns需要指向clash dns, 可以使用dhcp serve配置此项. 这样做的目的是使clash能够拿到连接的域名信息, 再配以适当的域名规则, 很多情形下, 即使在dns污染的情况下, 也能正常工作.
+记录一下自己的搭建过程记录一下自己的搭建过程
+最好用root用户运行, 特别是当使用clash premium installer搭建时, 不用root会报错
+一. clash程序
+- 下载clash premium (https://github.com/Dreamacro/clash/releases/tag/premium) 解压保存 …
+            
+          </p>
+          <a href="https://dsunn.github.io/blog/2021/07/clash/" title="Read More" class="excerpt_more button">Read More</a>
+        </div>
+      </div>
+    </div>
+  </li>
 
-<p>原则1: (科学环境下,) 在哪科学, dns请求发往哪<br />
-原则2: dns的路径分清, 除特例外, 终端只用网关的dns</p>
-
-<p>我局域网拓扑:<br />
-ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通过dhcp下发: clash作为各终端设备的网关, adh作为各终端设备的dns.<br />
-debian clash作为透明代理, 宿主debian关闭systemd-resolved 服务, 让clash dns占有53端口, debian的dns指向自己127.0.0.1; clash dns采用fake-ip模式, 并尽量在config.yaml中配置较齐全的域名规则, 这样fake-ip模式下, 对命中域名规则走节点的, clash会少用一次dns请求, 并同时达到抗dns污染的较果.</p>
-
-<p>局域网内的dns:<br />
-adguard home:<br />
-终端的dns请求被发送到adh, 而adh的唯一上游是clash dns; 当clash采用fake-ip模式时, adh从clash dns拿到的请求回馈也是fake-ip, 这fake-ip也返回给终端客户. 我之所以要加adh, 是想在请求送到clash dns前, adh可以方便地按需要进行host劫持, 去广告也是host劫持的一种, 虽然效果不大; 主要有用的host劫持是比如raw.githubusercontent.com; 还有docker jd的应用会产生大量的dns请求, 也用adh劫持, 并且在debian中用iptables把docker jd的流量放行, 不转发给clash.</p>
-
-<p>coredns:<br />
-由于clash dns本身不用科学, 虽然可以用fake-ip较有效地对抗dns污染, 但在clash之外设置一个能科学的dns, 作为clash dns fallback, 更符合clash的设计初衷, 甚至可以用coredns作为clash dns nameserver, 而clash dns fallback留空, 或配置为8.8.8.8, 如果留空出错的话.<br />
-与smartdns不同, coredns自己配置了一个domain list, 按照if-then-else查询内外的dns, 也就是说一个dns请求要么发往内组(我的环境下是设置为ros dns), 要么发往外组(1.1.1.1, etc.); 而smartdns同时发往内组外组, 而科学插件配置domain list, 并根据domain list选取smartdns的内外组(按端口); 用隐私角度, coredns优于smartdns;</p>
-
-<p>事实上, 在clash dns fake-ip模式下, 已经能够较大程度对抗dns污染了, 可以不用coredns等能科学的dns.</p>
-
-<p>另外, 当我用openwrt作为网关透明代理时也是一样, op本身的lan不配置dns, 全网络用openclash dns. 还有一点容易忽略的是要确保ipv6 dns也指向网关, 不然可能会有干扰科学.</p>
-
-
-  </article>
+    <li>
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/blog/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/blog/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item active">
+        <a href="#" aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item disabled">
+        <a href="#" aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a href="#" aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+    </li>
+  </ul>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://dsunn.github.io/blog/2021/09/test/" class="nav-link" title="it is aTest">it is aTest</a>
+      </li>
+      <li>
+        <a href="https://dsunn.github.io/blog/2021/09/about_dns/" class="nav-link" title="讨论下科学环境下的dns">讨论下科学环境下的dns</a>
+      </li>
       <li>
         <a href="https://dsunn.github.io/blog/2021/09/docker_nextcloud_npm/" class="nav-link" title="Docker搭建nextcloud并用nginx proxy manager反代(https)">Docker搭建nextcloud并用nginx proxy manager反代(https)</a>
       </li>
@@ -216,8 +242,9 @@ adguard home:<br />
   </section>
 </aside>
 
-  
 </div>
+
+
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
