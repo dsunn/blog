@@ -25,7 +25,7 @@ docker exec -it postgres psql -U postgres -d postgres&lt;br /&gt;
 CREATE DATABASE nextcloud;&lt;/p&gt;
 
 &lt;p&gt;cli安装nextcloud:&lt;br /&gt;
-docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shanghai   -p 10443:443   -v /volume2/docker/nextcloud:/config   -v /volume2/nextcloud/data:/data   --restart unless-stopped   ghcr.io/linuxserver/nextcloud&lt;/p&gt;
+docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shanghai   -p 443:443   -v /volume2/docker/nextcloud:/config   -v /volume2/nextcloud/data:/data   --restart unless-stopped   ghcr.io/linuxserver/nextcloud&lt;/p&gt;
 
 &lt;p&gt;容器跑起来后, 就能通过 &lt;a href=&#34;https://local_ip:port&#34;&gt;https://local_ip:port&lt;/a&gt; 访问nextcloud.&lt;/p&gt;
 

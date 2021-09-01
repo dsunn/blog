@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nextcloud on Whatever Blog</title>
+    <link>https://dsunn.github.io/blog/tags/nextcloud/</link>
+    <description>Recent content in nextcloud on Whatever Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Sep 2021 19:01:48 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/nextcloud/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker搭建nextcloud并用nginx proxy manager反代(https)</title>
+      <link>https://dsunn.github.io/blog/2021/09/docker%E6%90%AD%E5%BB%BAnextcloud%E5%B9%B6%E7%94%A8nginx-proxy-manager%E5%8F%8D%E4%BB%A3https/</link>
+      <pubDate>Wed, 01 Sep 2021 19:01:48 +0800</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/2021/09/docker%E6%90%AD%E5%BB%BAnextcloud%E5%B9%B6%E7%94%A8nginx-proxy-manager%E5%8F%8D%E4%BB%A3https/</guid>
+      <description>
+        
+          &lt;p&gt;nextcloud镜像: linuxserver/nextcloud&lt;br /&gt;
+这个镜像只支持https.&lt;br /&gt;
+(如需http, 可用ghcr.io/wonderfall/nextcloud:22)&lt;/p&gt;
+
+&lt;p&gt;db我用postgreSQL, 这个我原先就安装过.&lt;br /&gt;
+创建nextcloud db:&lt;br /&gt;
+docker exec -it postgres psql -U postgres -d postgres&lt;br /&gt;
+CREATE DATABASE nextcloud;&lt;/p&gt;
+
+&lt;p&gt;cli安装nextcloud:&lt;br /&gt;
+docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shanghai   -p 443:443   -v /volume2/docker/nextcloud:/config   -v /volume2/nextcloud/data:/data   --restart unless-stopped   ghcr.io/linuxserver/nextcloud&lt;/p&gt;
+
+&lt;p&gt;容器跑起来后, 就能通过 &lt;a href=&#34;https://local_ip:port&#34;&gt;https://local_ip:port&lt;/a&gt; 访问nextcloud.&lt;/p&gt;
+
+&lt;p&gt;如遇到folder permission denied, 可chmod -R 777 /path_to_data解决.&lt;/p&gt;
+
+&lt;p&gt;另一个问题是如通过nginx proxy manager(npm)加证书用域名访问, 会出现要求添加trusted_domains的页面; 我一开始加了域名, 但依然是这个页面; google也没直接答案, 后来综合一些论坛的帖子, 通过下面的方法解决:&lt;/p&gt;
+
+&lt;p&gt;config.php中添加:&lt;/p&gt;
+
+&lt;p&gt;&#39;trusted_domains&#39; =&amp;gt;&lt;br /&gt;
+  array (&lt;br /&gt;
+    0 =&amp;gt; &#39;local&lt;em&gt;ip:post&#39;,&lt;br /&gt;
+    1 =&amp;gt; &#39;FQDN:port&#39;,&lt;br /&gt;
+    2 =&amp;gt; &#39;docker&lt;/em&gt; gateway_ip&#39;,&lt;br /&gt;
+    3 =&amp;gt; &#39;router_ip&#39;,&lt;br /&gt;
+    4 =&amp;gt; &#39;npm_ip:port&#39;,&lt;br /&gt;
+),&lt;br /&gt;
+  &#39;overwrite.cli.url&#39; =&amp;gt; &#39;&lt;a href=&#34;https://FQDN:port&#39;&#34;&gt;https://FQDN:port&#39;&lt;/a&gt;,&lt;br /&gt;
+  &#39;overwritehost&#39; =&amp;gt; &#39;FQDN:port&#39;,&lt;br /&gt;
+  &#39;overwriteprotocol&#39; =&amp;gt; &#39;https&#39;,&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
