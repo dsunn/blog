@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 01 Sep 2021 19:01:48 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/nextcloud/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker搭建nextcloud并用nginx proxy manager反代(https)</title>
-      <link>https://dsunn.github.io/blog/2021/09/docker%E6%90%AD%E5%BB%BAnextcloud%E5%B9%B6%E7%94%A8nginx-proxy-manager%E5%8F%8D%E4%BB%A3https/</link>
+      <link>https://dsunn.github.io/blog/2021/09/docker_nextcloud_npm/</link>
       <pubDate>Wed, 01 Sep 2021 19:01:48 +0800</pubDate>
       
-      <guid>https://dsunn.github.io/blog/2021/09/docker%E6%90%AD%E5%BB%BAnextcloud%E5%B9%B6%E7%94%A8nginx-proxy-manager%E5%8F%8D%E4%BB%A3https/</guid>
+      <guid>https://dsunn.github.io/blog/2021/09/docker_nextcloud_npm/</guid>
       <description>
         
           &lt;p&gt;nextcloud镜像: linuxserver/nextcloud&lt;br /&gt;

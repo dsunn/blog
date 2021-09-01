@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 22 Aug 2021 12:04:32 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/nas/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用ffmpeg从mkv文件中提取srt</title>
-      <link>https://dsunn.github.io/blog/2021/08/%E4%BD%BF%E7%94%A8ffmpeg%E4%BB%8Emkv%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96srt/</link>
+      <link>https://dsunn.github.io/blog/2021/08/mkv2srt/</link>
       <pubDate>Sun, 22 Aug 2021 12:04:32 +0800</pubDate>
       
-      <guid>https://dsunn.github.io/blog/2021/08/%E4%BD%BF%E7%94%A8ffmpeg%E4%BB%8Emkv%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96srt/</guid>
+      <guid>https://dsunn.github.io/blog/2021/08/mkv2srt/</guid>
       <description>
         
           &lt;p&gt;ffmpeg -i video.mkv -vn -an -codec:s:0 srt subtitle.srt&lt;/p&gt;

@@ -6,13 +6,45 @@
     <description>Recent content on Whatever Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Sep 2021 19:01:48 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Sep 2021 20:11:10 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>讨论下科学环境下的dns</title>
+      <link>https://dsunn.github.io/blog/2021/09/about_dns/</link>
+      <pubDate>Wed, 01 Sep 2021 20:11:10 +0800</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/2021/09/about_dns/</guid>
+      <description>
+        
+          &lt;p&gt;讨论下我在局域网中dns的设置.&lt;/p&gt;
+
+&lt;p&gt;原则1: (科学环境下,) 在哪科学, dns请求发往哪&lt;br /&gt;
+原则2: dns的路径分清, 除特例外, 终端只用网关的dns&lt;/p&gt;
+
+&lt;p&gt;我局域网拓扑:&lt;br /&gt;
+ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通过dhcp下发: clash作为各终端设备的网关, adh作为各终端设备的dns.&lt;br /&gt;
+debian clash作为透明代理, 宿主debian关闭systemd-resolved 服务, 让clash dns占有53端口, debian的dns指向自己127.0.0.1; clash dns采用fake-ip模式, 并尽量在config.yaml中配置较齐全的域名规则, 这样fake-ip模式下, 对命中域名规则走节点的, clash会少用一次dns请求, 并同时达到抗dns污染的较果.&lt;/p&gt;
+
+&lt;p&gt;局域网内的dns:&lt;br /&gt;
+adguard home: 终端的dns请求被发送到adh, 而adh的唯一上游是clash dns; 当clash采用fake-ip模式时, adh从clash dns拿到的请求回馈也是fake-ip, 这fake-ip也返回给终端客户. 我之所以要加adh, 是想在请求送到clash dns前, adh可以方便地按需要进行host劫持, 去广告也是host劫持的一种, 虽然效果不大; 主要有用的host劫持是比如raw.githubusercontent.com; 还有docker jd的应用会产生大量的dns请求, 也用adh劫持, 并且在debian中用iptables把docker jd的流量放行, 不转发给clash.&lt;/p&gt;
+
+&lt;p&gt;coredns:&lt;br /&gt;
+由于clash dns本身不用科学, 虽然可以用fake-ip较有效地对抗dns污染, 但在clash之外设置一个能科学的dns, 作为clash dns fallback, 更符合clash的设计初衷, 甚至可以用coredns作为clash dns nameserver, 而clash dns fallback留空, 或配置为8.8.8.8, 如果留空出错的话.&lt;br /&gt;
+与smartdns不同, coredns自己配置了一个domain list, 按照if-then-else查询内外的dns, 也就是说一个dns请求要么发往内组(我的环境下是设置为ros dns), 要么发往外组(1.1.1.1, etc.); 而smartdns同时发往内组外组, 而科学插件配置domain list, 并根据domain list选取smartdns的内外组(按端口); 用隐私角度, coredns优于smartdns;&lt;/p&gt;
+
+&lt;p&gt;事实上, 在clash dns fake-ip模式下, 已经能够较大程度对抗dns污染了, 可以不用coredns等能科学的dns.&lt;/p&gt;
+
+&lt;p&gt;另外, 当我用openwrt作为网关透明代理时也是一样, op本身的lan不配置dns, 全网络用openclash dns. 还有一点容易忽略的是要确保ipv6 dns也指向网关, 不然可能会有干扰科学.&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
     <item>
       <title>Docker搭建nextcloud并用nginx proxy manager反代(https)</title>
-      <link>https://dsunn.github.io/blog/2021/09/docker%E6%90%AD%E5%BB%BAnextcloud%E5%B9%B6%E7%94%A8nginx-proxy-manager%E5%8F%8D%E4%BB%A3https/</link>
+      <link>https://dsunn.github.io/blog/2021/09/docker_nextcloud_npm/</link>
       <pubDate>Wed, 01 Sep 2021 19:01:48 +0800</pubDate>
       
-      <guid>https://dsunn.github.io/blog/2021/09/docker%E6%90%AD%E5%BB%BAnextcloud%E5%B9%B6%E7%94%A8nginx-proxy-manager%E5%8F%8D%E4%BB%A3https/</guid>
+      <guid>https://dsunn.github.io/blog/2021/09/docker_nextcloud_npm/</guid>
       <description>
         
           &lt;p&gt;nextcloud镜像: linuxserver/nextcloud&lt;br /&gt;
@@ -53,10 +85,10 @@ docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shang
     
     <item>
       <title>使用ffmpeg从mkv文件中提取srt</title>
-      <link>https://dsunn.github.io/blog/2021/08/%E4%BD%BF%E7%94%A8ffmpeg%E4%BB%8Emkv%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96srt/</link>
+      <link>https://dsunn.github.io/blog/2021/08/mkv2srt/</link>
       <pubDate>Sun, 22 Aug 2021 12:04:32 +0800</pubDate>
       
-      <guid>https://dsunn.github.io/blog/2021/08/%E4%BD%BF%E7%94%A8ffmpeg%E4%BB%8Emkv%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96srt/</guid>
+      <guid>https://dsunn.github.io/blog/2021/08/mkv2srt/</guid>
       <description>
         
           &lt;p&gt;ffmpeg -i video.mkv -vn -an -codec:s:0 srt subtitle.srt&lt;/p&gt;
@@ -67,10 +99,10 @@ docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shang
     
     <item>
       <title>Ros通过dhcp6 option下发指定dns</title>
-      <link>https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/</link>
+      <link>https://dsunn.github.io/blog/2021/08/ros_dhcp6/</link>
       <pubDate>Wed, 18 Aug 2021 12:58:03 +0800</pubDate>
       
-      <guid>https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/</guid>
+      <guid>https://dsunn.github.io/blog/2021/08/ros_dhcp6/</guid>
       <description>
         
           &lt;p&gt;我的网络架构是ros(主路由), dhcp服务跑在ros上; debian上跑clash作为透明代理. 先前我安装了openwrt作为旁路透明代理, 现在因为启用clash为网关, op就放一边, 也跑着, 作为网络中的一个设备, 算是一个backup的透明代理吧.&lt;/p&gt;
@@ -94,10 +126,10 @@ docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shang
     
     <item>
       <title>Debian搭建clash透明代理</title>
-      <link>https://dsunn.github.io/blog/2021/07/debian%E6%90%AD%E5%BB%BAclash%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</link>
+      <link>https://dsunn.github.io/blog/2021/07/clash/</link>
       <pubDate>Tue, 13 Jul 2021 22:21:40 +0800</pubDate>
       
-      <guid>https://dsunn.github.io/blog/2021/07/debian%E6%90%AD%E5%BB%BAclash%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</guid>
+      <guid>https://dsunn.github.io/blog/2021/07/clash/</guid>
       <description>
         
           &lt;p&gt;写在前面:&lt;br /&gt;
@@ -134,7 +166,7 @@ systemctl enable clash&lt;/p&gt;
 echo &amp;quot;net.ipv4.ip_forward = 1&amp;quot; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p&lt;br /&gt;
 echo &amp;quot;net.ipv6.conf.all.forwarding = 1&amp;quot; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p&lt;/p&gt;
 
-&lt;p&gt;关闭systemd-resolved 服务, 让clash占有53端口&lt;br /&gt;
+&lt;p&gt;关闭systemd-resolved 服务, 让clash dns占有53端口&lt;br /&gt;
 systemctl disable systemd-resolved&lt;br /&gt;
 /etc/reslov.conf里我是设置为127.0.0.1&lt;/p&gt;
 

@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 18 Aug 2021 12:58:03 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/openwrt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ros通过dhcp6 option下发指定dns</title>
-      <link>https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/</link>
+      <link>https://dsunn.github.io/blog/2021/08/ros_dhcp6/</link>
       <pubDate>Wed, 18 Aug 2021 12:58:03 +0800</pubDate>
       
-      <guid>https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/</guid>
+      <guid>https://dsunn.github.io/blog/2021/08/ros_dhcp6/</guid>
       <description>
         
           &lt;p&gt;我的网络架构是ros(主路由), dhcp服务跑在ros上; debian上跑clash作为透明代理. 先前我安装了openwrt作为旁路透明代理, 现在因为启用clash为网关, op就放一边, 也跑着, 作为网络中的一个设备, 算是一个backup的透明代理吧.&lt;/p&gt;

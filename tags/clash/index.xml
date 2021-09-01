@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 13 Jul 2021 22:21:40 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/clash/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Debian搭建clash透明代理</title>
-      <link>https://dsunn.github.io/blog/2021/07/debian%E6%90%AD%E5%BB%BAclash%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</link>
+      <link>https://dsunn.github.io/blog/2021/07/clash/</link>
       <pubDate>Tue, 13 Jul 2021 22:21:40 +0800</pubDate>
       
-      <guid>https://dsunn.github.io/blog/2021/07/debian%E6%90%AD%E5%BB%BAclash%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</guid>
+      <guid>https://dsunn.github.io/blog/2021/07/clash/</guid>
       <description>
         
           &lt;p&gt;写在前面:&lt;br /&gt;
@@ -49,7 +49,7 @@ systemctl enable clash&lt;/p&gt;
 echo &amp;quot;net.ipv4.ip_forward = 1&amp;quot; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p&lt;br /&gt;
 echo &amp;quot;net.ipv6.conf.all.forwarding = 1&amp;quot; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p&lt;/p&gt;
 
-&lt;p&gt;关闭systemd-resolved 服务, 让clash占有53端口&lt;br /&gt;
+&lt;p&gt;关闭systemd-resolved 服务, 让clash dns占有53端口&lt;br /&gt;
 systemctl disable systemd-resolved&lt;br /&gt;
 /etc/reslov.conf里我是设置为127.0.0.1&lt;/p&gt;
 
