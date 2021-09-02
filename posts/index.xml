@@ -54,10 +54,10 @@ adguard home:&lt;br /&gt;
 
 &lt;p&gt;db我用postgreSQL, 这个我原先就安装过.&lt;br /&gt;
 创建nextcloud db:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;docker exec -it postgres psql -U postgres -d postgres
-CREATE DATABASE nextcloud;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;docker exec -it postgres psql -U postgres -d postgres
+CREATE DATABASE nextcloud;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;cli安装nextcloud:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shanghai   -p 443:443   -v /volume2/docker/nextcloud:/config   -v /volume2/nextcloud/data:/data   --restart unless-stopped   ghcr.io/linuxserver/nextcloud&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shanghai   -p 443:443   -v /volume2/docker/nextcloud:/config   -v /volume2/nextcloud/data:/data   --restart unless-stopped   ghcr.io/linuxserver/nextcloud&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;容器跑起来后, 就能通过 &lt;a href=&#34;https://local_ip:port&#34;&gt;https://local_ip:port&lt;/a&gt; 访问nextcloud.&lt;/p&gt;
 
 &lt;p&gt;如遇到folder permission denied, 可chmod -R 777 /path_to_data解决.&lt;/p&gt;
