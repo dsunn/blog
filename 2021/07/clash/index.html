@@ -131,42 +131,35 @@
              </p>
 
 <p>编辑/lib/systemd/system/clash.service</p>
-
-<p>Description=A rule based proxy tunnel in Go<br />
-After=network.target<br />
-[Service]<br />
-Type=simple<br />
-Restart=on-abort<br />
-ExecStart=/usr/local/bin/clash<br />
-[Install]<br />
-WantedBy=multi-user.target</p>
-
+<pre><code class="language-cli" data-lang="cli">Description=A rule based proxy tunnel in Go  
+After=network.target  
+[Service]  
+Type=simple  
+Restart=on-abort  
+ExecStart=/usr/local/bin/clash  
+[Install]  
+WantedBy=multi-user.target  </code></pre>
 <p>默认运行目录为~/.config/clash, config.yaml要存放在工作目录中</p>
-
-<p>systemctl daemon-reload<br />
-systemctl enable clash</p>
-
+<pre><code class="language-cli" data-lang="cli">systemctl daemon-reload  
+systemctl enable clash  </code></pre>
 <p>二. 透明代理</p>
 
-<p>开启ipv4/ipv6的转发<br />
-echo &quot;net.ipv4.ip_forward = 1&quot; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p<br />
-echo &quot;net.ipv6.conf.all.forwarding = 1&quot; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p</p>
+<p>开启ipv4/ipv6的转发</p>
+<pre><code class="language-cli" data-lang="cli">echo &#34;net.ipv4.ip_forward = 1&#34; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p  
+echo &#34;net.ipv6.conf.all.forwarding = 1&#34; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p</code></pre>
+<p>关闭systemd-resolved 服务, 让clash dns占有53端口</p>
+<pre><code class="language-cli" data-lang="cli">systemctl disable systemd-resolved  </code></pre>
+<p>/etc/reslov.conf里我是设置为127.0.0.1</p>
 
-<p>关闭systemd-resolved 服务, 让clash dns占有53端口<br />
-systemctl disable systemd-resolved<br />
-/etc/reslov.conf里我是设置为127.0.0.1</p>
-
-<p>iptables持久化<br />
-apt install iptables-persistent netfilter-persistent<br />
-netfilter-persistent save<br />
-netfilter-persistent start<br />
-iptables-save  &gt; /etc/iptables/rules.v4<br />
-ip6tables-save  &gt; /etc/iptables/rules.v6</p>
-
-<p>加载恢复<br />
-iptables-restore  &lt; /etc/iptables/rules.v4<br />
-ip6tables-restore  &lt; /etc/iptables/rules.v6</p>
-
+<p>iptables持久化</p>
+<pre><code class="language-cli" data-lang="cli">apt install iptables-persistent netfilter-persistent  
+netfilter-persistent save  
+netfilter-persistent start  
+iptables-save  &gt; /etc/iptables/rules.v4  
+ip6tables-save  &gt; /etc/iptables/rules.v6  </code></pre>
+<p>加载恢复</p>
+<pre><code class="language-cli" data-lang="cli">iptables-restore  &lt; /etc/iptables/rules.v4  
+ip6tables-restore  &lt; /etc/iptables/rules.v6  </code></pre>
 <p>三. iptables</p>
 
 <p>推荐模式3和4</p>
@@ -186,7 +179,7 @@ ip6tables-restore  &lt; /etc/iptables/rules.v6</p>
 
 <p>四. 注意点<br />
 1. config.yaml中开启redir port: 7892, tproxy port: 7893, 开启clash dns, 监听port: 53<br />
-2. ipv6的dns解析开启, 据说可能对翻墙有影响(慢..?), 不如我开启了解析后, 并没特别的感觉,后来发现我的ipv6流量走的默认网关是ros, 没走到clash; 目前还没找到怎么象v4的dns一样设置ipv6能自动指定客户的网关, ipv6指定dns后来找到在ros上设置的方法(见<a href="https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/">https://dsunn.github.io/blog/2021/08/ros%E9%80%9A%E8%BF%87dhcp6-option%E4%B8%8B%E5%8F%91%E6%8C%87%E5%AE%9Adns/</a>); 如果要让ipv6走网关, 现在还心须在客户机上手动设置.</p>
+2. ipv6的dns解析开启, 据说可能对翻墙有影响(慢..?), 不如我开启了解析后, 并没特别的感觉,后来发现我的ipv6流量走的默认网关是ros, 没走到clash; 目前还没找到怎么象v4的dns一样设置ipv6能自动指定客户的网关, ipv6指定dns后来找到在ros上设置的方法(见<a href="https://dsunn.github.io/blog/2021/08/ros_dhcp6/">https://dsunn.github.io/blog/2021/08/ros_dhcp6/</a>); 如果要让ipv6走网关, 现在还心须在客户机上手动设置.</p>
 
 <p>五. clash dns</p>
 
@@ -206,7 +199,7 @@ clash dns比对后确定的解析结果, 只有在确定为直连时使用; 而�
 
 <p>搭建过墙的dns server部分, 我参照了<a href="https://blog.minidump.info/2019/07/coredns-no-dns-poisoning/">https://blog.minidump.info/2019/07/coredns-no-dns-poisoning/</a> 该文的方案, 这是采用coredns来搭建dns服务器(虚拟了一个debian的lxc, 网关为clash以便能翻墙查询)</p>
 
-<p>coredns (<a href="https://github.com/coredns/coredns">https://github.com/coredns/coredns</a>), 有很多插件, 官方的和第三方的, 可方便用于dns分流, 该方案是采用按<a href="https://github.com/felixonmars/dnsmasq-china-list 按域名分流查询">https://github.com/felixonmars/dnsmasq-china-list 按域名分流查询</a>, 命中名单的用国内114/223或isp的dns查询, 没命中名单的用国外dns查询, 支持各种查询方式. coredns可自己编译, 也可下载minidump编译的内核.</p>
+<p>coredns (<a href="https://github.com/coredns/coredns">https://github.com/coredns/coredns</a>), 有很多插件, 官方的和第三方的, 可方便用于dns分流, 该方案是采用按 <a href="https://github.com/felixonmars/dnsmasq-china-list, ">https://github.com/felixonmars/dnsmasq-china-list, </a>  命中名单的用国内114/223或isp的dns查询, 没命中名单的用国外dns查询, 支持各种查询方式. coredns可自己编译, 也可下载minidump编译的内核.</p>
 
 <p>目前clash dns, nameserver我采用114/223, fallback 指向coredns. 在此之上, 虚拟一个debian的lxc搭建adguard home, 上游指向clash的ip, adg过滤一些广告(感觉作用不强), 还能管理host劫持, ipv6解析开关等. 这些dns套娃用下来, 并没感觉dns有慢的感觉, 毕竟dns查询机制本来就是层层向上查询.</p>
 
@@ -220,78 +213,72 @@ a): 已实践通过.  nameserver设置为coredns, fallbabk不设置. 这种情�
 <hr />
 
 <p>redirect模式</p>
-
-<p>iptables -t nat -N clash<br />
-iptables -t nat -A clash -d 0.0.0.0/8 -j RETURN<br />
-iptables -t nat -A clash -d 10.0.0.0/8 -j RETURN<br />
-iptables -t nat -A clash -d 127.0.0.0/8 -j RETURN<br />
-iptables -t nat -A clash -d 169.254.0.0/16 -j RETURN<br />
-iptables -t nat -A clash -d 172.16.0.0/12 -j RETURN<br />
-iptables -t nat -A clash -d 192.168.0.0/16 -j RETURN<br />
-iptables -t nat -A clash -d 224.0.0.0/4 -j RETURN<br />
-iptables -t nat -A clash -d 240.0.0.0/4 -j RETURN<br />
-iptables -t nat -A clash -s 192.168.10.87 -j RETURN<br />
-iptables -t nat -A clash -p tcp -j RETURN -m mark --mark 0xff<br />
-iptables -t nat -A clash -p tcp -j REDIRECT --to-ports 7892<br />
-iptables -t nat -A PREROUTING -p tcp -j clash</p>
-
+<pre><code class="language-cli" data-lang="cli">iptables -t nat -N clash  
+iptables -t nat -A clash -d 0.0.0.0/8 -j RETURN  
+iptables -t nat -A clash -d 10.0.0.0/8 -j RETURN  
+iptables -t nat -A clash -d 127.0.0.0/8 -j RETURN  
+iptables -t nat -A clash -d 169.254.0.0/16 -j RETURN  
+iptables -t nat -A clash -d 172.16.0.0/12 -j RETURN  
+iptables -t nat -A clash -d 192.168.0.0/16 -j RETURN  
+iptables -t nat -A clash -d 224.0.0.0/4 -j RETURN  
+iptables -t nat -A clash -d 240.0.0.0/4 -j RETURN  
+iptables -t nat -A clash -s 192.168.10.87 -j RETURN  
+iptables -t nat -A clash -p tcp -j RETURN -m mark --mark 0xff  
+iptables -t nat -A clash -p tcp -j REDIRECT --to-ports 7892  
+iptables -t nat -A PREROUTING -p tcp -j clash</code></pre>
 <hr />
 
 <p>准tproxy模式  (所谓准tproxy模式是我认为的, 网上有的教程的tproxy模式就是类似这个)</p>
+<pre><code class="language-cli" data-lang="cli">iptables -t nat -N clash  
+iptables -t nat -A clash -d 0.0.0.0/8 -j RETURN  
+iptables -t nat -A clash -d 10.0.0.0/8 -j RETURN  
+iptables -t nat -A clash -d 127.0.0.0/8 -j RETURN  
+iptables -t nat -A clash -d 169.254.0.0/16 -j RETURN  
+iptables -t nat -A clash -d 172.16.0.0/12 -j RETURN  
+iptables -t nat -A clash -d 192.168.0.0/16 -j RETURN  
+iptables -t nat -A clash -d 224.0.0.0/4 -j RETURN  
+iptables -t nat -A clash -d 240.0.0.0/4 -j RETURN  
+iptables -t nat -A clash -s 192.168.10.87 -j RETURN  
+iptables -t nat -A clash -p tcp -j REDIRECT --to-port 7892  
+iptables -t nat -I PREROUTING -p tcp -d 8.8.8.8 -j REDIRECT --to-port 7892  
+iptables -t nat -I PREROUTING -p tcp -d 8.8.4.4 -j REDIRECT --to-port 7892  
+iptables -t nat -A PREROUTING -p tcp -j clash  
 
-<p>iptables -t nat -N clash<br />
-iptables -t nat -A clash -d 0.0.0.0/8 -j RETURN<br />
-iptables -t nat -A clash -d 10.0.0.0/8 -j RETURN<br />
-iptables -t nat -A clash -d 127.0.0.0/8 -j RETURN<br />
-iptables -t nat -A clash -d 169.254.0.0/16 -j RETURN<br />
-iptables -t nat -A clash -d 172.16.0.0/12 -j RETURN<br />
-iptables -t nat -A clash -d 192.168.0.0/16 -j RETURN<br />
-iptables -t nat -A clash -d 224.0.0.0/4 -j RETURN<br />
-iptables -t nat -A clash -d 240.0.0.0/4 -j RETURN<br />
-iptables -t nat -A clash -s 192.168.10.87 -j RETURN<br />
-iptables -t nat -A clash -p tcp -j REDIRECT --to-port 7892<br />
-iptables -t nat -I PREROUTING -p tcp -d 8.8.8.8 -j REDIRECT --to-port 7892<br />
-iptables -t nat -I PREROUTING -p tcp -d 8.8.4.4 -j REDIRECT --to-port 7892<br />
-iptables -t nat -A PREROUTING -p tcp -j clash</p>
-
-<p>ip rule add fwmark 1 table 100<br />
-ip route add local default dev lo table 100<br />
-iptables -t mangle -N clash<br />
-iptables -t mangle -A clash -d 0.0.0.0/8 -j RETURN<br />
-iptables -t mangle -A clash -d 10.0.0.0/8 -j RETURN<br />
-iptables -t mangle -A clash -d 127.0.0.0/8 -j RETURN<br />
-iptables -t mangle -A clash -d 169.254.0.0/16 -j RETURN<br />
-iptables -t mangle -A clash -d 172.16.0.0/12 -j RETURN<br />
-iptables -t mangle -A clash -d 192.168.0.0/16 -j RETURN<br />
-iptables -t mangle -A clash -d 224.0.0.0/4 -j RETURN<br />
-iptables -t mangle -A clash -d 240.0.0.0/4 -j RETURN<br />
-iptables -t mangle -A clash -s 192.168.10.87 -j RETURN<br />
-iptables -t mangle -A clash -p udp -j TPROXY --on-port 7892 --tproxy-mark 1<br />
-iptables -t mangle -A PREROUTING -p udp -j clash</p>
-
+ip rule add fwmark 1 table 100  
+ip route add local default dev lo table 100  
+iptables -t mangle -N clash  
+iptables -t mangle -A clash -d 0.0.0.0/8 -j RETURN  
+iptables -t mangle -A clash -d 10.0.0.0/8 -j RETURN  
+iptables -t mangle -A clash -d 127.0.0.0/8 -j RETURN  
+iptables -t mangle -A clash -d 169.254.0.0/16 -j RETURN  
+iptables -t mangle -A clash -d 172.16.0.0/12 -j RETURN  
+iptables -t mangle -A clash -d 192.168.0.0/16 -j RETURN  
+iptables -t mangle -A clash -d 224.0.0.0/4 -j RETURN  
+iptables -t mangle -A clash -d 240.0.0.0/4 -j RETURN  
+iptables -t mangle -A clash -s 192.168.10.87 -j RETURN  
+iptables -t mangle -A clash -p udp -j TPROXY --on-port 7892 --tproxy-mark 1  
+iptables -t mangle -A PREROUTING -p udp -j clash </code></pre>
 <hr />
 
 <p>tproxy模式</p>
-
-<p>ip rule add fwmark 1 table 100<br />
-ip route add local default dev lo table 100<br />
-iptables -t mangle -N clash<br />
-iptables -t mangle -A clash -d 0.0.0.0/8 -j RETURN<br />
-iptables -t mangle -A clash -d 10.0.0.0/8 -j RETURN<br />
-iptables -t mangle -A clash -d 127.0.0.0/8 -j RETURN<br />
-iptables -t mangle -A clash -d 169.254.0.0/16 -j RETURN<br />
-iptables -t mangle -A clash -d 172.16.0.0/12 -j RETURN<br />
-iptables -t mangle -A clash -d 192.168.0.0/16 -j RETURN<br />
-iptables -t mangle -A clash -d 224.0.0.0/4 -j RETURN<br />
-iptables -t mangle -A clash -d 240.0.0.0/4 -j RETURN<br />
-iptables -t mangle -A clash -s 192.168.10.87 -j RETURN<br />
-iptables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 1<br />
-iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 1<br />
-iptables -t mangle -A clash -p tcp -j RETURN -m mark --mark 1<br />
-iptables -t mangle -A clash -p udp -j RETURN -m mark --mark 1<br />
-iptables -t mangle -A PREROUTING -p tcp -j clash<br />
-iptables -t mangle -A PREROUTING -p udp -j clash</p>
-
+<pre><code class="language-cli" data-lang="cli">ip rule add fwmark 1 table 100  
+ip route add local default dev lo table 100  
+iptables -t mangle -N clash  
+iptables -t mangle -A clash -d 0.0.0.0/8 -j RETURN  
+iptables -t mangle -A clash -d 10.0.0.0/8 -j RETURN  
+iptables -t mangle -A clash -d 127.0.0.0/8 -j RETURN  
+iptables -t mangle -A clash -d 169.254.0.0/16 -j RETURN  
+iptables -t mangle -A clash -d 172.16.0.0/12 -j RETURN  
+iptables -t mangle -A clash -d 192.168.0.0/16 -j RETURN  
+iptables -t mangle -A clash -d 224.0.0.0/4 -j RETURN  
+iptables -t mangle -A clash -d 240.0.0.0/4 -j RETURN  
+iptables -t mangle -A clash -s 192.168.10.87 -j RETURN  
+iptables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 1  
+iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 1  
+iptables -t mangle -A clash -p tcp -j RETURN -m mark --mark 1  
+iptables -t mangle -A clash -p udp -j RETURN -m mark --mark 1  
+iptables -t mangle -A PREROUTING -p tcp -j clash  
+iptables -t mangle -A PREROUTING -p udp -j clash  </code></pre>
 <hr />
 
 <p>tun模式<br />
@@ -301,104 +288,94 @@ iptables -t mangle -A PREROUTING -p udp -j clash</p>
 
 <p>clash dns<br />
 (此处1053端口是clash dns listening port, 它这种情况下53端口是dnsmasq占用的, 我的debian没安装dnsmasq所以没应用这一段)</p>
-
-<p>iptables -t nat -N CLASH_DNS<br />
-iptables -t nat -F CLASH_DNS<br />
-iptables -t nat -A CLASH_DNS -p udp -j REDIRECT --to-port 1053<br />
-iptables -t nat -I OUTPUT -p udp --dport 53 -j CLASH_DNS<br />
-iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to 1053</p>
-
+<pre><code class="language-cli" data-lang="cli">iptables -t nat -N CLASH_DNS  
+iptables -t nat -F CLASH_DNS   
+iptables -t nat -A CLASH_DNS -p udp -j REDIRECT --to-port 1053  
+iptables -t nat -I OUTPUT -p udp --dport 53 -j CLASH_DNS  
+iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to 1053  </code></pre>
 <hr />
 
 <p>ipv6 (还没有成功过)<br />
 下面是我测试的, 但没成功, 不知是节点的问题, 还是iptables规则的问题</p>
+<pre><code class="language-cli" data-lang="cli">ipset create localnetwork6 hash:net family inet6  
+ipset add localnetwork6 ::/128  
+ipset add localnetwork6 ::1/128  
+ipset add localnetwork6 ::ffff:0:0/96  
+ipset add localnetwork6 ::ffff:0:0:0/96  
+ipset add localnetwork6 64:ff9b::/96  
+ipset add localnetwork6 100::/64  
+ipset add localnetwork6 2001::/32  
+ipset add localnetwork6 2001:20::/28  
+ipset add localnetwork6 2001:db8::/32  
+ipset add localnetwork6 2002::/16  
+ipset add localnetwork6 fc00::/7  
+ipset add localnetwork6 fe80::/10  
+ipset add localnetwork6 ff00::/8  
 
-<p>ipset create localnetwork6 hash:net family inet6<br />
-ipset add localnetwork6 ::/128<br />
-ipset add localnetwork6 ::1/128<br />
-ipset add localnetwork6 ::ffff:0:0/96<br />
-ipset add localnetwork6 ::ffff:0:0:0/96<br />
-ipset add localnetwork6 64:ff9b::/96<br />
-ipset add localnetwork6 100::/64<br />
-ipset add localnetwork6 2001::/32<br />
-ipset add localnetwork6 2001:20::/28<br />
-ipset add localnetwork6 2001:db8::/32<br />
-ipset add localnetwork6 2002::/16<br />
-ipset add localnetwork6 fc00::/7<br />
-ipset add localnetwork6 fe80::/10<br />
-ipset add localnetwork6 ff00::/8</p>
+ipset create clashhost6 hash:net family inet6  
+ipset add clashhost6 fe80::d466:a5ff:fed9:6028/64  
 
-<p>ipset create clashhost6 hash:net family inet6<br />
-ipset add clashhost6 fe80::d466:a5ff:fed9:6028/64</p>
+ip6tables -t mangle -N clash  
+ip6tables -t mangle -F clash  
+ip6tables -t mangle -A clash -m set --match-set localnetwork6 dst -j RETURN  
+ip6tables -t mangle -A clash -m set --match-set clashhost6 src -j RETURN  
 
-<p>ip6tables -t mangle -N clash<br />
-ip6tables -t mangle -F clash<br />
-ip6tables -t mangle -A clash -m set --match-set localnetwork6 dst -j RETURN<br />
-ip6tables -t mangle -A clash -m set --match-set clashhost6 src -j RETURN</p>
+ip -6 rule add fwmark 0x162 table 0x162  
+ip -6 route add local ::/0 dev lo table 0x162  
 
-<p>ip -6 rule add fwmark 0x162 table 0x162<br />
-ip -6 route add local ::/0 dev lo table 0x162</p>
-
-<p>ip6tables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 0x162<br />
-ip6tables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 0x162<br />
-ip6tables -t mangle -A clash -p tcp -j RETURN -m mark --mark 0x162<br />
-ip6tables -t mangle -A clash -p udp -j RETURN -m mark --mark 0x162<br />
-ip6tables -t mangle -A PREROUTING -p tcp -j clash<br />
-ip6tables -t mangle -A PREROUTING -p udp -j clash</p>
-
+ip6tables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 0x162  
+ip6tables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 0x162  
+ip6tables -t mangle -A clash -p tcp -j RETURN -m mark --mark 0x162  
+ip6tables -t mangle -A clash -p udp -j RETURN -m mark --mark 0x162  
+ip6tables -t mangle -A PREROUTING -p tcp -j clash  
+ip6tables -t mangle -A PREROUTING -p udp -j clash  </code></pre>
 <hr />
 
 <p>用ipset简化一下规则</p>
+<pre><code class="language-cli" data-lang="cli">ipset create localnetwork hash:net  
+ipset add localnetwork 127.0.0.0/8  
+ipset add localnetwork 10.0.0.0/8  
+ipset add localnetwork 192.168.0.0/16  
+ipset add localnetwork 224.0.0.0/4  
+ipset add localnetwork 172.16.0.0/12  
+ipset add localnetwork 0.0.0.0/8  
+ipset add localnetwork 169.254.0.0/16  
+ipset add localnetwork 240.0.0.0/4  
 
-<p>ipset create localnetwork hash:net<br />
-ipset add localnetwork 127.0.0.0/8<br />
-ipset add localnetwork 10.0.0.0/8<br />
-ipset add localnetwork 192.168.0.0/16<br />
-ipset add localnetwork 224.0.0.0/4<br />
-ipset add localnetwork 172.16.0.0/12<br />
-ipset add localnetwork 0.0.0.0/8<br />
-ipset add localnetwork 169.254.0.0/16<br />
-ipset add localnetwork 240.0.0.0/4</p>
-
-<p>ipset create clashhost hash:net<br />
-ipset add clashhost 192.168.10.87</p>
-
+ipset create clashhost hash:net  
+ipset add clashhost 192.168.10.87</code></pre>
 <hr />
+<pre><code class="language-cli" data-lang="cli">ipset create localnetwork6 hash:net family inet6  
+ipset add localnetwork6 ::/128  
+ipset add localnetwork6 ::1/128  
+ipset add localnetwork6 ::ffff:0:0/96  
+ipset add localnetwork6 ::ffff:0:0:0/96  
+ipset add localnetwork6 64:ff9b::/96  
+ipset add localnetwork6 100::/64  
+ipset add localnetwork6 2001::/32  
+ipset add localnetwork6 2001:20::/28  
+ipset add localnetwork6 2001:db8::/32  
+ipset add localnetwork6 2002::/16  
+ipset add localnetwork6 fc00::/7  
+ipset add localnetwork6 fe80::/10  
+ipset add localnetwork6 ff00::/8  
 
-<p>ipset create localnetwork6 hash:net family inet6<br />
-ipset add localnetwork6 ::/128<br />
-ipset add localnetwork6 ::1/128<br />
-ipset add localnetwork6 ::ffff:0:0/96<br />
-ipset add localnetwork6 ::ffff:0:0:0/96<br />
-ipset add localnetwork6 64:ff9b::/96<br />
-ipset add localnetwork6 100::/64<br />
-ipset add localnetwork6 2001::/32<br />
-ipset add localnetwork6 2001:20::/28<br />
-ipset add localnetwork6 2001:db8::/32<br />
-ipset add localnetwork6 2002::/16<br />
-ipset add localnetwork6 fc00::/7<br />
-ipset add localnetwork6 fe80::/10<br />
-ipset add localnetwork6 ff00::/8</p>
-
-<p>ipset create clashhost6 hash:net family inet6<br />
-ipset add clashhost6 fe80::d466:a5ff:fed9:6028/64</p>
-
+ipset create clashhost6 hash:net family inet6  
+ipset add clashhost6 fe80::d466:a5ff:fed9:6028/64  </code></pre>
 <hr />
 
 <p>在ipset后应用的iptables规则(tproxy模式, 不含ipv6部分)</p>
-
-<p>ip rule add fwmark 1 table 100<br />
-ip route add local default dev lo table 100<br />
-iptables -t mangle -N clash<br />
-iptables -t mangle -A clash -m set --match-set localnetwork dst -j RETURN<br />
-iptables -t mangle -A clash -m set --match-set clashhost src -j RETURN<br />
-iptables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 1<br />
-iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 1<br />
-iptables -t mangle -A clash -p tcp -j RETURN -m mark --mark 1<br />
-iptables -t mangle -A clash -p udp -j RETURN -m mark --mark 1<br />
-iptables -t mangle -A PREROUTING -p tcp -j clash<br />
-iptables -t mangle -A PREROUTING -p udp -j clash</p>
-
+<pre><code class="language-cli" data-lang="cli">ip rule add fwmark 1 table 100  
+ip route add local default dev lo table 100  
+iptables -t mangle -N clash  
+iptables -t mangle -A clash -m set --match-set localnetwork dst -j RETURN  
+iptables -t mangle -A clash -m set --match-set clashhost src -j RETURN  
+iptables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 1  
+iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 1  
+iptables -t mangle -A clash -p tcp -j RETURN -m mark --mark 1  
+iptables -t mangle -A clash -p udp -j RETURN -m mark --mark 1  
+iptables -t mangle -A PREROUTING -p tcp -j clash  
+iptables -t mangle -A PREROUTING -p udp -j clash  </code></pre>
 <hr />
 
 <p>另外在准tproxy模式下, dig @114.114.114.114 baidu.com 是不通的, 而 dig @192.168.10.251 baidu.com 是可行的, 可能是iptables规则的问题吧, 规则中192.168.10.251是绕过clash的, 114.114.114.114是经过clash, 什么原因导致不通我也不全懂; 其实在准tproxy模式下, coredns设置114.114.114.114也是有问题, (国外dns的没问题), 估计也是这原因; 但在tproxy模式下, 则无此问题.</p>

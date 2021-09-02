@@ -15,8 +15,7 @@
       <guid>https://dsunn.github.io/blog/2021/08/mkv2srt/</guid>
       <description>
         
-          &lt;p&gt;ffmpeg -i video.mkv -vn -an -codec:s:0 srt subtitle.srt&lt;/p&gt;
-
+          &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;ffmpeg -i video.mkv -vn -an -codec:s:0 srt subtitle.srt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         
       </description>
     </item>

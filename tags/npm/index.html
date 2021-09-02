@@ -132,9 +132,7 @@
 (如需http, 可用ghcr.io/wonderfall/nextcloud:22)
 db我用postgreSQL, 这个我原先就安装过.
 创建nextcloud db:
-docker exec -it postgres psql -U postgres -d postgres
-CREATE DATABASE nextcloud;
-cli安装nextcloud:
+docker exec -it postgres psql -U postgres -d postgres CREATE DATABASE nextcloud; cli安装nextcloud:
 docker run -d --name=nextcloud -e PUID=1026 -e PGID=100 -e TZ=Asia/Shanghai -p 443:443 …
             
           </p>

@@ -22,10 +22,8 @@
 &lt;p&gt;这样, 在ipv4方面, 通过ros的dhcp服务下发网关为clash, dns为adh(当然从上面的设置中可以知道, adh是把过滤后的请求唯一发给clash的). ipv6是主路由ros通告的, 网关自然为ros, ipv6的dns其实我在ros里并没有设置过, 但在实际使用中发现, 终端设备还是会获取到ipv6的upstream dns, 也就是说即使你在路由器中不设置ipv6的dns, 设备还是会循网关递归找到上游的dns服务器; windows会优先使用ipv6 dns(upstream)来解析, 这样导致dns请求不能到达clash.&lt;/p&gt;
 
 &lt;p&gt;一番google后, 现在是通过ros的ipv6 dhcp server中加入option 23来指定dns, 即adh的ipv6地址. 代码:&lt;/p&gt;
-
-&lt;p&gt;/ipv6 dhcp-server option&lt;br /&gt;
- add code=23 name=dns value=0xfd80000000000000ccf2bbfffe0abcf1&lt;/p&gt;
-
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;ipv6 dhcp&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;server option
+ add code&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt; name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dns value&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0xfd80000000000000ccf2bbfffe0abcf1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;此外, ros的ipv6-ND中不勾选advertise dns, 勾选other config.&lt;/p&gt;
 
 &lt;p&gt;但刚开始一直没生效, 经检查后发现是op在干扰, op虽然是透明代理, 而且目前我并没有用到它, 但它其实是在通告ipv6的dns. 关闭了op的&amp;quot;使用内置的ipv6管理&amp;quot;, 就正常了.&lt;/p&gt;
