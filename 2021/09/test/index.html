@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" data-figures="" class="page">
   <head>
-<title>it is aTest | Whatever Blog</title>
+<title>Test | Whatever Blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,15 +10,17 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="test 1
-okay">
+<meta name="description" content="我是上海CREATE DATABASE nextcloud; 北京
+
+docker run -d --name=nextcloud -e PUID=1026 -e PGID=100 -e TZ=Asia/Shanghai -p 443:443 -v /volume2/docker/nextcloud:/config …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="it is aTest" />
+<meta name="twitter:title" content="Test" />
 <meta property="og:url" content="https://dsunn.github.io/blog/2021/09/test/" />
-<meta property="og:title" content="it is aTest" />
-<meta property="og:description" content="test 1
-okay" />
+<meta property="og:title" content="Test" />
+<meta property="og:description" content="我是上海CREATE DATABASE nextcloud; 北京
+
+docker run -d --name=nextcloud -e PUID=1026 -e PGID=100 -e TZ=Asia/Shanghai -p 443:443 -v /volume2/docker/nextcloud:/config …" />
 <meta property="og:image" content="https://dsunn.github.io/blog/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://dsunn.github.io/blog/icons/apple-touch-icon.png">
@@ -78,23 +80,23 @@ okay" />
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">it is aTest</h1>
+    <h1 class="post_title">Test</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg></span>
     <span class="post_date">
-      Sep 1, 2021</span>
+      Sep 2, 2021</span>
     <span class="post_time"> · 1 min read</span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=it%20is%20aTest&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2ftest%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Test&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2ftest%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2ftest%2f&t=it%20is%20aTest" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2ftest%2f&t=Test" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -114,10 +116,45 @@ okay" />
   </div>
 
     
-    <p>test 1</p>
+    <p>我是上海<code>CREATE DATABASE nextcloud;</code> 北京<br />
+<p></p>
 
-<p>okay</p>
+<p>docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shanghai   -p 443:443   -v /volume2/docker/nextcloud:/config   -v /volume2/nextcloud/data:/data   --restart unless-stopped   ghcr.io/linuxserver/nextcloud</p>
 
+<p><p></p>
+
+<p><p><td bgcolor=orange></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker exec -it postgres psql -U postgres -d postgres
+CREATE DATABASE nextcloud;</code></pre></div>
+<p><p></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#e6db74">&#39;trusted_domains&#39;</span> <span style="color:#f92672">=&gt;</span> 
+  <span style="color:#66d9ef">array</span> (
+    <span style="color:#ae81ff">0</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;local_ip:post&#39;</span>,
+    <span style="color:#ae81ff">1</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;FQDN:port&#39;</span>,
+    <span style="color:#ae81ff">2</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;docker_gateway_ip&#39;</span>,
+    <span style="color:#ae81ff">3</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;router_ip&#39;</span>,
+    <span style="color:#ae81ff">4</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;npm_ip:port&#39;</span>,
+),
+  <span style="color:#e6db74">&#39;overwrite.cli.url&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;https://FQDN:port&#39;</span>,
+  <span style="color:#e6db74">&#39;overwritehost&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;FQDN:port&#39;</span>,
+  <span style="color:#e6db74">&#39;overwriteprotocol&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;https&#39;</span>,</code></pre></div>
+<p>H<sub>2</sub>O</p>
+
+<blockquote>
+<p>Stay Hungry. Stay Foolish -- Steve Jobs</p>
+</blockquote>
+
+<p>#include<br />
+int main(void)<br />
+{<br />
+  printf(&quot;Hello world!&quot;),<br />
+  return 0;<br />
+}</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#66d9ef">\documentclass</span>{article}  
+<span style="color:#75715e">% 这里是导言区
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">\begin</span>{document}
+Hello, world!
+<span style="color:#66d9ef">\end</span>{document}</code></pre></div>
 
   </article>
 <aside class="sidebar">

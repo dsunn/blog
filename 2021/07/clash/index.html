@@ -382,13 +382,13 @@ iptables -t mangle -A PREROUTING -p udp -j clash  </code></pre>
 
 <hr />
 
-<p>研究一下(目前还没加入到规则中, 现在的规则还是用-m set --match-set clashhost dst -j RETURN)<br />
-iptables -t nat -I OUTPUT -m owner ! --uid-owner clash -p udp --dport 53 -j CLASH_DNS</p>
-
-<p>用-m owner ! --uid-owner clash改写上述iptables中绕过clash流量的部分 (这里用clash通不过, 改为0, 不知对不对?)<br />
--&gt;&gt;<br />
-iptables -t mangle -A clash -m owner --uid-owner 0 -j RETURN   #放行clash发出的数据<br />
-iptables -t nat -A OUTPUT -m owner ! --uid-owner 0 -j clash #转发本机非clash的流量</p>
+<p>研究一下(目前还没加入到规则中, 现在的规则还是用<code>-m set --match-set clashhost dst -j RETURN</code>)</p>
+<pre><code class="language-cli" data-lang="cli">iptables -t nat -I OUTPUT -m owner ! --uid-owner clash -p udp --dport 53 -j CLASH_DNS  </code></pre>
+<p>用<code>-m owner ! --uid-owner clash</code>改写上述iptables中绕过clash流量的部分 (这里用clash通不过, 改为0, 不知对不对?)<br />
+-&gt;&gt;</p>
+<pre><code class="language-cli" data-lang="cli">iptables -t mangle -A clash -m owner --uid-owner 0 -j RETURN   #放行clash发出的数据  
+iptables -t nat -A OUTPUT -m owner ! --uid-owner 0 -j clash #转发本机非clash的流量  </code></pre>
+<p>cli</p>
 
 <p>(以上二行我在加入到tproxy的iptables规则中时报错, 第二条可能是原规则没有新建OUTPUT的链吧, 这我不是很懂, 第一条报错不懂什么原因)</p>
 
@@ -400,6 +400,9 @@ iptables -t nat -A OUTPUT -m owner ! --uid-owner 0 -j clash #转发本机非clas
   <section class="sidebar_inner">
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://dsunn.github.io/blog/2021/09/test/" class="nav-link" title="Test">Test</a>
+      </li>
       <li>
         <a href="https://dsunn.github.io/blog/2021/09/about_dns/" class="nav-link" title="讨论下科学环境下的dns">讨论下科学环境下的dns</a>
       </li>

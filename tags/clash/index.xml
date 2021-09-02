@@ -279,13 +279,13 @@ iptables -t mangle -A PREROUTING -p udp -j clash  &lt;/code&gt;&lt;/pre&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;研究一下(目前还没加入到规则中, 现在的规则还是用-m set --match-set clashhost dst -j RETURN)&lt;br /&gt;
-iptables -t nat -I OUTPUT -m owner ! --uid-owner clash -p udp --dport 53 -j CLASH_DNS&lt;/p&gt;
-
-&lt;p&gt;用-m owner ! --uid-owner clash改写上述iptables中绕过clash流量的部分 (这里用clash通不过, 改为0, 不知对不对?)&lt;br /&gt;
--&amp;gt;&amp;gt;&lt;br /&gt;
-iptables -t mangle -A clash -m owner --uid-owner 0 -j RETURN   #放行clash发出的数据&lt;br /&gt;
-iptables -t nat -A OUTPUT -m owner ! --uid-owner 0 -j clash #转发本机非clash的流量&lt;/p&gt;
+&lt;p&gt;研究一下(目前还没加入到规则中, 现在的规则还是用&lt;code&gt;-m set --match-set clashhost dst -j RETURN&lt;/code&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;iptables -t nat -I OUTPUT -m owner ! --uid-owner clash -p udp --dport 53 -j CLASH_DNS  &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;用&lt;code&gt;-m owner ! --uid-owner clash&lt;/code&gt;改写上述iptables中绕过clash流量的部分 (这里用clash通不过, 改为0, 不知对不对?)&lt;br /&gt;
+-&amp;gt;&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;iptables -t mangle -A clash -m owner --uid-owner 0 -j RETURN   #放行clash发出的数据  
+iptables -t nat -A OUTPUT -m owner ! --uid-owner 0 -j clash #转发本机非clash的流量  &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;cli&lt;/p&gt;
 
 &lt;p&gt;(以上二行我在加入到tproxy的iptables规则中时报错, 第二条可能是原规则没有新建OUTPUT的链吧, 这我不是很懂, 第一条报错不懂什么原因)&lt;/p&gt;
 
