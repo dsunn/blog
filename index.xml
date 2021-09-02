@@ -6,58 +6,7 @@
     <description>Recent content on Whatever Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Sep 2021 09:03:18 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Test</title>
-      <link>https://dsunn.github.io/blog/2021/09/test/</link>
-      <pubDate>Thu, 02 Sep 2021 09:03:18 +0800</pubDate>
-      
-      <guid>https://dsunn.github.io/blog/2021/09/test/</guid>
-      <description>
-        
-          &lt;p&gt;我是上海&lt;code&gt;CREATE DATABASE nextcloud;&lt;/code&gt; 北京&lt;br /&gt;
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;docker run -d   --name=nextcloud   -e PUID=1026   -e PGID=100   -e TZ=Asia/Shanghai   -p 443:443   -v /volume2/docker/nextcloud:/config   -v /volume2/nextcloud/data:/data   --restart unless-stopped   ghcr.io/linuxserver/nextcloud&lt;/p&gt;
-
-&lt;p&gt;&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;p&gt;&lt;td bgcolor=orange&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker exec -it postgres psql -U postgres -d postgres
-CREATE DATABASE nextcloud;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;p&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;trusted_domains&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;array&lt;/span&gt; (
-    &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;local_ip:post&amp;#39;&lt;/span&gt;,
-    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FQDN:port&amp;#39;&lt;/span&gt;,
-    &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;docker_gateway_ip&amp;#39;&lt;/span&gt;,
-    &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;router_ip&amp;#39;&lt;/span&gt;,
-    &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;npm_ip:port&amp;#39;&lt;/span&gt;,
-),
-  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;overwrite.cli.url&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://FQDN:port&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;overwritehost&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FQDN:port&amp;#39;&lt;/span&gt;,
-  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;overwriteprotocol&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https&amp;#39;&lt;/span&gt;,&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Stay Hungry. Stay Foolish -- Steve Jobs&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;#include&lt;br /&gt;
-int main(void)&lt;br /&gt;
-{&lt;br /&gt;
-  printf(&amp;quot;Hello world!&amp;quot;),&lt;br /&gt;
-  return 0;&lt;br /&gt;
-}&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-tex&#34; data-lang=&#34;tex&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\documentclass&lt;/span&gt;{article}  
-&lt;span style=&#34;color:#75715e&#34;&gt;% 这里是导言区
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\begin&lt;/span&gt;{document}
-Hello, world!
-&lt;span style=&#34;color:#66d9ef&#34;&gt;\end&lt;/span&gt;{document}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-        
-      </description>
-    </item>
-    
+    <lastBuildDate>Wed, 01 Sep 2021 20:11:10 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>讨论下科学环境下的dns</title>
       <link>https://dsunn.github.io/blog/2021/09/about_dns/</link>

@@ -84,65 +84,6 @@
   <div class="excerpt">
     <div class="excerpt_header">
       <h3 class="post_link">
-        <a href="https://dsunn.github.io/blog/2021/09/test/" title="Test">Test</a>
-      </h3>
-      
-  <div class="post_meta">
-    <span><svg class="icon">
-  <use xlink:href="#calendar"></use>
-</svg></span>
-    <span class="post_date">
-      Sep 2, 2021</span>
-    <span class="post_time"> · 1 min read</span>
-    <span class="page_only">&nbsp;·
-  <div class="post_share">
-    Share on:
-    <a href="https://twitter.com/intent/tweet?text=Test&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2ftest%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
-      <svg class="icon">
-  <use xlink:href="#twitter"></use>
-</svg>
-    </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2ftest%2f&t=Test" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
-      <svg class="icon">
-  <use xlink:href="#facebook"></use>
-</svg>
-    </a>
-    <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
-      <svg class="icon">
-  <use xlink:href="#linkedin"></use>
-</svg>
-    </a>
-    <a href="https://dsunn.github.io/blog/2021/09/test/" title="Copy Link" class="link link_yank">
-      <svg class="icon">
-  <use xlink:href="#copy"></use>
-</svg>
-    </a>
-  </div>
-  </span>
-  </div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">
-            
-              我是上海CREATE DATABASE nextcloud; 北京
-
-docker run -d --name=nextcloud -e PUID=1026 -e PGID=100 -e TZ=Asia/Shanghai -p 443:443 -v /volume2/docker/nextcloud:/config -v /volume2/nextcloud/data:/data --restart unless-stopped ghcr.io/linuxserver/nextcloud
-
-docker exec -it postgres psql -U postgres -d postgres CREATE DATABASE …
-            
-          </p>
-          <a href="https://dsunn.github.io/blog/2021/09/test/" title="Read More" class="excerpt_more button">Read More</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
         <a href="https://dsunn.github.io/blog/2021/09/about_dns/" title="讨论下科学环境下的dns">讨论下科学环境下的dns</a>
       </h3>
       
@@ -383,36 +324,75 @@ docker run -d --name=nextcloud -e PUID=1026 -e PGID=100 -e TZ=Asia/Shanghai -p 4
     </div>
   </li>
 
+      <li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="https://dsunn.github.io/blog/2021/07/clash/" title="Debian搭建clash透明代理">Debian搭建clash透明代理</a>
+      </h3>
+      
+  <div class="post_meta">
+    <span><svg class="icon">
+  <use xlink:href="#calendar"></use>
+</svg></span>
+    <span class="post_date">
+      Jul 13, 2021</span>
+    <span class="post_time"> · 7 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/clash' title="clash" class="post_tag button button_translucent">clash
+        </a>
+    </span>
+    <span class="page_only">&nbsp;·
+  <div class="post_share">
+    Share on:
+    <a href="https://twitter.com/intent/tweet?text=Debian%e6%90%ad%e5%bb%baclash%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f07%2fclash%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#twitter"></use>
+</svg>
+    </a>
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f07%2fclash%2f&t=Debian%e6%90%ad%e5%bb%baclash%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#facebook"></use>
+</svg>
+    </a>
+    <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
+      <svg class="icon">
+  <use xlink:href="#linkedin"></use>
+</svg>
+    </a>
+    <a href="https://dsunn.github.io/blog/2021/07/clash/" title="Copy Link" class="link link_yank">
+      <svg class="icon">
+  <use xlink:href="#copy"></use>
+</svg>
+    </a>
+  </div>
+  </span>
+  </div>
+
+    </div>
+      <div class="excerpt_footer">
+        <div>
+          <p class="pale">
+            
+              写在前面:
+为使得clash设计的dns防污染能更好地工作, 客户端的dns需要指向clash dns, 可以使用dhcp serve配置此项. 这样做的目的是使clash能够拿到连接的域名信息, 再配以适当的域名规则, 很多情形下, 即使在dns污染的情况下, 也能正常工作.
+记录一下自己的搭建过程记录一下自己的搭建过程
+最好用root用户运行, 特别是当使用clash premium installer搭建时, 不用root会报错
+一. clash程序
+- 下载clash premium (https://github.com/Dreamacro/clash/releases/tag/premium) 解压保存 …
+            
+          </p>
+          <a href="https://dsunn.github.io/blog/2021/07/clash/" title="Read More" class="excerpt_more button">Read More</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
     <li>
-    <ul class="pagination pagination-default">
-      <li class="page-item disabled">
-        <a href="#" aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
-      </li>
-      <li class="page-item disabled">
-        <a href="#" aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
-      </li>
-      <li class="page-item active">
-        <a href="#" aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
-      </li>
-      <li class="page-item">
-        <a href="/blog/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
-      </li>
-      <li class="page-item">
-        <a href="/blog/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="/blog/page/2/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
-      </li>
-    </ul>
     </li>
   </ul>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://dsunn.github.io/blog/2021/09/test/" class="nav-link" title="Test">Test</a>
-      </li>
       <li>
         <a href="https://dsunn.github.io/blog/2021/09/about_dns/" class="nav-link" title="讨论下科学环境下的dns">讨论下科学环境下的dns</a>
       </li>

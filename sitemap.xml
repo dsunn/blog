@@ -2,19 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://dsunn.github.io/blog/posts/</loc>
-    <lastmod>2021-09-02T09:03:18+08:00</lastmod>
-  </url><url>
-    <loc>https://dsunn.github.io/blog/2021/09/test/</loc>
-    <lastmod>2021-09-02T09:03:18+08:00</lastmod>
-  </url><url>
-    <loc>https://dsunn.github.io/blog/</loc>
-    <lastmod>2021-09-02T09:03:18+08:00</lastmod>
-  </url><url>
     <loc>https://dsunn.github.io/blog/tags/dns/</loc>
     <lastmod>2021-09-01T20:11:10+08:00</lastmod>
   </url><url>
+    <loc>https://dsunn.github.io/blog/posts/</loc>
+    <lastmod>2021-09-01T20:11:10+08:00</lastmod>
+  </url><url>
     <loc>https://dsunn.github.io/blog/tags/</loc>
+    <lastmod>2021-09-01T20:11:10+08:00</lastmod>
+  </url><url>
+    <loc>https://dsunn.github.io/blog/</loc>
     <lastmod>2021-09-01T20:11:10+08:00</lastmod>
   </url><url>
     <loc>https://dsunn.github.io/blog/2021/09/about_dns/</loc>
