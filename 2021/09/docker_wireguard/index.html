@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" data-figures="" class="page">
   <head>
-<title>Ros通过dhcp6 option下发指定dns | Whatever Blog</title>
+<title>Docker_wireguard | Whatever Blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,22 +10,22 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="我的网络架构是ros(主路由), dhcp服务跑在ros上; debian上跑clash作为透明代理. 先前我安装了openwrt作为旁路透明代理, 现在因为启用clash为网关, op就放一边, 也跑着, 作为网络中的一个设备, 算是一个backup的透明代理吧.
-我debian上的clash, 跑的是fake-ip …">
+<meta name="description" content="docker cli 安装 wireguard
+docker run -d \ --name=wireguard \ --cap-add=NET_ADMIN \ --cap-add=SYS_MODULE \ -e PUID=1000 \ -e PGID=1000 \ -e TZ=Asia/Shanghai \ -e …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Ros通过dhcp6 option下发指定dns" />
-<meta property="og:url" content="https://dsunn.github.io/blog/2021/08/ros_dhcp6/" />
-<meta property="og:title" content="Ros通过dhcp6 option下发指定dns" />
-<meta property="og:description" content="我的网络架构是ros(主路由), dhcp服务跑在ros上; debian上跑clash作为透明代理. 先前我安装了openwrt作为旁路透明代理, 现在因为启用clash为网关, op就放一边, 也跑着, 作为网络中的一个设备, 算是一个backup的透明代理吧.
-我debian上的clash, 跑的是fake-ip …" />
+<meta name="twitter:title" content="Docker_wireguard" />
+<meta property="og:url" content="https://dsunn.github.io/blog/2021/09/docker_wireguard/" />
+<meta property="og:title" content="Docker_wireguard" />
+<meta property="og:description" content="docker cli 安装 wireguard
+docker run -d \ --name=wireguard \ --cap-add=NET_ADMIN \ --cap-add=SYS_MODULE \ -e PUID=1000 \ -e PGID=1000 \ -e TZ=Asia/Shanghai \ -e …" />
 <meta property="og:image" content="https://dsunn.github.io/blog/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://dsunn.github.io/blog/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://dsunn.github.io/blog/icons/favicon-32x32.png">
 <link rel="manifest" href="https://dsunn.github.io/blog/icons/site.webmanifest">
 
-<link rel="canonical" href="https://dsunn.github.io/blog/2021/08/ros_dhcp6/">
+<link rel="canonical" href="https://dsunn.github.io/blog/2021/09/docker_wireguard/">
 
     
 
@@ -78,27 +78,27 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Ros通过dhcp6 option下发指定dns</h1>
+    <h1 class="post_title">Docker_wireguard</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg></span>
     <span class="post_date">
-      Aug 18, 2021</span>
-    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/ros' title="ros" class="post_tag button button_translucent">ros
-        </a><a href='https://dsunn.github.io/blog/tags/openwrt' title="openwrt" class="post_tag button button_translucent">openwrt
-        </a><a href='https://dsunn.github.io/blog/tags/ipv6' title="ipv6" class="post_tag button button_translucent">ipv6
+      Sep 3, 2021</span>
+    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/docker' title="docker" class="post_tag button button_translucent">docker
+        </a><a href='https://dsunn.github.io/blog/tags/vpn' title="vpn" class="post_tag button button_translucent">vpn
+        </a><a href='https://dsunn.github.io/blog/tags/wireguard' title="wireguard" class="post_tag button button_translucent">wireguard
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Ros%e9%80%9a%e8%bf%87dhcp6%20option%e4%b8%8b%e5%8f%91%e6%8c%87%e5%ae%9adns&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f08%2fros_dhcp6%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Docker_wireguard&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2fdocker_wireguard%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f08%2fros_dhcp6%2f&t=Ros%e9%80%9a%e8%bf%87dhcp6%20option%e4%b8%8b%e5%8f%91%e6%8c%87%e5%ae%9adns" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2fdocker_wireguard%2f&t=Docker_wireguard" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -108,7 +108,7 @@
   <use xlink:href="#linkedin"></use>
 </svg>
     </a>
-    <a href="https://dsunn.github.io/blog/2021/08/ros_dhcp6/" title="Copy Link" class="link link_yank">
+    <a href="https://dsunn.github.io/blog/2021/09/docker_wireguard/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -118,18 +118,26 @@
   </div>
 
     
-    <p>我的网络架构是ros(主路由), dhcp服务跑在ros上; debian上跑clash作为透明代理. 先前我安装了openwrt作为旁路透明代理, 现在因为启用clash为网关, op就放一边, 也跑着, 作为网络中的一个设备, 算是一个backup的透明代理吧.</p>
-
-<p>我debian上的clash, 跑的是fake-ip的dns模式, 转发模式是tproxy. 另用coredns架设了一个能科学且能分流查询的dns 服务器, 作为clash的fallback dns组, 另外架设了一个adguard home, 作为clash dns的延伸, adh上游唯一设置为clash dns, 我主要用adh拦截一些广告(实际作用不大), 和host的ip劫持. 这样, 就保证了终端设备的dns请求都最终到达clash, 而能使用到clash的dns的反投毒的功能, 以及fake-ip功能.</p>
-
-<p>这样, 在ipv4方面, 通过ros的dhcp服务下发网关为clash, dns为adh(当然从上面的设置中可以知道, adh是把过滤后的请求唯一发给clash的). ipv6是主路由ros通告的, 网关自然为ros, ipv6的dns其实我在ros里并没有设置过, 但在实际使用中发现, 终端设备还是会获取到ipv6的upstream dns, 也就是说即使你在路由器中不设置ipv6的dns, 设备还是会循网关递归找到上游的dns服务器; windows会优先使用ipv6 dns(upstream)来解析, 这样导致dns请求不能到达clash.</p>
-
-<p>一番google后, 现在是通过ros的ipv6 dhcp server中加入option 23来指定dns, 即adh的ipv6地址. 代码:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#f92672">/</span>ipv6 dhcp<span style="color:#f92672">-</span>server option
- add code<span style="color:#f92672">=</span><span style="color:#ae81ff">23</span> name<span style="color:#f92672">=</span>dns value<span style="color:#f92672">=</span><span style="color:#ae81ff">0xfd80000000000000ccf2bbfffe0abcf1</span></code></pre></div>
-<p>此外, ros的ipv6-ND中不勾选advertise dns, 勾选other config.</p>
-
-<p>但刚开始一直没生效, 经检查后发现是op在干扰, op虽然是透明代理, 而且目前我并没有用到它, 但它其实是在通告ipv6的dns. 关闭了op的&quot;使用内置的ipv6管理&quot;, 就正常了.</p>
+    <p>docker cli 安装 wireguard</p>
+<pre><code class="language-cli" data-lang="cli">docker run -d \
+  --name=wireguard \
+  --cap-add=NET_ADMIN \
+  --cap-add=SYS_MODULE \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Asia/Shanghai \
+  -e SERVERURL=your.domain \
+  -e SERVERPORT=31821 \
+  -e PEERS=1 \
+  -e PEERDNS=auto \
+  -e INTERNAL_SUBNET=192.168.10.0 \
+  -p 31821:51820/udp \
+  -v /home/aki/wg/config:/config \
+  -v /lib/modules:/lib/modules \
+  --sysctl=&#34;net.ipv4.conf.all.src_valid_mark=1&#34; \
+   --restart unless-stopped \
+  linuxserver/wireguard</code></pre>
+<p>通过环境变量<code>PEERS</code>来需要的对端数量</p>
 
 
   </article>
@@ -138,9 +146,6 @@
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://dsunn.github.io/blog/2021/09/docker_wireguard/" class="nav-link" title="Docker_wireguard">Docker_wireguard</a>
-      </li>
-      <li>
         <a href="https://dsunn.github.io/blog/2021/09/about_dns/" class="nav-link" title="讨论下科学环境下的dns">讨论下科学环境下的dns</a>
       </li>
       <li>
@@ -148,6 +153,9 @@
       </li>
       <li>
         <a href="https://dsunn.github.io/blog/2021/08/mkv2srt/" class="nav-link" title="使用ffmpeg从mkv文件中提取srt">使用ffmpeg从mkv文件中提取srt</a>
+      </li>
+      <li>
+        <a href="https://dsunn.github.io/blog/2021/08/ros_dhcp6/" class="nav-link" title="Ros通过dhcp6 option下发指定dns">Ros通过dhcp6 option下发指定dns</a>
       </li>
       <li>
         <a href="https://dsunn.github.io/blog/2021/07/clash/" class="nav-link" title="Debian搭建clash透明代理">Debian搭建clash透明代理</a>

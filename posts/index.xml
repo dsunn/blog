@@ -6,7 +6,40 @@
     <description>Recent content in Posts on Whatever Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Sep 2021 20:11:10 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Sep 2021 13:27:52 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker_wireguard</title>
+      <link>https://dsunn.github.io/blog/2021/09/docker_wireguard/</link>
+      <pubDate>Fri, 03 Sep 2021 13:27:52 +0800</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/2021/09/docker_wireguard/</guid>
+      <description>
+        
+          &lt;p&gt;docker cli 安装 wireguard&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;docker run -d \
+  --name=wireguard \
+  --cap-add=NET_ADMIN \
+  --cap-add=SYS_MODULE \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Asia/Shanghai \
+  -e SERVERURL=your.domain \
+  -e SERVERPORT=31821 \
+  -e PEERS=1 \
+  -e PEERDNS=auto \
+  -e INTERNAL_SUBNET=192.168.10.0 \
+  -p 31821:51820/udp \
+  -v /home/aki/wg/config:/config \
+  -v /lib/modules:/lib/modules \
+  --sysctl=&amp;#34;net.ipv4.conf.all.src_valid_mark=1&amp;#34; \
+   --restart unless-stopped \
+  linuxserver/wireguard&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过环境变量&lt;code&gt;PEERS&lt;/code&gt;来需要的对端数量&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
     <item>
       <title>讨论下科学环境下的dns</title>
       <link>https://dsunn.github.io/blog/2021/09/about_dns/</link>
