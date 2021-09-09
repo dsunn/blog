@@ -34,7 +34,7 @@
   --sysctl=&amp;#34;net.ipv4.conf.all.src_valid_mark=1&amp;#34; \
    --restart unless-stopped \
   linuxserver/wireguard&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;通过环境变量&lt;code&gt;PEERS&lt;/code&gt;来需要的对端数量&lt;/p&gt;
+&lt;p&gt;通过环境变量&lt;code&gt;PEERS&lt;/code&gt;来生成需要的对端数量&lt;/p&gt;
 
         
       </description>
