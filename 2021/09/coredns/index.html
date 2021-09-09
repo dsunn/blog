@@ -114,7 +114,7 @@
   </div>
 
     
-    <p>coredns (<a href="https://github.com/coredns">https://github.com/coredns</a>) 是一个灵活可扩展的DNS 服务器，可以作为Kubernetes 集群DNS, 有很多内置插件和第三方插件支持. 我是采用类库大魔王 (<a href="https://github.com/missdeer/coredns_custom_build">https://github.com/missdeer/coredns_custom_build</a>) 编译好的核心, 并稍微修改一下他的配置文件, 在debian中搭建一个基于dnsmasq-china-list分流查询的dns服务器.</p>
+    <p>coredns (<a href="https://github.com/coredns">https://github.com/coredns</a>) 是一个灵活可扩展的DNS 服务器，可以作为Kubernetes 集群DNS, 有很多内置插件和第三方插件支持. 我是采用类库大魔王 (<a href="https://github.com/missdeer/coredns_custom_build">https://github.com/missdeer/coredns_custom_build</a>) 编译好的核心, 并稍微修改一下他的配置文件, 在debian中搭建一个基于dnsmasq-china-list (<a href="https://github.com/felixonmars/dnsmasq-china-list">https://github.com/felixonmars/dnsmasq-china-list</a>) 分流查询的dns服务器.</p>
 
 <ul>
 <li><p>在类库大魔王coredns_custom_build页面下载64位的linux版文件, 解析后coredns核心复制到/usr/bin/下</p></li>
@@ -143,6 +143,9 @@ WantedBy=multi-user.target</code></pre></li>
 </ul>
 
 <p>我的使用经验, coredns 配合clash的fake-ip dns 模式, 即(1)clash dns nameserver设置两到三个国内公共或isp的dns, fallback设置为coredns; 或(2)clash dns nameserver设置为coredns, fallback设置为空; 推荐(2); 使用下来科学系统很流畅并能很有效地抗污染.</p>
+
+<p>参考: 类库大魔王的挖井日记<br />
+<a href="https://blog.ismisv.com/2019/07/coredns-no-dns-poisoning/">https://blog.ismisv.com/2019/07/coredns-no-dns-poisoning/</a></p>
 
 
   </article>
