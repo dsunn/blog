@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="en" data-figures="">
+<html lang="en" data-figures="" class="page">
   <head>
-<title>vpn | Whatever Blog</title>
+<title>debian 搭建 coredns | Whatever Blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,21 +10,20 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="">
+<meta name="description" content="coredns (https://github.com/coredns) 是一个灵活可扩展的DNS 服务器，可以作为Kubernetes 集群DNS, 有很多内置插件和第三方插件支持. 我是采用类库大魔王 (https://github.com/missdeer/coredns_custom_build) 编译好的核 …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="vpn" />
-<meta property="og:url" content="https://dsunn.github.io/blog/tags/vpn/" />
-<meta property="og:title" content="vpn" />
-<meta property="og:description" content="" />
+<meta name="twitter:title" content="debian 搭建 coredns" />
+<meta property="og:url" content="https://dsunn.github.io/blog/2021/09/coredns/" />
+<meta property="og:title" content="debian 搭建 coredns" />
+<meta property="og:description" content="coredns (https://github.com/coredns) 是一个灵活可扩展的DNS 服务器，可以作为Kubernetes 集群DNS, 有很多内置插件和第三方插件支持. 我是采用类库大魔王 (https://github.com/missdeer/coredns_custom_build) 编译好的核 …" />
 <meta property="og:image" content="https://dsunn.github.io/blog/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://dsunn.github.io/blog/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://dsunn.github.io/blog/icons/favicon-32x32.png">
 <link rel="manifest" href="https://dsunn.github.io/blog/icons/site.webmanifest">
 
-<link rel="canonical" href="https://dsunn.github.io/blog/tags/vpn/">
-<link rel="alternate" type="application/rss+xml" href="https://dsunn.github.io/blog/tags/vpn/index.xml" title="Whatever Blog" />
+<link rel="canonical" href="https://dsunn.github.io/blog/2021/09/coredns/">
 
     
 
@@ -74,36 +73,28 @@
 </header>
 
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <ul class="posts" id="posts">
-      <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://dsunn.github.io/blog/2021/09/docker_wireguard/" title="Docker搭建wireguard回家">Docker搭建wireguard回家</a>
-      </h3>
-      
+  <article class="post_content">
+    <h1 class="post_title">debian 搭建 coredns</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg></span>
     <span class="post_date">
-      Sep 3, 2021</span>
-    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/docker' title="docker" class="post_tag button button_translucent">docker
-        </a><a href='https://dsunn.github.io/blog/tags/vpn' title="vpn" class="post_tag button button_translucent">vpn
-        </a><a href='https://dsunn.github.io/blog/tags/wireguard' title="wireguard" class="post_tag button button_translucent">wireguard
+      Sep 9, 2021</span>
+    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/dns' title="dns" class="post_tag button button_translucent">dns
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Docker%e6%90%ad%e5%bb%bawireguard%e5%9b%9e%e5%ae%b6&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2fdocker_wireguard%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=debian%20%e6%90%ad%e5%bb%ba%20coredns&url=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2fcoredns%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2fdocker_wireguard%2f&t=Docker%e6%90%ad%e5%bb%bawireguard%e5%9b%9e%e5%ae%b6" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2f2021%2f09%2fcoredns%2f&t=debian%20%e6%90%ad%e5%bb%ba%20coredns" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -113,7 +104,7 @@
   <use xlink:href="#linkedin"></use>
 </svg>
     </a>
-    <a href="https://dsunn.github.io/blog/2021/09/docker_wireguard/" title="Copy Link" class="link link_yank">
+    <a href="https://dsunn.github.io/blog/2021/09/coredns/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -122,31 +113,43 @@
   </span>
   </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div>
-          <p class="pale">
-            
-              docker cli 安装 wireguard
-docker run -d \ --name=wireguard \ --cap-add=NET_ADMIN \ --cap-add=SYS_MODULE \ -e PUID=1000 \ -e PGID=1000 \ -e TZ=Asia/Shanghai \ -e SERVERURL=your.domain \ -e SERVERPORT=31821 \ -e PEERS=1 \ -e PEERDNS=auto \ -e INTERNAL_SUBNET=192.168.10.0 \ -p 31821:51820/udp \ -v …
-            
-          </p>
-          <a href="https://dsunn.github.io/blog/2021/09/docker_wireguard/" title="Read More" class="excerpt_more button">Read More</a>
-        </div>
-      </div>
-    </div>
-  </li>
+    
+    <p>coredns (<a href="https://github.com/coredns">https://github.com/coredns</a>) 是一个灵活可扩展的DNS 服务器，可以作为Kubernetes 集群DNS, 有很多内置插件和第三方插件支持. 我是采用类库大魔王 (<a href="https://github.com/missdeer/coredns_custom_build">https://github.com/missdeer/coredns_custom_build</a>) 编译好的核心, 并稍微修改一下他的配置文件, 在debian中搭建一个基于dnsmasq-china-list分流查询的dns服务器.</p>
 
-    <li>
-    </li>
-  </ul>
+<ul>
+<li><p>在类库大魔王coredns_custom_build页面下载64位的linux版文件, 解析后coredns核心复制到/usr/bin/下</p></li>
+
+<li><p>新建/etc/coredns目录, 复制Corefile到这个目录下</p></li>
+
+<li><p>配置为deamon运行, 创建/lib/systemd/system/coredns.service</p>
+<pre><code class="language-cli" data-lang="cli">[unit]
+Description=Coredns server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/etc/coredns
+ExecStart=/usr/bin/coredns -conf Corefile
+Restart=always
+
+[Install]
+WantedBy=multi-user.target</code></pre></li>
+
+<li><p>systemctl start 并且 enable</p></li>
+
+<li><p>debian的dns最好不要指向科学网关, 而是指向国内dns</p></li>
+
+<li><p>我根据自己的需要稍微修改了一下Corefile, 就是在其中的域名列表中删除了google的相关域名</p></li>
+</ul>
+
+<p>我的使用经验, coredns 配合clash的fake-ip dns 模式, 即(1)clash dns nameserver设置两到三个国内公共或isp的dns, fallback设置为coredns; 或(2)clash dns nameserver设置为coredns, fallback设置为空; 推荐(2); 使用下来科学系统很流畅并能很有效地抗污染.</p>
+
+
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://dsunn.github.io/blog/2021/09/coredns/" class="nav-link" title="debian 搭建 coredns">debian 搭建 coredns</a>
-      </li>
       <li>
         <a href="https://dsunn.github.io/blog/2021/09/docker_wireguard/" class="nav-link" title="Docker搭建wireguard回家">Docker搭建wireguard回家</a>
       </li>
@@ -230,9 +233,8 @@ docker run -d \ --name=wireguard \ --cap-add=NET_ADMIN \ --cap-add=SYS_MODULE \ 
   </section>
 </aside>
 
+  
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
