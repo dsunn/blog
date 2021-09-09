@@ -186,7 +186,7 @@
           <p class="pale">
             
               docker cli 安装 wireguard
-docker run -d \ --name=wireguard \ --cap-add=NET_ADMIN \ --cap-add=SYS_MODULE \ -e PUID=1000 \ -e PGID=1000 \ -e TZ=Asia/Shanghai \ -e SERVERURL=your.domain \ -e SERVERPORT=31821 \ -e PEERS=1 \ -e PEERDNS=auto \ -e INTERNAL_SUBNET=192.168.10.0 \ -p 31821:51820/udp \ -v …
+docker run -d \ --name=wireguard \ --cap-add=NET_ADMIN \ --cap-add=SYS_MODULE \ -e PUID=1000 \ -e PGID=1000 \ -e TZ=Asia/Shanghai \ -e SERVERURL=your.domain \ -e SERVERPORT=51820 \ -e PEERS=1 \ -e PEERDNS=auto \ -e INTERNAL_SUBNET=192.168.10.0 \ -p 51820:51820/udp \ -v …
             
           </p>
           <a href="https://dsunn.github.io/blog/2021/09/docker_wireguard/" title="Read More" class="excerpt_more button">Read More</a>
