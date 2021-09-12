@@ -74,7 +74,7 @@ adguard home:&lt;br /&gt;
 终端的dns请求被发送到adh, 而adh的唯一上游是clash dns; 当clash采用fake-ip模式时, adh从clash dns拿到的请求回馈也是fake-ip, 这fake-ip也返回给终端客户. 我之所以要加adh, 是想在请求送到clash dns前, adh可以方便地按需要进行host劫持, 去广告也是host劫持的一种, 虽然效果不大; 主要有用的host劫持是比如raw.githubusercontent.com; 还有docker jd的应用会产生大量的dns请求, 也用adh劫持, 并且在debian中用iptables把docker jd的流量放行, 不转发给clash.&lt;/p&gt;
 
 &lt;p&gt;coredns:&lt;br /&gt;
-由于clash dns本身不用科学, 虽然可以用fake-ip较有效地对抗dns污染, 但在clash之外设置一个能科学的dns, 作为clash dns fallback, 同时nameserver用isp或国内公共dns, 更符合clash的设计初衷; 甚至可以用coredns作为clash dns nameserver, 而clash dns fallback留空, 或配置为8.8.8.8, 如果留空出错的话.&lt;br /&gt;
+由于clash dns本身不能科学, 虽然可以用fake-ip较有效地对抗dns污染, 但在clash之外设置一个能科学的dns, 作为clash dns fallback, 同时nameserver用isp或国内公共dns, 更符合clash的设计初衷; 甚至可以用coredns作为clash dns nameserver, 而clash dns fallback留空, 或配置为8.8.8.8, 如果留空出错的话. 目前我采用的是用coredns作为clash dns nameserver, 而clash dns fallback留空, 这种方式.&lt;br /&gt;
 与smartdns不同, coredns自己配置了一个domain list, 按照if-then-else查询内外的dns, 也就是说一个dns请求要么发往内组(我的环境下是设置为ros dns), 要么发往外组(1.1.1.1, etc.); 而smartdns同时发往内组外组, 而科学插件配置domain list, 并根据domain list选取smartdns的内外组(按端口).&lt;br /&gt;
 从隐私角度, coredns优于smartdns, 比如在上述的用coredns作为clash dns nameserver, 而clash dns fallback留空这样的配置环境中, 局域网内任何黑名单中的域名查询都不会经过内组, 这个配置环境中, 最好把连接的节点域名, 用国内dns解析出ip后, 在clash中用host劫持.&lt;/p&gt;
 
