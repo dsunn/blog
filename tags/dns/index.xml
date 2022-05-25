@@ -23,7 +23,7 @@
 &lt;li&gt;&lt;p&gt;新建/etc/coredns目录, 复制Corefile到这个目录下&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;配置为deamon运行, 创建/lib/systemd/system/coredns.service&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;[unit]
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;[unit]
 Description=Coredns server
 After=network.target
 
