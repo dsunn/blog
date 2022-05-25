@@ -6,7 +6,178 @@
     <description>Recent content on Whatever Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Sep 2021 19:16:02 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 May 2022 21:37:57 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PVE下LXC debian容器搭建mosdns</title>
+      <link>https://dsunn.github.io/blog/2022/05/mosdns/</link>
+      <pubDate>Wed, 25 May 2022 21:37:57 +0800</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/2022/05/mosdns/</guid>
+      <description>
+        
+          &lt;p&gt;搭建环境: PVE LXC debian 10, 网关clash(科学环境)&lt;br /&gt;
+项目地址: &lt;a href=&#34;https://github.com/IrineSistiana/mosdns&#34;&gt;https://github.com/IrineSistiana/mosdns&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;下载并copy 二进制文件mosdns到 /usr/bin/&lt;br /&gt;
+新建目录: /etc/mosdns, 下载并copy geoip.dat和geosite.dat到该目录, 配置文件config.yaml也放这里&lt;/p&gt;
+
+&lt;p&gt;关闭systemd-resolved&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;systemctl disable systemd-resolved&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;新建/etc/systemd/system/mosdns.service&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;# /etc/systemd/system/mosdns.service
+[Unit]
+Description=A DNS forwarder
+ConditionFileIsExecutable=/usr/bin/mosdns
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/usr/bin/mosdns &amp;#34;-s&amp;#34; &amp;#34;run&amp;#34; &amp;#34;-c&amp;#34; &amp;#34;/etc/mosdns/config.yaml&amp;#34; &amp;#34;-dir&amp;#34; &amp;#34;/etc/mosdns&amp;#34;
+Restart=always
+RestartSec=120
+EnvironmentFile=-/etc/sysconfig/mosdns
+
+[Install]
+WantedBy=multi-user.target&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;开机自启&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;systemctl enable mosdns&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;启动运行&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;systemctl start mosdns&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我个人的配置文件如下:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cli&#34; data-lang=&#34;cli&#34;&gt;log:
+  level: debug
+  file:  &amp;#39;&amp;#39;
+
+plugin:
+  - tag: main_server
+    type: server
+    args:
+      entry:
+        - _no_ecs
+        - lazy_cache
+        # - _prefer_ipv4 注释这条以允许解析ipv6的ip
+        - _single_flight
+        - main_sequence
+      server:
+        - protocol: udp
+          addr: &amp;#39;:53&amp;#39;
+        - protocol: tcp
+          addr: &amp;#39;:53&amp;#39;
+        # - protocol: udp
+        #   addr: &amp;#34;192.168.10.183:53&amp;#34;
+        # - protocol: tcp
+        #   addr: &amp;#34;192.168.10.183:53&amp;#34;
+
+  - tag: main_sequence
+    type: sequence
+    args:
+      exec:
+        # - if:
+        #     - query_is_ad_domain
+        #   exec:
+        #     - _block_with_nxdomain
+        #     - _return
+        - if:
+            - query_is_local_domain
+            - &amp;#39;!_query_is_common&amp;#39;
+          exec:
+            - forward_local
+            - _return
+        - if:
+            - query_is_non_local_domain
+          exec:
+            - forward_remote
+            - _return
+        - primary:
+            - forward_remote
+            - if:
+                - &amp;#39;!response_has_local_ip&amp;#39;
+              exec:
+                - _drop_response
+          secondary:
+            - forward_remote
+          fast_fallback:   150
+          always_standby:  true
+
+  - tag: forward_local
+    type: fast_forward
+    args:
+      upstream:
+      #主路由ros的dns(配置了ISP的ipv4/6 dns和阿里dns)
+        - addr: &amp;#34;192.168.10.251&amp;#34;
+          dial_addr: &amp;#34;192.168.10.251&amp;#34;
+          idle_timeout:    8
+          max_conns:       1
+          trusted: true
+          enable_pipeline: true
+        # - addr: &amp;#39;https://dns.alidns.com/dns-query&amp;#39;
+        #   dial_addr: &amp;#39;223.6.6.6:443&amp;#39;
+        #   idle_timeout:    8
+        #   max_conns:       1          
+        # - addr: &amp;#39;https://doh.pub/dns-query&amp;#39;
+          # dial_addr: &amp;#39;175.24.219.66:443&amp;#39;
+        #   idle_timeout:    59
+        #   max_conns:       1  
+
+
+  - tag: forward_remote
+    type: fast_forward
+    args:
+      upstream:
+        - addr: &amp;#39;https://dns.google/dns-query&amp;#39;
+          dial_addr: &amp;#39;8.8.8.8:443&amp;#39;
+          idle_timeout: 60
+          max_conns: 1
+          trusted: true
+          enable_pipeline: true
+        - addr: &amp;#39;https://cloudflare-dns.com/dns-query&amp;#39;
+          dial_addr: &amp;#39;1.1.1.1:443&amp;#39;
+          idle_timeout: 9
+          max_conns: 1
+          trusted: true
+          enable_pipeline: true
+        - addr: &amp;#39;https://dns.quad9.net/dns-query&amp;#39;
+          dial_addr: &amp;#39;9.9.9.9:443&amp;#39;
+          idle_timeout: 9
+          max_conns: 1
+          trusted: true
+          enable_pipeline: true
+
+  - tag: lazy_cache
+    type: cache
+    args:
+      size: 409600
+      lazy_cache_ttl: 259200
+
+  - tag: query_is_local_domain
+    type: query_matcher
+    args:
+      domain:
+        - &amp;#39;ext:./geosite.dat:cn&amp;#39;
+
+  - tag: query_is_non_local_domain
+    type: query_matcher
+    args:
+      domain:
+        - &amp;#39;ext:./geosite.dat:geolocation-!cn&amp;#39;
+
+  - tag: response_has_local_ip
+    type: response_matcher
+    args:
+      ip:
+        - &amp;#39;ext:./geoip.dat:cn&amp;#39;
+
+  # - tag: query_is_ad_domain
+  #   type: query_matcher
+  #   args:
+  #     domain:
+  #       - &amp;#39;ext:./serverlist.txt&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;cli&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
     <item>
       <title>debian 搭建 coredns</title>
       <link>https://dsunn.github.io/blog/2021/09/coredns/</link>
