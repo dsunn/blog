@@ -309,12 +309,13 @@ docker run -d \ --name=wireguard \ --cap-add=NET_ADMIN \ --cap-add=SYS_MODULE \ 
         <div>
           <p class="pale">
             
-              讨论下我在局域网中dns的设置.
+              modified on 5/26/2022
+讨论下我在局域网中dns的设置.
 原则1: (科学环境下,) 在哪科学, dns请求发往哪
 原则2: dns的路径分清, 除特例外, 终端只用网关的dns
 我局域网拓扑:
-ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通过dhcp下发: clash作为各终端设备的网关, adh作为各终端设备的dns.
-debian clash作为透明代理, 宿主debian关闭systemd-resolved 服务, 让clash dns占有53端口, debian的dns指向自己127.0.0.1; clash dns采用fake-ip模式, 并尽量在config.yaml中配置较齐全的域名 …
+ros(主路由)pppoe拨号光猫, dns设置为isp的ipv4/6 dns和223.5.5.5, 通过dhcp下发: clash作为各终端设备的网关, adgh作为各终端设备的dns.
+debian clash作为透明代理, 宿主debian关闭systemd-resolved 服务, 让clash dns占有53端口, debian的dns指向自己ros dns; clash dns采用fake-ip模式, 并尽量 …
             
           </p>
           <a href="https://dsunn.github.io/blog/2021/09/about_dns/" title="Read More" class="excerpt_more button">Read More</a>
