@@ -184,8 +184,9 @@
         <div>
           <p class="pale">
             
-              我的网络架构是ros(主路由), dhcp服务跑在ros上; debian上跑clash作为透明代理. 先前我安装了openwrt作为旁路透明代理, 现在因为启用clash为网关, op就放一边, 也跑着, 作为网络中的一个设备, 算是一个backup的透明代理吧.
-我debian上的clash, 跑的是fake-ip的dns模式, 转发模式是tproxy. 另用coredns架设了一个能科学且能分流查询的dns 服务器, 作为clash的fallback dns组, 另外架设了一个adguard home, 作为clash dns的延伸, adh上游唯一设置为clash dns, 我主要用adh拦截一些广告(实际作用不大),  …
+              last modified on 5/27/2022
+我的网络架构是ros(主路由), dhcp服务跑在ros上; debian上跑clash作为透明代理. 先前我安装了openwrt作为旁路透明代理, 现在因为启用clash为网关, op就放一边, 也跑着, 作为网络中的一个设备, 算是一个backup吧.
+我debian上的clash, 跑的是fake-ip的dns模式, 转发模式是tproxy. 另用mosdns架设了一个能科学且能分流查询的dns 服务器, 作为clash的nameserver(唯一), 另外架设了一个adguard home, 作为clash dns的延伸, adgh上游唯一设置为clash dns, 我主 …
             
           </p>
           <a href="https://dsunn.github.io/blog/2021/08/ros_dhcp6/" title="Read More" class="excerpt_more button">Read More</a>
