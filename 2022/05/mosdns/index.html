@@ -148,135 +148,157 @@ WantedBy=multi-user.target</code></pre>
 <pre tabindex="0"><code class="language-cli" data-lang="cli">systemctl enable mosdns</code></pre>
 <p>启动运行</p>
 <pre tabindex="0"><code class="language-cli" data-lang="cli">systemctl start mosdns</code></pre>
-<p>我个人的配置文件如下:</p>
+<p>我个人的配置文件如下(v4):</p>
 <pre tabindex="0"><code class="language-cli" data-lang="cli">log:
   level: debug
-  file:  &#39;&#39;
+  file: &#34;&#34;
 
-plugin:
-  - tag: main_server
-    type: server
-    args:
-      entry:
-        - _no_ecs
-        - lazy_cache
-        # - _prefer_ipv4 注释这条以允许解析ipv6的ip
-        - _single_flight
-        - main_sequence
-      server:
-        - protocol: udp
-          addr: &#39;:53&#39;
-        - protocol: tcp
-          addr: &#39;:53&#39;
-        # - protocol: udp
-        #   addr: &#34;192.168.10.183:53&#34;
-        # - protocol: tcp
-        #   addr: &#34;192.168.10.183:53&#34;
+data_providers:
+  - tag: geosite
+    file: ./geosite.dat
+    auto_reload: true
+  - tag: geoip
+    file: ./geoip.dat
+    auto_reload: true
 
-  - tag: main_sequence
-    type: sequence
-    args:
-      exec:
-        # - if:
-        #     - query_is_ad_domain
-        #   exec:
-        #     - _block_with_nxdomain
-        #     - _return
-        - if:
-            - query_is_local_domain
-            - &#39;!_query_is_common&#39;
-          exec:
-            - forward_local
-            - _return
-        - if:
-            - query_is_non_local_domain
-          exec:
-            - forward_remote
-            - _return
-        - primary:
-            - forward_remote
-            - if:
-                - &#39;!response_has_local_ip&#39;
-              exec:
-                - _drop_response
-          secondary:
-            - forward_remote
-          fast_fallback:   150
-          always_standby:  true
-
-  - tag: forward_local
-    type: fast_forward
-    args:
-      upstream:
-      #主路由ros的dns(配置了ISP的ipv4/6 dns和阿里dns)
-        - addr: &#34;192.168.10.251&#34;
-          dial_addr: &#34;192.168.10.251&#34;
-          idle_timeout:    8
-          max_conns:       1
-          trusted: true
-          enable_pipeline: true
-        # - addr: &#39;https://dns.alidns.com/dns-query&#39;
-        #   dial_addr: &#39;223.6.6.6:443&#39;
-        #   idle_timeout:    8
-        #   max_conns:       1          
-        # - addr: &#39;https://doh.pub/dns-query&#39;
-          # dial_addr: &#39;175.24.219.66:443&#39;
-        #   idle_timeout:    59
-        #   max_conns:       1  
-
-
-  - tag: forward_remote
-    type: fast_forward
-    args:
-      upstream:
-        - addr: &#39;https://dns.google/dns-query&#39;
-          dial_addr: &#39;8.8.8.8:443&#39;
-          idle_timeout: 60
-          max_conns: 1
-          trusted: true
-          enable_pipeline: true
-        - addr: &#39;https://cloudflare-dns.com/dns-query&#39;
-          dial_addr: &#39;1.1.1.1:443&#39;
-          idle_timeout: 9
-          max_conns: 1
-          trusted: true
-          enable_pipeline: true
-        - addr: &#39;https://dns.quad9.net/dns-query&#39;
-          dial_addr: &#39;9.9.9.9:443&#39;
-          idle_timeout: 9
-          max_conns: 1
-          trusted: true
-          enable_pipeline: true
-
+plugins:
+  # 缓存
   - tag: lazy_cache
     type: cache
     args:
       size: 409600
       lazy_cache_ttl: 259200
 
+  # 转发至本地服务器的插件
+  - tag: forward_local
+    type: fast_forward
+    args:
+      upstream:
+        - addr: &#34;192.168.10.251&#34;
+        #ros主路由dns(配置了ISP的v4/6dns和223,114)
+          dial_addr: &#34;192.168.10.251&#34;
+          idle_timeout:    8
+          max_conns:       1
+          trusted: true
+          enable_pipeline: true
+
+  # 转发至远程服务器的插件
+  - tag: forward_remote
+    type: fast_forward
+    args:
+      upstream:
+        - addr: &#39;https://dns.google/dns-query&#39;
+          dial_addr: &#39;8.8.8.8:443&#39;
+          idle_timeout: 9
+          max_conns: 1
+          trusted: true
+          # enable_pipeline: true
+          # enable_http3: true
+        - addr: &#39;https://cloudflare-dns.com/dns-query&#39;
+          dial_addr: &#39;1.1.1.1:443&#39;
+          idle_timeout: 9
+          max_conns: 1
+          trusted: true
+          # enable_pipeline: true
+          # enable_http3: true
+        - addr: &#39;https://dns.quad9.net/dns-query&#39;
+          dial_addr: &#39;9.9.9.9:443&#39;
+          idle_timeout: 9
+          max_conns: 1
+          trusted: true
+          # enable_pipeline: true
+          # enable_http3: true
+
+  # 匹配本地域名的插件
   - tag: query_is_local_domain
     type: query_matcher
     args:
       domain:
-        - &#39;ext:./geosite.dat:cn&#39;
+        - &#39;provider:geosite:cn&#39;
 
+  # 匹配非本地域名的插件
   - tag: query_is_non_local_domain
     type: query_matcher
     args:
       domain:
-        - &#39;ext:./geosite.dat:geolocation-!cn&#39;
+        - &#39;provider:geosite:geolocation-!cn&#39;
 
-  - tag: response_has_local_ip
-    type: response_matcher
-    args:
-      ip:
-        - &#39;ext:./geoip.dat:cn&#39;
-
+  # # 匹配广告域名的插件
   # - tag: query_is_ad_domain
   #   type: query_matcher
   #   args:
   #     domain:
-  #       - &#39;ext:./serverlist.txt&#39;</code></pre>
+  #       - &#39;provider:geosite:category-ads-all&#39;
+
+  # 匹配本地 IP 的插件
+  - tag: response_has_local_ip
+    type: response_matcher
+    args:
+      ip:
+        - &#39;provider:geoip:cn&#39;
+
+  # 主要的运行逻辑插件
+  # sequence 插件中调用的插件 tag 必须在 sequence 前定义，
+  # 否则 sequence 找不到对应插件。
+  - tag: main_sequence
+    type: sequence
+    args:
+      exec:
+        - _misc_optm
+     
+        # 缓存
+        - lazy_cache
+        - _no_ecs
+        
+        # - _prefer_ipv4
+        
+        # # 屏蔽广告域名
+        # - if: query_is_ad_domain
+        #   exec:
+        #     - _new_nxdomain_response
+        #     - _return
+
+        # 已知的本地域名用本地服务器解析
+        - if: query_is_local_domain
+          exec:
+            - forward_local
+            - _return
+
+        # - _prefer_ipv4   #非local的ipv4优先
+
+        # 已知的非本地域名用远程服务器解析
+        - if: query_is_non_local_domain
+          exec:
+            # - _prefer_ipv4
+            - forward_remote
+            - _return
+
+          # 剩下的未知域名用 IP 分流。
+          # 这里借助了 `fallback` 工作机制。分流原理请参考 `fallback`
+          # 的工作流程。
+          # primary 从本地服务器获取应答，丢弃非本地 IP 的结果。
+        - primary:
+            - forward_remote  #should be local per logic, but causes dns leak
+            - if: &#34;(! response_has_local_ip) || [_response_valid_answer]&#34;
+              exec:
+                - _drop_response
+          # secondary 从远程服务器获取应答。
+          secondary:
+            # - _prefer_ipv4
+            - forward_remote
+          # 这里建议设置成 local 服务器正常延时的 2~5 倍。
+          # 这个延时保证了 local 延时偶尔变高时，其结果不会被 remote 抢答。
+          # 如果 local 超过这个延时还没响应，可以假设 local 出现了问题。
+          # 这时用就采用 remote 的应答。单位: 毫秒。
+          fast_fallback: 200
+
+servers:
+  - exec: main_sequence
+    listeners:
+      - protocol: udp
+        addr: :53
+      - protocol: tcp
+        addr: :53</code></pre>
 
   </article>
 <aside class="sidebar">
