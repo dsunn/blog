@@ -128,13 +128,14 @@
         <div>
           <p class="pale">
             
-              搭建环境: PVE LXC debian 10, 网关clash(科学环境)
+              modified on 2022/8/3, for mosdns v4+
+搭建环境: PVE LXC debian 10, 网关clash(科学环境)
 项目地址: https://github.com/IrineSistiana/mosdns
 下载并copy 二进制文件mosdns到 /usr/bin/
 新建目录: /etc/mosdns, 下载并copy geoip.dat和geosite.dat到该目录, 配置文件config.yaml也放这里
 关闭systemd-resolved
 systemctl disable systemd-resolved 新建/etc/systemd/system/mosdns.service
-# /etc/systemd/system/mosdns.service …
+# …
             
           </p>
           <a href="https://dsunn.github.io/blog/2022/05/mosdns/" title="Read More" class="excerpt_more button">Read More</a>

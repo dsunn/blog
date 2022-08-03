@@ -10,19 +10,21 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="搭建环境: PVE LXC debian 10, 网关clash(科学环境)
+<meta name="description" content="modified on 2022/8/3, for mosdns v4&#43;
+搭建环境: PVE LXC debian 10, 网关clash(科学环境)
 项目地址: https://github.com/IrineSistiana/mosdns
 下载并copy 二进制文件mosdns到 /usr/bin/
-新建目录: /etc/mosdns, 下载并copy geoip.dat …">
+新建目录: …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="PVE下LXC debian容器搭建mosdns" />
 <meta property="og:url" content="https://dsunn.github.io/blog/2022/05/mosdns/" />
 <meta property="og:title" content="PVE下LXC debian容器搭建mosdns" />
-<meta property="og:description" content="搭建环境: PVE LXC debian 10, 网关clash(科学环境)
+<meta property="og:description" content="modified on 2022/8/3, for mosdns v4&#43;
+搭建环境: PVE LXC debian 10, 网关clash(科学环境)
 项目地址: https://github.com/IrineSistiana/mosdns
 下载并copy 二进制文件mosdns到 /usr/bin/
-新建目录: /etc/mosdns, 下载并copy geoip.dat …" />
+新建目录: …" />
 <meta property="og:image" content="https://dsunn.github.io/blog/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://dsunn.github.io/blog/icons/apple-touch-icon.png">
@@ -120,7 +122,9 @@
   </div>
 
     
-    <p>搭建环境: PVE LXC debian 10, 网关clash(科学环境)<br />
+    <p>modified on 2022/8/3, for mosdns v4+</p>
+
+<p>搭建环境: PVE LXC debian 10, 网关clash(科学环境)<br />
 项目地址: <a href="https://github.com/IrineSistiana/mosdns">https://github.com/IrineSistiana/mosdns</a></p>
 
 <p>下载并copy 二进制文件mosdns到 /usr/bin/<br />
@@ -135,9 +139,10 @@ Description=A DNS forwarder
 ConditionFileIsExecutable=/usr/bin/mosdns
 
 [Service]
+User=root
 StartLimitInterval=5
 StartLimitBurst=10
-ExecStart=/usr/bin/mosdns &#34;-s&#34; &#34;run&#34; &#34;-c&#34; &#34;/etc/mosdns/config.yaml&#34; &#34;-dir&#34; &#34;/etc/mosdns&#34;
+ExecStart=/usr/bin/mosdns &#34;start&#34; &#34;-c&#34; &#34;/etc/mosdns/config.yaml&#34; &#34;-d&#34; &#34;/etc/mosdns&#34;
 Restart=always
 RestartSec=120
 EnvironmentFile=-/etc/sysconfig/mosdns
