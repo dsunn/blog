@@ -9,7 +9,7 @@
   
   >
   <head>
-<title>Clash | Whatever blog</title>
+<title>debian搭建clash的透明代理 | Whatever blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,10 +25,10 @@
 <meta name="description" content="Article description." />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@david">
-<meta name="twitter:title" content="Clash" />
+<meta name="twitter:title" content="debian搭建clash的透明代理" />
 <meta name="twitter:image" content="https://dsunn.github.io/blog/images/thumbnail.png"/>
 <meta property="og:url" content="https://dsunn.github.io/blog/post/clash/" />
-<meta property="og:title" content="Clash" />
+<meta property="og:title" content="debian搭建clash的透明代理" />
 <meta property="og:description" content="Article description." />
 <meta property="og:image" content="https://dsunn.github.io/blog/images/thumbnail.png" />
 
@@ -95,7 +95,7 @@
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Clash</h1>
+    <h1 class="post_title">debian搭建clash的透明代理</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <title>calendar</title>
@@ -110,14 +110,14 @@
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Clash&url=https%3a%2f%2fdsunn.github.io%2fblog%2fpost%2fclash%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=debian%e6%90%ad%e5%bb%baclash%e7%9a%84%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86&url=https%3a%2f%2fdsunn.github.io%2fblog%2fpost%2fclash%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
 
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2fpost%2fclash%2f&t=Clash" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2fpost%2fclash%2f&t=debian%e6%90%ad%e5%bb%baclash%e7%9a%84%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>facebook</title>
   <use xlink:href="#facebook"></use>
@@ -154,34 +154,36 @@ clash项目目前的dns, 已经只能用fake-ip, 去除了redir-host模式.
 <li>设置为systemd deamon</li>
 </ul>
 <p>编辑/lib/systemd/system/clash.service</p>
-<p>Description=A rule based proxy tunnel in Go<br>
-After=network.target<br>
-[Service]<br>
-Type=simple<br>
-Restart=on-abort<br>
-ExecStart=/usr/local/bin/clash<br>
-[Install]<br>
-WantedBy=multi-user.target<br>
-默认运行目录为~/.config/clash, config.yaml要存放在工作目录中</p>
-<p>systemctl daemon-reload<br>
-systemctl enable clash<br>
-二. 透明代理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">#/lib/systemd/system/clash.service</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="n">Description</span><span class="o">=</span><span class="n">A</span> <span class="n">rule</span> <span class="n">based</span> <span class="n">proxy</span> <span class="n">tunnel</span> <span class="ow">in</span> <span class="n">Go</span>  
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="n">After</span><span class="o">=</span><span class="n">network</span><span class="o">.</span><span class="n">target</span>  
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">[</span><span class="n">Service</span><span class="p">]</span>  
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="n">Type</span><span class="o">=</span><span class="n">simple</span>  
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="n">Restart</span><span class="o">=</span><span class="n">on</span><span class="o">-</span><span class="n">abort</span>  
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">clash</span>  
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="p">[</span><span class="n">Install</span><span class="p">]</span>  
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span>  
+</span></span></code></pre></div><p>默认运行目录为~/.config/clash, config.yaml要存放在工作目录中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">systemctl daemon-reload  
+</span></span><span class="line"><span class="ln">2</span><span class="cl">systemctl enable clash  
+</span></span></code></pre></div><p>二. 透明代理</p>
 <p>开启ipv4/ipv6的转发</p>
-<p>echo &quot;net.ipv4.ip_forward = 1&quot; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p<br>
-echo &quot;net.ipv6.conf.all.forwarding = 1&quot; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p
-关闭systemd-resolved 服务, 让clash dns占有53端口</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">echo &#34;net.ipv4.ip_forward = 1&#34; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p  
+</span></span><span class="line"><span class="ln">2</span><span class="cl">echo &#34;net.ipv6.conf.all.forwarding = 1&#34; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p
+</span></span></code></pre></div><p>关闭systemd-resolved 服务, 让clash dns占有53端口</p>
 <p>systemctl disable systemd-resolved<br>
 /etc/reslov.conf里我是设置为主路由(ros)的dns</p>
 <p>iptables持久化</p>
-<p>apt install iptables-persistent netfilter-persistent<br>
-netfilter-persistent save<br>
-netfilter-persistent start<br>
-iptables-save  &gt; /etc/iptables/rules.v4<br>
-ip6tables-save  &gt; /etc/iptables/rules.v6<br>
-加载恢复</p>
-<p>iptables-restore  &lt; /etc/iptables/rules.v4<br>
-ip6tables-restore  &lt; /etc/iptables/rules.v6</p>
-<p>三. iptables
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">apt install iptables-persistent netfilter-persistent  
+</span></span><span class="line"><span class="ln">2</span><span class="cl">netfilter-persistent save  
+</span></span><span class="line"><span class="ln">3</span><span class="cl">netfilter-persistent start  
+</span></span><span class="line"><span class="ln">4</span><span class="cl">iptables-save  &gt; /etc/iptables/rules.v4  
+</span></span><span class="line"><span class="ln">5</span><span class="cl">ip6tables-save  &gt; /etc/iptables/rules.v6  
+</span></span></code></pre></div><p>加载恢复</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">iptables-restore  &lt; /etc/iptables/rules.v4  
+</span></span><span class="line"><span class="ln">2</span><span class="cl">ip6tables-restore  &lt; /etc/iptables/rules.v6  
+</span></span></code></pre></div><p>三. iptables
 clash的转发模式有redirect, tproxy和tun模式, 我个人使用的转发模式tproxy.</p>
 <ul>
 <li>redirect模式
@@ -199,41 +201,44 @@ clash的转发模式有redirect, tproxy和tun模式, 我个人使用的转发模
 <p>六. 配置iptables</p>
 <p>(以下代码中192.168.10.87是我的clash host)</p>
 <p>tproxy模式</p>
-<p>ipset create localnetwork hash:net
-ipset add localnetwork 127.0.0.0/8
-ipset add localnetwork 10.0.0.0/8
-ipset add localnetwork 192.168.0.0/16
-ipset add localnetwork 224.0.0.0/4
-ipset add localnetwork 172.16.0.0/12
-ipset add localnetwork 0.0.0.0/8
-ipset add localnetwork 169.254.0.0/16
-ipset add localnetwork 240.0.0.0/4</p>
-<p>ipset create clashhost hash:net
-ipset add clashhost 192.168.10.87</p>
-<p>ipset create otherdirect hash:net
-ipset add otherdirect 106.39.171.84
-ipset add otherdirect 106.39.171.42
-ipset add otherdirect 106.39.166.88</p>
-<p>ip rule add fwmark 1 table 100
-ip route add local default dev lo table 100
-iptables -t mangle -N clash
-iptables -t mangle -A clash -m set --match-set localnetwork dst -j RETURN
-iptables -t mangle -A clash -m set --match-set otherdirect dst -j RETURN
-iptables -t mangle -A clash -m set --match-set clashhost src -j RETURN
-iptables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 1
-iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 1
-iptables -t mangle -A clash -p tcp -j RETURN -m mark --mark 1
-iptables -t mangle -A clash -p udp -j RETURN -m mark --mark 1
-iptables -t mangle -A PREROUTING -p tcp -j clash
-iptables -t mangle -A PREROUTING -p udp -j clash</p>
-<p>clash dns
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">ipset create localnetwork hash:net
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">ipset add localnetwork 127.0.0.0/8
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">ipset add localnetwork 10.0.0.0/8
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">ipset add localnetwork 192.168.0.0/16
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">ipset add localnetwork 224.0.0.0/4
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">ipset add localnetwork 172.16.0.0/12
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">ipset add localnetwork 0.0.0.0/8
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">ipset add localnetwork 169.254.0.0/16
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">ipset add localnetwork 240.0.0.0/4
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">ipset create clashhost hash:net
+</span></span><span class="line"><span class="ln">12</span><span class="cl">ipset add clashhost 192.168.10.87
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">ipset create otherdirect hash:net
+</span></span><span class="line"><span class="ln">15</span><span class="cl">ipset add otherdirect 106.39.171.84
+</span></span><span class="line"><span class="ln">16</span><span class="cl">ipset add otherdirect 106.39.171.42
+</span></span><span class="line"><span class="ln">17</span><span class="cl">ipset add otherdirect 106.39.166.88
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl">ip rule add fwmark 1 table 100
+</span></span><span class="line"><span class="ln">20</span><span class="cl">ip route add local default dev lo table 100
+</span></span><span class="line"><span class="ln">21</span><span class="cl">iptables -t mangle -N clash
+</span></span><span class="line"><span class="ln">22</span><span class="cl">iptables -t mangle -A clash -m set --match-set localnetwork dst -j RETURN
+</span></span><span class="line"><span class="ln">23</span><span class="cl">iptables -t mangle -A clash -m set --match-set otherdirect dst -j RETURN
+</span></span><span class="line"><span class="ln">24</span><span class="cl">iptables -t mangle -A clash -m set --match-set clashhost src -j RETURN
+</span></span><span class="line"><span class="ln">25</span><span class="cl">iptables -t mangle -A clash -p tcp -j TPROXY --on-port 7893 --tproxy-mark 1
+</span></span><span class="line"><span class="ln">26</span><span class="cl">iptables -t mangle -A clash -p udp -j TPROXY --on-port 7893 --tproxy-mark 1
+</span></span><span class="line"><span class="ln">27</span><span class="cl">iptables -t mangle -A clash -p tcp -j RETURN -m mark --mark 1
+</span></span><span class="line"><span class="ln">28</span><span class="cl">iptables -t mangle -A clash -p udp -j RETURN -m mark --mark 1
+</span></span><span class="line"><span class="ln">29</span><span class="cl">iptables -t mangle -A PREROUTING -p tcp -j clash
+</span></span><span class="line"><span class="ln">30</span><span class="cl">iptables -t mangle -A PREROUTING -p udp -j clash
+</span></span></code></pre></div><p>clash dns
 (此处1053端口是clash dns监听端口, 我是让终端的dns请求指向clash dns, 所以没应用这一段)</p>
-<p>iptables -t nat -N CLASH_DNS<br>
-iptables -t nat -F CLASH_DNS<br>
-iptables -t nat -A CLASH_DNS -p udp -j REDIRECT --to-port 1053<br>
-iptables -t nat -I OUTPUT -p udp --dport 53 -j CLASH_DNS<br>
-iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to 1053</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">iptables -t nat -N CLASH_DNS  
+</span></span><span class="line"><span class="ln">2</span><span class="cl">iptables -t nat -F CLASH_DNS   
+</span></span><span class="line"><span class="ln">3</span><span class="cl">iptables -t nat -A CLASH_DNS -p udp -j REDIRECT --to-port 1053  
+</span></span><span class="line"><span class="ln">4</span><span class="cl">iptables -t nat -I OUTPUT -p udp --dport 53 -j CLASH_DNS  
+</span></span><span class="line"><span class="ln">5</span><span class="cl">iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to 1053  
+</span></span></code></pre></div>
     </div>
 <div class="post_comments">
   
@@ -268,7 +273,7 @@ iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to 1053</p>
     <h2 class="mt-4">Featured Posts</h2>
     <ul>
       <li>
-        <a href="https://dsunn.github.io/blog/post/clash/" class="nav-link" title="Clash">Clash</a>
+        <a href="https://dsunn.github.io/blog/post/clash/" class="nav-link" title="debian搭建clash的透明代理">debian搭建clash的透明代理</a>
       </li>
     </ul>
     <h2 class="mt-4">Recent Posts</h2>
