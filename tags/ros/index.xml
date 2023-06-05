@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ros on Whatever blog</title>
+    <link>https://dsunn.github.io/blog/tags/ros/</link>
+    <description>Recent content in ros on Whatever blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Whatever blog</copyright>
+    <lastBuildDate>Mon, 05 Jun 2023 09:32:08 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/ros/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ros通过dhcp6下发ipv6 dns的设定</title>
+      <link>https://dsunn.github.io/blog/post/ros_dhcp6/</link>
+      <pubDate>Mon, 05 Jun 2023 09:32:08 -0400</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/ros_dhcp6/</guid>
+      <description>
+        
+          
+            修改于6/5/2023
+1/ipv6 dhcp-server option 2 add code=23 name=dns value=0xfd80000000000000ccf2bbfffe0abcf1 此外, ros的ipv6-ND中不勾选advertise dns, 勾选other config.
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

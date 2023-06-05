@@ -164,19 +164,25 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">systemctl daemon-reload  
 </span></span><span class="line"><span class="ln">2</span><span class="cl">systemctl enable clash  
 </span></span></code></pre></div><p>二. 透明代理</p>
-<p>开启ipv4/ipv6的转发</p>
+<ul>
+<li>开启ipv4/ipv6的转发</li>
+</ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">echo &#34;net.ipv4.ip_forward = 1&#34; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p  
 </span></span><span class="line"><span class="ln">2</span><span class="cl">echo &#34;net.ipv6.conf.all.forwarding = 1&#34; &gt;&gt; /etc/sysctl.conf &amp;&amp; sysctl -p
 </span></span></code></pre></div><p>关闭systemd-resolved 服务, 让clash dns占有53端口
 systemctl disable systemd-resolved<br>
 /etc/reslov.conf里我是设置为主路由(ros)的dns</p>
-<p>iptables持久化</p>
+<ul>
+<li>iptables持久化</li>
+</ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">apt install iptables-persistent netfilter-persistent  
 </span></span><span class="line"><span class="ln">2</span><span class="cl">netfilter-persistent save  
 </span></span><span class="line"><span class="ln">3</span><span class="cl">netfilter-persistent start  
 </span></span><span class="line"><span class="ln">4</span><span class="cl">iptables-save  &gt; /etc/iptables/rules.v4  
 </span></span><span class="line"><span class="ln">5</span><span class="cl">ip6tables-save  &gt; /etc/iptables/rules.v6  
-</span></span></code></pre></div><p>加载恢复</p>
+</span></span></code></pre></div><ul>
+<li>加载恢复</li>
+</ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">iptables-restore  &lt; /etc/iptables/rules.v4  
 </span></span><span class="line"><span class="ln">2</span><span class="cl">ip6tables-restore  &lt; /etc/iptables/rules.v6  
 </span></span></code></pre></div><p>三. iptables
@@ -211,7 +217,9 @@ systemctl disable systemd-resolved<br>
 </span></span><span class="line"><span class="ln">28</span><span class="cl">iptables -t mangle -A clash -p udp -j RETURN -m mark --mark 1
 </span></span><span class="line"><span class="ln">29</span><span class="cl">iptables -t mangle -A PREROUTING -p tcp -j clash
 </span></span><span class="line"><span class="ln">30</span><span class="cl">iptables -t mangle -A PREROUTING -p udp -j clash
-</span></span></code></pre></div><p>clash dns (此处1053端口是clash dns监听端口, 我是让终端的dns请求指向clash dns, 所以我并没应用这一段)</p>
+</span></span></code></pre></div><ul>
+<li>clash dns (此处1053端口是clash dns监听端口, 我是让终端的dns请求指向clash dns, 所以我并没应用这一段)</li>
+</ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">iptables -t nat -N CLASH_DNS  
 </span></span><span class="line"><span class="ln">2</span><span class="cl">iptables -t nat -F CLASH_DNS   
 </span></span><span class="line"><span class="ln">3</span><span class="cl">iptables -t nat -A CLASH_DNS -p udp -j REDIRECT --to-port 1053  
@@ -252,6 +260,9 @@ systemctl disable systemd-resolved<br>
     <h2 class="mt-4">Featured Posts</h2>
     <ul>
       <li>
+        <a href="https://dsunn.github.io/blog/post/ros_dhcp6/" class="nav-link" title="Ros通过dhcp6下发ipv6 dns的设定">Ros通过dhcp6下发ipv6 dns的设定</a>
+      </li>
+      <li>
         <a href="https://dsunn.github.io/blog/post/clash/" class="nav-link" title="debian搭建clash的透明代理">debian搭建clash的透明代理</a>
       </li>
     </ul>
@@ -263,7 +274,7 @@ systemctl disable systemd-resolved<br>
       <nav class="tags_nav">
         <a href='https://dsunn.github.io/blog/categories/technology/' class="post_tag button button_translucent" title="technology">
           TECHNOLOGY
-          <span class="button_tally">1</span>
+          <span class="button_tally">2</span>
         </a>
         
         
@@ -274,6 +285,21 @@ systemctl disable systemd-resolved<br>
       <nav class="tags_nav">
         <a href='https://dsunn.github.io/blog/tags/clash/' class="post_tag button button_translucent" title="clash">
           CLASH
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/dns/' class="post_tag button button_translucent" title="dns">
+          DNS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/ipv6/' class="post_tag button button_translucent" title="ipv6">
+          IPV6
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/ros/' class="post_tag button button_translucent" title="ros">
+          ROS
           <span class="button_tally">1</span>
         </a>
         
