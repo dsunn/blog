@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Whatever blog</title>
-    <link>https://dsunn.github.io/blog/post/</link>
-    <description>Recent content in Posts on Whatever blog</description>
+    <title>clash on Whatever blog</title>
+    <link>https://dsunn.github.io/blog/tags/clash/</link>
+    <description>Recent content in clash on Whatever blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Whatever blog</copyright>
-    <lastBuildDate>Mon, 05 Jun 2023 08:36:36 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Jun 2023 08:36:36 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/clash/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Clash</title>
       <link>https://dsunn.github.io/blog/post/clash/</link>
