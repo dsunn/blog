@@ -6,7 +6,6 @@
     <description>Recent content in Categories on Whatever blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright © 2020–2030, Whatever blog;</copyright>
-    <lastBuildDate>Mon, 05 Jun 2023 07:46:44 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright © 2020–2030, Whatever blog;</copyright><atom:link href="https://dsunn.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
