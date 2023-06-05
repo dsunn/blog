@@ -7,7 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Whatever blog</copyright>
-    <lastBuildDate>Mon, 05 Jun 2023 09:32:08 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Jun 2023 09:41:28 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>debian LXC搭建modsns</title>
+      <link>https://dsunn.github.io/blog/post/mosdns/</link>
+      <pubDate>Mon, 05 Jun 2023 09:41:28 -0400</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/mosdns/</guid>
+      <description>
+        
+          
+            修改于6/5/2023
+搭建环境: PVE LXC debian 11, 网关clash(科学环境) 项目地址: https://github.com/IrineSistiana/mosdns
+下载并copy 二进制文件mosdns到 /usr/bin/ 新建目录: /etc/mosdns, 下载并copy一众规则文件到该目录, 配置文件config.yaml也放这里
+关闭systemd-resolved
+1systemctl disable systemd-resolved 新建/etc/systemd/system/mosdns.service
+1# /etc/systemd/system/mosdns.service 2[Unit] 3Description=A DNS forwarder 4ConditionFileIsExecutable=/usr/bin/mosdns 5 6[Service] 7User=root 8StartLimitInterval=5 9StartLimitBurst=10 10ExecStart=/usr/bin/mosdns &amp;#34;start&amp;#34; &amp;#34;-c&amp;#34; &amp;#34;/etc/mosdns/config.yaml&amp;#34; &amp;#34;-d&amp;#34; &amp;#34;/etc/mosdns&amp;#34; 11Restart=always 12RestartSec=120 13EnvironmentFile=-/etc/sysconfig/mosdns 14 15[Install] 16WantedBy=multi-user.target 17 18 19[Install] 20WantedBy=multi-user.target 开机自启/启动运行
+1systemctl enable mosdns 2systemctl start mosdns 我个人的配置文件如下(v5), (不使用fallback, 仅以direct文件分流):
+1## mosdns v5 conf 2 3 4log: 5 level: debug 6 # file: &amp;#34;/etc/mosdns/logs/mosdns.
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Ros通过dhcp6下发ipv6 dns的设定</title>
       <link>https://dsunn.github.io/blog/post/ros_dhcp6/</link>
