@@ -6,6 +6,6 @@
     <description>Recent content in Series on Whatever blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright © 2020–2030, Whatever blog;</copyright><atom:link href="https://dsunn.github.io/blog/series/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Whatever blog</copyright><atom:link href="https://dsunn.github.io/blog/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
