@@ -18,15 +18,15 @@
         
           
             修改于6/5/2023
-写在前面: clash项目目前的dns, 已经只能用fake-ip, 去除了redir-host模式. 为使得clash设计的dns防污染能更好地工作, 客户端的dns需要指向clash dns, 可以使用dhcp serve配置此项. 这样做的目的是使clash能够拿到连接的域名信息, 再配以适当的域名规则, 很多情形下, 即使在dns污染的情况下, 也能正常工作.
-记录一下自己的搭建过程记录一下自己的搭建过程
-最好用root用户运行, 特别是当使用clash premium installer搭建时, 不用root会报错
 一. clash程序
-下载clash premium (https://github.com/Dreamacro/clash/releases/tag/premium) 解压保存为/usr/local/bin/clash 设置为systemd deamon 编辑/lib/systemd/system/clash.service
+root运行 下载clash premium (https://github.com/Dreamacro/clash/releases/tag/premium) 解压保存为/usr/local/bin/clash 设置为systemd deamon 编辑/lib/systemd/system/clash.service
 1#/lib/systemd/system/clash.service 2 3Description=A rule based proxy tunnel in Go 4After=network.target 5[Service] 6Type=simple 7Restart=on-abort 8ExecStart=/usr/local/bin/clash 9[Install] 10WantedBy=multi-user.target 默认运行目录为~/.config/clash, config.yaml要存放在工作目录中
 1systemctl daemon-reload 2systemctl enable clash 二. 透明代理
 开启ipv4/ipv6的转发
-1echo &amp;#34;net.ipv4.ip_forward = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p 2echo &amp;#34;net.ipv6.conf.all.forwarding = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.
+1echo &amp;#34;net.ipv4.ip_forward = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p 2echo &amp;#34;net.ipv6.conf.all.forwarding = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p 关闭systemd-resolved 服务, 让clash dns占有53端口 systemctl disable systemd-resolved
+/etc/reslov.conf里我是设置为主路由(ros)的dns
+iptables持久化
+1apt install iptables-persistent netfilter-persistent 2netfilter-persistent save 3netfilter-persistent start 4iptables-save &amp;gt; /etc/iptables/rules.
           
           
         

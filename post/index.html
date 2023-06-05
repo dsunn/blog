@@ -154,11 +154,9 @@
         <div class="pale">
           
             <p>修改于6/5/2023
-写在前面: clash项目目前的dns, 已经只能用fake-ip, 去除了redir-host模式. 为使得clash设计的dns防污染能更好地工作, 客户端的dns需要指向clash dns, 可以使用dhcp serve配置此项. 这样做的目的是使clash能够拿到连接的域名信息, 再配以适当的域名规则, 很多情形下, 即使在dns污染的情况下, 也能正常工作.
-记录一下自己的搭建过程记录一下自己的搭建过程
-最好用root用户运行, 特别是当使用clash premium installer搭建时, 不用root会报错
 一. clash程序
-下载clash premium …</p>
+root运行 下载clash premium (<a href="https://github.com/Dreamacro/clash/releases/tag/premium">https://github.com/Dreamacro/clash/releases/tag/premium</a>) 解压保存为/usr/local/bin/clash 设置为systemd deamon 编辑/lib/systemd/system/clash.service
+1#/lib/systemd/system/clash.service 2 3Description=A rule based proxy tunnel in Go 4After=network.target 5[Service] 6Type=simple …</p>
           
           <br>
           <a href="https://dsunn.github.io/blog/post/clash/" title="Read More" class="excerpt_more button">Read More</a>
