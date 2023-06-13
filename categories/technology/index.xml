@@ -7,7 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Whatever blog</copyright>
-    <lastBuildDate>Mon, 05 Jun 2023 09:41:28 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/categories/technology/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Jun 2023 23:07:47 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/categories/technology/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ffmpeg提取字幕文件</title>
+      <link>https://dsunn.github.io/blog/post/ffmpeg/</link>
+      <pubDate>Mon, 12 Jun 2023 23:07:47 -0400</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/ffmpeg/</guid>
+      <description>
+        
+          
+            ffmpeg -i video.mkv -vn -an -codec:s:0 srt subtitle.srt
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>debian LXC搭建modsns</title>
       <link>https://dsunn.github.io/blog/post/mosdns/</link>
