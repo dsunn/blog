@@ -38,9 +38,9 @@
 下载并copy 二进制文件mosdns到 /usr/bin/ 新建目录: /etc/mosdns, 下载并copy一众规则文件到该目录, 配置文件config.yaml也放这里
 关闭systemd-resolved
 1systemctl disable systemd-resolved 新建/etc/systemd/system/mosdns.service
-1# /etc/systemd/system/mosdns.service 2[Unit] 3Description=A DNS forwarder 4ConditionFileIsExecutable=/usr/bin/mosdns 5 6[Service] 7User=root 8StartLimitInterval=5 9StartLimitBurst=10 10ExecStart=/usr/bin/mosdns &amp;#34;start&amp;#34; &amp;#34;-c&amp;#34; &amp;#34;/etc/mosdns/config.yaml&amp;#34; &amp;#34;-d&amp;#34; &amp;#34;/etc/mosdns&amp;#34; 11Restart=always 12RestartSec=120 13EnvironmentFile=-/etc/sysconfig/mosdns 14 15[Install] 16WantedBy=multi-user.target 17 18 19[Install] 20WantedBy=multi-user.target 开机自启/启动运行
+1# /etc/systemd/system/mosdns.service 2[Unit] 3Description=A DNS forwarder 4ConditionFileIsExecutable=/usr/bin/mosdns 5 6[Service] 7User=root 8StartLimitInterval=5 9StartLimitBurst=10 10ExecStart=/usr/bin/mosdns &amp;#34;start&amp;#34; &amp;#34;-c&amp;#34; &amp;#34;/etc/mosdns/config.yaml&amp;#34; &amp;#34;-d&amp;#34; &amp;#34;/etc/mosdns&amp;#34; 11Restart=always 12RestartSec=120 13EnvironmentFile=-/etc/sysconfig/mosdns 14 15[Install] 16WantedBy=multi-user.target 开机自启/启动运行
 1systemctl enable mosdns 2systemctl start mosdns 我个人的配置文件如下(v5), (不使用fallback, 仅以direct文件分流):
-1## mosdns v5 conf 2 3 4log: 5 level: debug 6 # file: &amp;#34;/etc/mosdns/logs/mosdns.
+1## mosdns v5 conf 2 3 4log: 5 level: debug 6 # file: &amp;#34;/etc/mosdns/logs/mosdns.log&amp;#34; 7 # production: false 8 9 10plugins: 11 - tag: cache 12 type: cache 13 args: 14 size: 409600 15 lazy_cache_ttl: 259200 16 dump_file: .
           
           
         
