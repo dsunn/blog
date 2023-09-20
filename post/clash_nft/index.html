@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html
   lang="en"
-  data-figures=""
+  data-figures="true"
+  
+    class="page"
   
   
   >
   <head>
-<title>Categories | Whatever blog</title>
+<title>debian搭建clash的透明代理(Tproxy)(nftables转发) | Whatever blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,25 +18,25 @@
 
 
 
+
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="" />
+<meta name="description" content="Article description." />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@david">
-<meta name="twitter:title" content="Categories" />
+<meta name="twitter:title" content="debian搭建clash的透明代理(Tproxy)(nftables转发)" />
 <meta name="twitter:image" content="https://dsunn.github.io/blog/images/thumbnail.png"/>
-<meta property="og:url" content="https://dsunn.github.io/blog/categories/" />
-<meta property="og:title" content="Categories" />
-<meta property="og:description" content="" />
+<meta property="og:url" content="https://dsunn.github.io/blog/post/clash_nft/" />
+<meta property="og:title" content="debian搭建clash的透明代理(Tproxy)(nftables转发)" />
+<meta property="og:description" content="Article description." />
 <meta property="og:image" content="https://dsunn.github.io/blog/images/thumbnail.png" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://dsunn.github.io/blog/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://dsunn.github.io/blog/icons/favicon-32x32.png">
 <link rel="manifest" href="https://dsunn.github.io/blog/icons/site.webmanifest">
 
-<link rel="canonical" href="https://dsunn.github.io/blog/categories/">
-<link rel="alternate" type="application/rss+xml" href="https://dsunn.github.io/blog/categories/index.xml" title="Whatever blog" />
+<link rel="canonical" href="https://dsunn.github.io/blog/post/clash_nft/">
 
 
 
@@ -50,7 +52,7 @@
 
   </head>
   <body
-    data-code="7"
+    data-code="10"
     data-lines="false"
     id="documentTop"
     data-lang="en"
@@ -90,19 +92,10 @@
 </header>
 
     <main>
-
-
-
+  
 <div class="grid-inverse wrap content">
-  <div>
-    <ul class="posts" id="posts">
-        <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://dsunn.github.io/blog/categories/technology/" title="Technology">Technology</a>
-      </h3>
-      
+  <article class="post_content">
+    <h1 class="post_title">debian搭建clash的透明代理(Tproxy)(nftables转发)</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <title>calendar</title>
@@ -111,18 +104,20 @@
 </span>
     <span class="post_date">
       Sep 19, 2023</span>
-    <span class="post_time"> · 0 min read</span>
+    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/clash/' title="clash" class="post_tag button button_translucent">clash
+        </a>
+    </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Technology&url=https%3a%2f%2fdsunn.github.io%2fblog%2fcategories%2ftechnology%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=debian%e6%90%ad%e5%bb%baclash%e7%9a%84%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86%28Tproxy%29%28nftables%e8%bd%ac%e5%8f%91%29&url=https%3a%2f%2fdsunn.github.io%2fblog%2fpost%2fclash_nft%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
 
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2fcategories%2ftechnology%2f&t=Technology" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2fpost%2fclash_nft%2f&t=debian%e6%90%ad%e5%bb%baclash%e7%9a%84%e9%80%8f%e6%98%8e%e4%bb%a3%e7%90%86%28Tproxy%29%28nftables%e8%bd%ac%e5%8f%91%29" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>facebook</title>
   <use xlink:href="#facebook"></use>
@@ -136,7 +131,7 @@
 </svg>
 
     </a>
-    <a href="https://dsunn.github.io/blog/categories/technology/" title="Copy Link" class="link link_yank">
+    <a href="https://dsunn.github.io/blog/post/clash_nft/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <title>copy</title>
   <use xlink:href="#copy"></use>
@@ -147,30 +142,80 @@
   </span>
   </div>
 
+    <div class="post_body"><p>ref debian搭建clash的透明代理(Tproxy)(iptables转发)<a href="https://dsunn.github.io/blog/post/clash/">https://dsunn.github.io/blog/post/clash/</a></p>
+<p>本篇对上述用iptables来转发局域网流量到clash的方法, 用linux内置的nftables来代替.</p>
+<p>修改/etc/nftables.conf, 在其最后加入下列设置.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">table inet clash
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">delete table inet clash
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">table inet clash {
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    set local_addr {
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        type ipv4_addr
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        flags interval
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        elements = {
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            10.0.0.0/8,
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            127.0.0.0/8,
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            169.254.0.0/16,
+</span></span><span class="line"><span class="ln">12</span><span class="cl">            172.16.0.0/12,
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            192.168.0.0/16,
+</span></span><span class="line"><span class="ln">14</span><span class="cl">            240.0.0.0/4,
+</span></span><span class="line"><span class="ln">15</span><span class="cl">                        0.0.0.0/8
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        }
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    }
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    set clashhost_addr {
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        type ipv4_addr
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        flags interval
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        elements = {
+</span></span><span class="line"><span class="ln">23</span><span class="cl">            192.168.10.89/32
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        }
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    }
+</span></span><span class="line"><span class="ln">26</span><span class="cl">
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    chain clash-tproxy {
+</span></span><span class="line"><span class="ln">28</span><span class="cl">        ip daddr @local_addr return
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        ip daddr @clashhost_addr return
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        meta l4proto { tcp, udp } meta mark set 1 tproxy to :7893 accept
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    }
+</span></span><span class="line"><span class="ln">32</span><span class="cl">
+</span></span><span class="line"><span class="ln">33</span><span class="cl">    chain clash-mark {
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        ip daddr @local_addr return
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        ip daddr @clashhost_addr return
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        meta mark set 1
+</span></span><span class="line"><span class="ln">37</span><span class="cl">    }
+</span></span><span class="line"><span class="ln">38</span><span class="cl">
+</span></span><span class="line"><span class="ln">39</span><span class="cl">    chain mangle-prerouting {
+</span></span><span class="line"><span class="ln">40</span><span class="cl">        type filter hook prerouting priority mangle; policy accept;
+</span></span><span class="line"><span class="ln">41</span><span class="cl">        meta l4proto { tcp, udp } ct direction original jump clash-tproxy
+</span></span><span class="line"><span class="ln">42</span><span class="cl">    }
+</span></span></code></pre></div><p>在系统上使能nftables</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">systemctl enable nftables
+</span></span><span class="line"><span class="ln">2</span><span class="cl">systemctl start nftables
+</span></span></code></pre></div><p>修改/etc/rc.local, 加入下列设置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">ip rule add fwmark 1 table 100
+</span></span><span class="line"><span class="ln">2</span><span class="cl">ip route add local default dev lo table 100
+</span></span></code></pre></div><p>在系统上使能rc-local.service, 以开机时运行上述指令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">systemctl enable rc-local.service
+</span></span></code></pre></div><p>然后</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">reboot
+</span></span></code></pre></div>
     </div>
-      <div class="excerpt_footer">
-        <div class="pale">
-          
-            <p></p>
-          
-          <br>
-          <a href="https://dsunn.github.io/blog/categories/technology/" title="Read More" class="excerpt_more button">Read More</a>
-        </div>
-      </div>
-    </div>
-  </li>
+<div class="post_comments">
+  
+  
+  
+</div>
 
-      <li>
-      </li>
-    </ul>
-  </div>
+
+
+
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <br>
     
   
   <div class="search">
-    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='categories'>
+    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='post'>
     <label for="find" class="search_label"><svg class="icon">
   <title>search</title>
   <use xlink:href="#search"></use>
@@ -250,9 +295,8 @@
   </section>
 </aside>
 
+  
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
