@@ -173,7 +173,7 @@
 </span></span><span class="line"><span class="ln">26</span><span class="cl">
 </span></span><span class="line"><span class="ln">27</span><span class="cl">    chain clash-tproxy {
 </span></span><span class="line"><span class="ln">28</span><span class="cl">        ip daddr @local_addr return
-</span></span><span class="line"><span class="ln">29</span><span class="cl">        ip daddr @clashhost_addr return
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        ip saddr @clashhost_addr return
 </span></span><span class="line"><span class="ln">30</span><span class="cl">        meta l4proto { tcp, udp } meta mark set 1 tproxy to :7893 accept
 </span></span><span class="line"><span class="ln">31</span><span class="cl">    }
 </span></span><span class="line"><span class="ln">32</span><span class="cl">
