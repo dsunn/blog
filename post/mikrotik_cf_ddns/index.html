@@ -145,8 +145,7 @@
   </span>
   </div>
 
-    <div class="post_body"><p><strong>Insert Lead paragraph here.</strong>
-在参考了j大佬的<a href="https://www.digs.eu.org/2024/01/04/ROS%20cloudflare%20DDNS%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC/">博客</a>和这位作者的<a href="https://gist.githubusercontent.com/kolobus/18680f8fb01ce3003cb9a3f82c9d30e1/raw/cf8ecd84fc0e5dccb7298422c7d8c40410c345a3/cf-ddns.rsc">脚本</a>的脚本后, 魔改的.</p>
+    <div class="post_body"><p>在参考了j大佬的<a href="https://www.digs.eu.org/2024/01/04/ROS%20cloudflare%20DDNS%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC/">博客</a>和这位作者的<a href="https://gist.githubusercontent.com/kolobus/18680f8fb01ce3003cb9a3f82c9d30e1/raw/cf8ecd84fc0e5dccb7298422c7d8c40410c345a3/cf-ddns.rsc">脚本</a>的脚本后, 魔改的.</p>
 <p>适用在cloudflare上更新ipv4和ipv6的动态ip; 和原作者不同的是, 我的脚本是直接从ros接口上取相应ip, 其实我这脚本是放在ppp profile-on up-script中, 在拨号完成后执行一次, 而不是定时反复执行, 故相应修改了代码.</p>
 <p>token, zone_id, record_id等请先行获取, 获取方法在前述j大佬博客中有所提及.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1"># Cloudflare Dynamic DNS update script</span>
