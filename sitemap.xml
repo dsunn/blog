@@ -2,8 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://dsunn.github.io/blog/post/all_about_dns/</loc>
+    <lastmod>2024-03-05T08:00:07-05:00</lastmod>
+  </url><url>
     <loc>https://dsunn.github.io/blog/categories/</loc>
-    <lastmod>2024-03-05T07:33:25-05:00</lastmod>
+    <lastmod>2024-03-05T08:00:07-05:00</lastmod>
+  </url><url>
+    <loc>https://dsunn.github.io/blog/tags/dns/</loc>
+    <lastmod>2024-03-05T08:00:07-05:00</lastmod>
+  </url><url>
+    <loc>https://dsunn.github.io/blog/post/</loc>
+    <lastmod>2024-03-05T08:00:07-05:00</lastmod>
+  </url><url>
+    <loc>https://dsunn.github.io/blog/tags/</loc>
+    <lastmod>2024-03-05T08:00:07-05:00</lastmod>
+  </url><url>
+    <loc>https://dsunn.github.io/blog/categories/technology/</loc>
+    <lastmod>2024-03-05T08:00:07-05:00</lastmod>
+  </url><url>
+    <loc>https://dsunn.github.io/blog/</loc>
+    <lastmod>2024-03-05T08:00:07-05:00</lastmod>
   </url><url>
     <loc>https://dsunn.github.io/blog/post/mikrotik_cf_ddns/</loc>
     <lastmod>2024-03-05T07:33:25-05:00</lastmod>
@@ -11,25 +29,10 @@
     <loc>https://dsunn.github.io/blog/tags/ddns/</loc>
     <lastmod>2024-03-05T07:33:25-05:00</lastmod>
   </url><url>
-    <loc>https://dsunn.github.io/blog/tags/dns/</loc>
-    <lastmod>2024-03-05T07:33:25-05:00</lastmod>
-  </url><url>
     <loc>https://dsunn.github.io/blog/tags/ipv6/</loc>
     <lastmod>2024-03-05T07:33:25-05:00</lastmod>
   </url><url>
-    <loc>https://dsunn.github.io/blog/post/</loc>
-    <lastmod>2024-03-05T07:33:25-05:00</lastmod>
-  </url><url>
     <loc>https://dsunn.github.io/blog/tags/ros/</loc>
-    <lastmod>2024-03-05T07:33:25-05:00</lastmod>
-  </url><url>
-    <loc>https://dsunn.github.io/blog/tags/</loc>
-    <lastmod>2024-03-05T07:33:25-05:00</lastmod>
-  </url><url>
-    <loc>https://dsunn.github.io/blog/categories/technology/</loc>
-    <lastmod>2024-03-05T07:33:25-05:00</lastmod>
-  </url><url>
-    <loc>https://dsunn.github.io/blog/</loc>
     <lastmod>2024-03-05T07:33:25-05:00</lastmod>
   </url><url>
     <loc>https://dsunn.github.io/blog/tags/clash/</loc>

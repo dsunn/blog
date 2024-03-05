@@ -7,7 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Whatever blog</copyright>
-    <lastBuildDate>Tue, 05 Mar 2024 07:33:25 -0500</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Mar 2024 08:00:07 -0500</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>All_about_dns</title>
+      <link>https://dsunn.github.io/blog/post/all_about_dns/</link>
+      <pubDate>Tue, 05 Mar 2024 08:00:07 -0500</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/all_about_dns/</guid>
+      <description>
+        
+          
+            Insert Lead paragraph here.
+谈谈我的dns在一些特殊的网络架构中的思路... 目的:
+走节点的连接, 其dns请求不发到国内的dns服务器 减少不必要的dns请求 尽量避免所谓的dns leak 我的内部网络: 主路由 ros, 旁路网关 clash on debain, mosdns server, 交换机, 及各种终端; 其中clash所在的debian, 网关为ros, 其他设备的网关为clash所在的debian; 内网到内网的通信会经交换机抵达, 不必通过路由器ros, 发给ros的除外.
+ros: ros上开启dns服务, 上游为ISP的ipv4和ipv6服务器, 开启Allow Remote Requests, (这条开启是仅仅让mosdns访问的, 后面详解) ros通过dhcp_server通知各终端把dns和网关都指向clash及clash_dns, 除clash自己.
+clash: clash开启dns服务(我用的fake_ip, 当然不用fake_ip也行, 不影响前述目的), clash_dns的唯一上游, 是mosdns; 同时, clash 的 fallback_dns关闭
+mosdns: mosdns按direct-list(即cn_sites)的域名进行分流, 命中该list的, 请求上游为ros_dns, ros_dns会向它的上游, 也就是向各ISP_dns请求; 而没有命中该list的, 也就是走节点的, mosdns发给上游8.8.8.8(建议dot/doh). 我们来看一下数据包的路径: mosdns发给ros的请求, 因为都是内网设备, 将直接由交换机转发, 而不经过mosdns的网关, 即clash所在的debian; 而mosdns发给8.8.8.8(我是用dot)的请求, 会按网关要求, 发给clash所在的debian, debian会转发给clash, 由clash加密封装后, 按规则走指定的节点. 当然clash最后也是通过debian的网关, 即ros, 再发到节点.
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>cloudflare ddns的routeros脚本</title>
       <link>https://dsunn.github.io/blog/post/mikrotik_cf_ddns/</link>

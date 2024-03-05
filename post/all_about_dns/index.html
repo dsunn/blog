@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html
   lang="en"
-  data-figures=""
+  data-figures="true"
+  
+    class="page"
   
   
   >
   <head>
-<title>Series | Whatever blog</title>
+<title>All_about_dns | Whatever blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,25 +18,25 @@
 
 
 
+
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="" />
+<meta name="description" content="Article description." />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@david">
-<meta name="twitter:title" content="Series" />
+<meta name="twitter:title" content="All_about_dns" />
 <meta name="twitter:image" content="https://dsunn.github.io/blog/images/thumbnail.png"/>
-<meta property="og:url" content="https://dsunn.github.io/blog/series/" />
-<meta property="og:title" content="Series" />
-<meta property="og:description" content="" />
+<meta property="og:url" content="https://dsunn.github.io/blog/post/all_about_dns/" />
+<meta property="og:title" content="All_about_dns" />
+<meta property="og:description" content="Article description." />
 <meta property="og:image" content="https://dsunn.github.io/blog/images/thumbnail.png" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://dsunn.github.io/blog/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://dsunn.github.io/blog/icons/favicon-32x32.png">
 <link rel="manifest" href="https://dsunn.github.io/blog/icons/site.webmanifest">
 
-<link rel="canonical" href="https://dsunn.github.io/blog/series/">
-<link rel="alternate" type="application/rss+xml" href="https://dsunn.github.io/blog/series/index.xml" title="Whatever blog" />
+<link rel="canonical" href="https://dsunn.github.io/blog/post/all_about_dns/">
 
 
 
@@ -50,7 +52,7 @@
 
   </head>
   <body
-    data-code="7"
+    data-code="10"
     data-lines="false"
     id="documentTop"
     data-lang="en"
@@ -90,23 +92,106 @@
 </header>
 
     <main>
-
-
-
+  
 <div class="grid-inverse wrap content">
-  <div>
-    <ul class="posts" id="posts">
-      <li>
-      </li>
-    </ul>
+  <article class="post_content">
+    <h1 class="post_title">All_about_dns</h1>
+  <div class="post_meta">
+    <span><svg class="icon">
+  <title>calendar</title>
+  <use xlink:href="#calendar"></use>
+</svg>
+</span>
+    <span class="post_date">
+      Mar 5, 2024</span>
+    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/dns/' title="dns" class="post_tag button button_translucent">dns
+        </a>
+    </span>
+    <span class="page_only">&nbsp;·
+  <div class="post_share">
+    Share on:
+    <a href="https://twitter.com/intent/tweet?text=All_about_dns&url=https%3a%2f%2fdsunn.github.io%2fblog%2fpost%2fall_about_dns%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <title>twitter</title>
+  <use xlink:href="#twitter"></use>
+</svg>
+
+    </a>
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fdsunn.github.io%2fblog%2fpost%2fall_about_dns%2f&t=All_about_dns" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <title>facebook</title>
+  <use xlink:href="#facebook"></use>
+</svg>
+
+    </a>
+    <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
+      <svg class="icon">
+  <title>linkedin</title>
+  <use xlink:href="#linkedin"></use>
+</svg>
+
+    </a>
+    <a href="https://dsunn.github.io/blog/post/all_about_dns/" title="Copy Link" class="link link_yank">
+      <svg class="icon">
+  <title>copy</title>
+  <use xlink:href="#copy"></use>
+</svg>
+
+    </a>
   </div>
+  </span>
+  </div>
+
+    <div class="post_body"><p><strong>Insert Lead paragraph here.</strong></p>
+<p>谈谈我的dns在一些特殊的网络架构中的思路...
+目的:</p>
+<ul>
+<li>走节点的连接, 其dns请求不发到国内的dns服务器</li>
+<li>减少不必要的dns请求</li>
+<li>尽量避免所谓的dns leak</li>
+</ul>
+<p>我的内部网络:
+主路由 ros, 旁路网关 clash on debain, mosdns server, 交换机, 及各种终端;
+其中clash所在的debian, 网关为ros, 其他设备的网关为clash所在的debian;
+内网到内网的通信会经交换机抵达, 不必通过路由器ros, 发给ros的除外.</p>
+<p>ros:
+ros上开启dns服务, 上游为ISP的ipv4和ipv6服务器, 开启Allow Remote Requests, (这条开启是仅仅让mosdns访问的, 后面详解)
+ros通过dhcp_server通知各终端把dns和网关都指向clash及clash_dns, 除clash自己.</p>
+<p>clash:
+clash开启dns服务(我用的fake_ip, 当然不用fake_ip也行, 不影响前述目的), clash_dns的唯一上游, 是mosdns; 同时, clash 的 fallback_dns关闭</p>
+<p>mosdns:
+mosdns按direct-list(即cn_sites)的域名进行分流, 命中该list的, 请求上游为ros_dns, ros_dns会向它的上游, 也就是向各ISP_dns请求; 而没有命中该list的, 也就是走节点的, mosdns发给上游8.8.8.8(建议dot/doh).
+我们来看一下数据包的路径: mosdns发给ros的请求, 因为都是内网设备, 将直接由交换机转发, 而不经过mosdns的网关, 即clash所在的debian; 而mosdns发给8.8.8.8(我是用dot)的请求, 会按网关要求, 发给clash所在的debian, debian会转发给clash, 由clash加密封装后, 按规则走指定的节点. 当然clash最后也是通过debian的网关, 即ros, 再发到节点.</p>
+<p>各终端设备:
+终端设备的dns, 是近观ros dhcp_server的通知, 设置为clash_dns, 而clash_dns_server, 我是设置为fake_ip模式, 当然也可以不设置为fake_ip模式, 后面我会说fake_ip模式的好处.</p>
+<p>从上面我们看到, ros作为网络的主路由, 是唯一对外查询dns的设备, (clash经过加密封装的dns请求, 在出口ros这里看来, 并不是对外的dns请求), 所以ros只接收到来自mosdns上对cn_sites所发起的dns请求, 甚至ros可以drop forward链上的dns请求, 以尽量避免特定域名的dns请求发到ISP的dns服务; 而mosdns只接收来自clash_dns的请求, clash_dns_server接收各终端设备的dns请求.</p>
+<p>为了说清fake_ip, 我们先从另一视角看一下内网的结构:</p>
+<p>终端设备 --&gt; clash --&gt; 直连或节点
+在这里, 终端设备和clash的关系, 是host/proxy的关系; 同理, clash和节点的关系, 也是host/proxy的关系.</p>
+<p>先看clash和节点的host/proxy关系, 当clash想通过节点访问谷歌(<a href="https://www.google.com">www.google.com</a>)时, clash并不需要谷歌的ip, 它是把FQDN发给节点, 等于是说: &quot;你自己用你默认的dns查询后, 帮我连这个url, 把结果返回给我&quot;; 就是说host自己不需要有连接的dns结果, 只需要把域名传递给proxy就行.
+而当clash需要直连时, 它会向上游mosdns查询, 拿到real_ip来直连, mosdns如上述会向ros_dns获取cn_sites的解析结果.</p>
+<p>然后看终端设备和clash的host/proxy的关系, 终端的不管是走不走节点的请求, 都是走网关再转发给clash的, 所以终端不需要dns的解析, 只需要把域名发给proxy也即clash就行, 但tcp的机制上, 终端必须先请求dns, 再按dns解析进行tcp连接; 这样的话, 终端只需要从clash_dns那里拿到fake_ip就行了, 由clash根据映射, 回到请求的域名, 再根据规则, 判定直连或者走节点.</p>
+<p>所以采用fake_ip, 会减少dns的查询, 从而加快网络的连接速度; 当然, 如果你出于特别原因, 需要终端获取real_ip, 也可以, 但终端设备的dns还是需要指向clash_dns, 这样可以让clash拿到你请求的域名, 从而用域名规则分流.</p>
+<p>其实从上面所说的clash和节点的host/proxy关系这节, 我们不难看出, clash在连接谷歌时, 不需要谷歌的ip, 于是, 即使把clash_dns的上游, 即mosdns中, 用于查询谷歌的上游dns, (在我的设置里是8.8.8.8), 胡乱改成1.2.3.4等错误的ip时, 其实也不会影响对谷歌的访问.</p>
+
+    </div>
+<div class="post_comments">
+  
+  
+  
+</div>
+
+
+
+
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <br>
     
   
   <div class="search">
-    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='series'>
+    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='post'>
     <label for="find" class="search_label"><svg class="icon">
   <title>search</title>
   <use xlink:href="#search"></use>
@@ -197,9 +282,8 @@
   </section>
 </aside>
 
+  
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
