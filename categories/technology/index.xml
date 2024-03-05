@@ -17,7 +17,7 @@
       <description>
         
           
-            Insert Lead paragraph here. 在参考了j大佬的博客(https://www.digs.eu.org/2024/01/04/ROS%20cloudflare%20DDNS%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC/)和这位作者(https://gist.githubusercontent.com/kolobus/18680f8fb01ce3003cb9a3f82c9d30e1/raw/cf8ecd84fc0e5dccb7298422c7d8c40410c345a3/cf-ddns.rsc)的脚本后, 魔改的.
+            Insert Lead paragraph here. 在参考了j大佬的博客和这位作者的脚本的脚本后, 魔改的.
 适用在cloudflare上更新ipv4和ipv6的动态ip; 和原作者不同的是, 我的脚本是直接从ros接口上取相应ip, 其实我这脚本是放在ppp profile-on up-script中, 在拨号完成后执行一次, 而不是定时反复执行, 故相应修改了代码.
 token, zone_id, record_id等请先行获取, 获取方法在前述j大佬博客中有所提及.
 1# Cloudflare Dynamic DNS update script 2# Required policy: read, write, test, policy 3# Add this script to scheduler 4# Install DigiCert root CA or disable check-certificate 5# Modified from https://gist.github.com/kolobus/18680f8fb01ce3003cb9a3f82c9d30e1 6# Configuration --------------------------------------------------------------------- 7 8:local TOKEN &amp;#34;&amp;#34; 9 10:local ZONEIDv6 &amp;#34;&amp;#34; 11:local RECORDIDv6 &amp;#34;&amp;#34; 12:local RECORDNAMEv6 &amp;#34;&amp;#34; 13:local IP6NEW 14 15:local ZONEIDv4 &amp;#34;&amp;#34; 16:local RECORDIDv4 &amp;#34;&amp;#34; 17:local RECORDNAMEv4 &amp;#34;&amp;#34; 18:local IP4NEW 19 20:local WANIF &amp;#34;&amp;#34; 21 22#------------------------------------------------------------------------------------ 23 24 25 26 27:if ([/interface get $WANIF value-name=running]) do={ 28 29 # IPv6 check 30 31 :local &amp;#34;IP6NEW&amp;#34; [/ipv6/address get [:pick [find dynamic global interface=$WANIF] 0 ] address] 32 :set &amp;#34;IP6NEW&amp;#34; [:pick $&amp;#34;IP6NEW&amp;#34; 0 [:find $&amp;#34;IP6NEW&amp;#34; &amp;#34;/&amp;#34;]] 33 34 :local url &amp;#34;https://api.
