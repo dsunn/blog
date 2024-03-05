@@ -165,8 +165,8 @@ mosdns按direct-list(即cn_sites)的域名进行分流, 命中该list的, 请求
 终端设备的dns, 是近观ros dhcp_server的通知, 设置为clash_dns, 而clash_dns_server, 我是设置为fake_ip模式, 当然也可以不设置为fake_ip模式, 后面我会说fake_ip模式的好处.</p>
 <p>从上面我们看到, ros作为网络的主路由, 是唯一对外查询dns的设备, (clash经过加密封装的dns请求, 在出口ros这里看来, 并不是对外的dns请求), 所以ros只接收到来自mosdns上对cn_sites所发起的dns请求, 甚至ros可以drop forward链上的dns请求, 以尽量避免特定域名的dns请求发到ISP的dns服务; 而mosdns只接收来自clash_dns的请求, clash_dns_server接收各终端设备的dns请求.</p>
 <p>为了说清fake_ip, 我们先从另一视角看一下内网的结构:</p>
-<p>终端设备 --&gt; clash --&gt; 直连或节点
-在这里, 终端设备和clash的关系, 是host/proxy的关系; 同理, clash和节点的关系, 也是host/proxy的关系.</p>
+<p>终端设备 --&gt; clash --&gt; 直连或节点</p>
+<p>在这里, 终端设备和clash的关系, 是host/proxy的关系; 同理, clash和节点的关系, 也是host/proxy的关系.</p>
 <p>先看clash和节点的host/proxy关系, 当clash想通过节点访问谷歌(<a href="https://www.google.com">www.google.com</a>)时, clash并不需要谷歌的ip, 它是把FQDN发给节点, 等于是说: &quot;你自己用你默认的dns查询后, 帮我连这个url, 把结果返回给我&quot;; 就是说host自己不需要有连接的dns结果, 只需要把域名传递给proxy就行.
 而当clash需要直连时, 它会向上游mosdns查询, 拿到real_ip来直连, mosdns如上述会向ros_dns获取cn_sites的解析结果.</p>
 <p>然后看终端设备和clash的host/proxy的关系, 终端的不管是走不走节点的请求, 都是走网关再转发给clash的, 所以终端不需要dns的解析, 只需要把域名发给proxy也即clash就行, 但tcp的机制上, 终端必须先请求dns, 再按dns解析进行tcp连接; 这样的话, 终端只需要从clash_dns那里拿到fake_ip就行了, 由clash根据映射, 回到请求的域名, 再根据规则, 判定直连或者走节点.</p>
