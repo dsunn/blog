@@ -149,22 +149,29 @@
 <li>减少不必要的dns请求</li>
 <li>尽量避免所谓的dns leak</li>
 </ul>
+<hr>
 <p>我的内部网络:
 主路由 ros, 旁路网关 clash on debain, mosdns server, 交换机, 及各种终端;
 其中clash所在的debian, 网关为ros, 其他设备的网关为clash所在的debian;
-内网到内网的通信会经交换机抵达, 不必通过路由器ros, 发给ros的除外.</p>
+内网到内网的通信基本上会经交换机转发抵达.</p>
 <p>ros:
 ros上开启dns服务, 上游为ISP的ipv4和ipv6服务器, 开启Allow Remote Requests, (这条开启是仅仅让mosdns访问的, 后面详解)
 ros通过dhcp_server通知各终端把dns和网关都指向clash及clash_dns, 除clash自己.</p>
 <p>clash:
 clash开启dns服务(我用的fake_ip, 当然不用fake_ip也行, 不影响前述目的), clash_dns的唯一上游, 是mosdns; 同时, clash 的 fallback_dns关闭</p>
 <p>mosdns:
-mosdns按direct-list(即cn_sites)的域名进行分流, 命中该list的, 请求上游为ros_dns, ros_dns会向它的上游, 也就是向各ISP_dns请求; 而没有命中该list的, 也就是走节点的, mosdns发给上游8.8.8.8(建议dot/doh).
-我们来看一下数据包的路径: mosdns发给ros的请求, 因为都是内网设备, 将直接由交换机转发, 而不经过mosdns的网关, 即clash所在的debian; 而mosdns发给8.8.8.8(我是用dot)的请求, 会按网关要求, 发给clash所在的debian, debian会转发给clash, 由clash加密封装后, 按规则走指定的节点. 当然clash最后也是通过debian的网关, 即ros, 再发到节点.</p>
+mosdns按direct-list(即cn_sites)的域名进行分流, 命中该list的, 请求发到上游ros_dns, ros_dns会向它的上游, 也就是向各ISP_dns请求; 而没有命中该list的, 也就是走节点的, mosdns把请求发给上游8.8.8.8(建议dot/doh); mosdns同样不采用fallback_dns的策略.</p>
+<p>我们来看一下数据包的路径: mosdns发给ros的请求, 因为都是内网设备, 将直接由交换机转发, 而不经过mosdns的网关, 即clash所在的debian; 而mosdns发给8.8.8.8(我是用dot)的请求, 会按网关要求, 发给clash所在的debian, debian会转发给clash, 由clash加密封装后, 按规则走指定的节点. 当然clash最后也是通过debian的网关, 即ros, 再发到节点.</p>
 <p>各终端设备:
 终端设备的dns, 是近观ros dhcp_server的通知, 设置为clash_dns, 而clash_dns_server, 我是设置为fake_ip模式, 当然也可以不设置为fake_ip模式, 后面我会说fake_ip模式的好处.</p>
 <p>从上面我们看到, ros作为网络的主路由, 是唯一对外查询dns的设备, (clash经过加密封装的dns请求, 在出口ros这里看来, 并不是对外的dns请求), 所以ros只接收到来自mosdns上对cn_sites所发起的dns请求, 甚至ros可以drop forward链上的dns请求, 以尽量避免特定域名的dns请求发到ISP的dns服务; 而mosdns只接收来自clash_dns的请求, clash_dns_server接收各终端设备的dns请求.</p>
-<p>为了说清fake_ip, 我们先从另一视角看一下内网的结构:</p>
+<hr>
+<p>dns leak:
+主要是在dns查询时, 不要并发, 不要fallback, 还有就是尽量正确地分流查询.
+实际上, 即使通过了各测试dns leak的网站的测试, 也仅仅表明针对这网站, 没有leak.</p>
+<hr>
+<p>fake_ip:
+我们先从另一视角看一下内网的结构:</p>
 <p>终端设备 --&gt; clash --&gt; 直连或节点</p>
 <p>在这里, 终端设备和clash的关系, 是host/proxy的关系; 同理, clash和节点的关系, 也是host/proxy的关系.</p>
 <p>先看clash和节点的host/proxy关系, 当clash想通过节点访问谷歌(<a href="https://www.google.com">www.google.com</a>)时, clash并不需要谷歌的ip, 它是把FQDN发给节点, 等于是说: &quot;你自己用你默认的dns查询后, 帮我连这个url, 把结果返回给我&quot;; 就是说host自己不需要有连接的dns结果, 只需要把域名传递给proxy就行.
