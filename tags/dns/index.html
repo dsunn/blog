@@ -154,8 +154,10 @@
         <div class="pale">
           
             <p>谈谈我的dns在一些特殊的网络架构中的思路... 目的:
-走节点的连接, 其dns请求不发到国内的dns服务器 减少不必要的dns请求 尽量避免所谓的dns leak 我的内部网络: 主路由 ros, 旁路网关 clash on debain, mosdns server, 交换机, 及各种终端; 其中clash所在的debian, 网关为ros, 其他设备的网关为clash所在的debian; 内网到内网的通信基本上会经交换机转发抵达.
-ros: ros上开启dns服务, 上游为ISP的ipv4和ipv6服务器, 开启Allow Remote Requests, (这条开启是仅仅让mosdns访问的, 后面详解) ros通 …</p>
+走节点的连接, 其dns请求不发到国内的dns服务器 减少不必要的dns请求 尽量避免所谓的dns leak 我的内部网络:
+主路由 ros, 旁路网关 clash on debain, mosdns server, 交换机, 及各种终端; 其中clash所在的debian, 网关为ros, 其他设备的网关为clash所在的debian; 内网到内网的通信基本上会经交换机转发抵达.
+ros:
+ros上开启dns服务, 上游为ISP的ipv4和ipv6服务器, 开启Allow Remote Requests, (这条开启是仅仅让mosdns访问的, 后面详解) ros通 …</p>
           
           <br>
           <a href="https://dsunn.github.io/blog/post/all_about_dns/" title="Read More" class="excerpt_more button">Read More</a>
