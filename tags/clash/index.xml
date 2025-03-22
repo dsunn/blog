@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clash on Whatever blog</title>
+    <link>https://dsunn.github.io/blog/tags/clash/</link>
+    <description>Recent content in Clash on Whatever blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Sep 2023 20:47:03 -0400</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/clash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>debian搭建clash的透明代理(Tproxy)(nftables转发)</title>
+      <link>https://dsunn.github.io/blog/post/clash_nft/</link>
+      <pubDate>Tue, 19 Sep 2023 20:47:03 -0400</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/clash_nft/</guid>
+      <description>
+        
+          
+            &lt;p&gt;ref debian搭建clash的透明代理(Tproxy)(iptables转发)&lt;a href=&#34;https://dsunn.github.io/blog/post/clash/&#34;&gt;https://dsunn.github.io/blog/post/clash/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本篇对上述用iptables来转发局域网流量到clash的方法, 用linux内置的nftables来代替.&lt;/p&gt;
+&lt;p&gt;修改/etc/nftables.conf, 在其最后加入下列设置.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;table inet clash
+delete table inet clash
+
+table inet clash {
+    set local_addr {
+        type ipv4_addr
+        flags interval
+        elements = {
+            10.0.0.0/8,
+            127.0.0.0/8,
+            169.254.0.0/16,
+            172.16.0.0/12,
+            192.168.0.0/16,
+            240.0.0.0/4,
+            0.0.0.0/8
+        }
+    }
+
+    set clashhost_addr {
+        type ipv4_addr
+        flags interval
+        elements = {
+            192.168.10.89/32
+        }
+    }
+
+    chain clash-tproxy {
+        ip daddr @local_addr return
+        ip saddr @clashhost_addr return
+        meta l4proto { tcp, udp } meta mark set 1 tproxy to :7893 accept
+    }
+
+    chain clash-mark {
+        ip daddr @local_addr return
+        ip daddr @clashhost_addr return
+        meta mark set 1
+    }
+
+    chain mangle-prerouting {
+        type filter hook prerouting priority mangle; policy accept;
+        meta l4proto { tcp, udp } ct direction original jump clash-tproxy
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在系统上使能nftables&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>debian搭建clash的透明代理(Tproxy)(iptables转发)</title>
+      <link>https://dsunn.github.io/blog/post/clash/</link>
+      <pubDate>Mon, 05 Jun 2023 08:36:36 -0400</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/clash/</guid>
+      <description>
+        
+          
+            &lt;p&gt;修改于9/20/2023&lt;/p&gt;
+&lt;p&gt;一. clash程序&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;root运行&lt;/li&gt;
+&lt;li&gt;下载clash premium (&lt;a href=&#34;https://github.com/Dreamacro/clash/releases/tag/premium&#34;&gt;https://github.com/Dreamacro/clash/releases/tag/premium&lt;/a&gt;) 解压保存为/usr/local/bin/clash&lt;/li&gt;
+&lt;li&gt;设置为systemd deamon&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;编辑/lib/systemd/system/clash.service&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#/lib/systemd/system/clash.service
+
+Description=A rule based proxy tunnel in Go  
+After=network.target  
+[Service]  
+Type=simple  
+Restart=on-abort  
+ExecStart=/usr/local/bin/clash  
+[Install]  
+WantedBy=multi-user.target  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;默认运行目录为~/.config/clash, config.yaml要存放在工作目录中&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl daemon-reload  
+systemctl enable clash  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;二. 透明代理&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开启ipv4/ipv6的转发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &amp;#34;net.ipv4.ip_forward = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p  
+echo &amp;#34;net.ipv6.conf.all.forwarding = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;关闭systemd-resolved 服务, 让clash dns占有53端口
+systemctl disable systemd-resolved&lt;br&gt;
+/etc/reslov.conf里我是设置为主路由(ros)的dns&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;iptables持久化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;apt install iptables-persistent netfilter-persistent  
+netfilter-persistent save  
+netfilter-persistent start  
+iptables-save  &amp;gt; /etc/iptables/rules.v4  
+ip6tables-save  &amp;gt; /etc/iptables/rules.v6  
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;加载恢复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;iptables-restore  &amp;lt; /etc/iptables/rules.v4  
+ip6tables-restore  &amp;lt; /etc/iptables/rules.v6  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;三. iptables
+(以下代码中192.168.10.87是我的clash host, 模式为tproxy)&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
