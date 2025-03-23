@@ -107,7 +107,7 @@
     <span class="post_date">
       Mar 22, 2025	  
     </span>
-    <span class="post_time"> · 9 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/vyos/' title="vyos" class="post_tag button button_translucent">vyos
+    <span class="post_time"> · 8 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/vyos/' title="vyos" class="post_tag button button_translucent">vyos
         </a><a href='https://dsunn.github.io/blog/tags/router/' title="router" class="post_tag button button_translucent">router
         </a>
     </span>
@@ -402,7 +402,7 @@ set policy local-route rule 10 set table &#39;100&#39;
 <pre tabindex="0"><code>sudo podman pull lscr.io/linuxserver/heimdall:latest
 </code></pre><p>vyos configure模式下:
 2. 创建网络</p>
-<p>创建容器桥接网络</p>
+<p>创建容器网络</p>
 <pre tabindex="0"><code>set container network ct-network prefix &#39;172.23.0.0/24&#39; #与宿主网段不同
 </code></pre><ol start="3">
 <li>创建容器</li>
@@ -419,7 +419,8 @@ set container name heimdall port https source &#39;4432&#39;
 set container name heimdall restart &#39;always&#39;
 set container name heimdall volume conf destination &#39;/config&#39;
 set container name heimdall volume conf source &#39;/home/aki/container/heimdall&#39;
-</code></pre><p>这里source是容器的挂载路径，destination是容器内的路径</p>
+</code></pre><p>这里source是容器的挂载路径，destination是容器内的路径
+vyos的容器网络, 不用映射端口到主机, 就可以使用全端口, 当然你想映射, 也行</p>
 <ol start="4">
 <li>保存配置</li>
 </ol>
@@ -429,10 +430,7 @@ set container name heimdall volume conf source &#39;/home/aki/container/heimdall
 <pre tabindex="0"><code>set firewall global-options state-policy invalid action &#39;drop&#39;
 </code></pre><p>为此, 需要另外添加一条全局规则, 允许容器的流量:</p>
 <pre tabindex="0"><code>set firewall global-options apply-to-bridged-traffic invalid-connections
-</code></pre><p>macvlan
-目前没找到vyos在配置模式下, 创建macvlan的命令, vyos 1.5 版本有一个pseudo-ethernet, 据官方wiki介绍, 类似macvlan, 但目前未找到方法 用于容器</p>
-<p>但是可以通过podman创建macvlan, 并将容器的网络设置为macvlan, podman的cli和docker cli几乎一样, 请自行google.</p>
-
+</code></pre>
     </div><div class="post_comments">
   
   
