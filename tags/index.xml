@@ -4,8 +4,65 @@
     <title>Tags on Whatever blog</title>
     <link>https://dsunn.github.io/blog/tags/</link>
     <description>Recent content in Tags on Whatever blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Mar 2025 14:18:21 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Mar 2025 14:18:21 +0800</lastBuildDate>
+    <atom:link href="https://dsunn.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Router</title>
+      <link>https://dsunn.github.io/blog/tags/router/</link>
+      <pubDate>Sat, 22 Mar 2025 14:18:21 +0800</pubDate>
+      <guid>https://dsunn.github.io/blog/tags/router/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vyos</title>
+      <link>https://dsunn.github.io/blog/tags/vyos/</link>
+      <pubDate>Sat, 22 Mar 2025 14:18:21 +0800</pubDate>
+      <guid>https://dsunn.github.io/blog/tags/vyos/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dns</title>
+      <link>https://dsunn.github.io/blog/tags/dns/</link>
+      <pubDate>Tue, 05 Mar 2024 08:00:07 -0500</pubDate>
+      <guid>https://dsunn.github.io/blog/tags/dns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ddns</title>
+      <link>https://dsunn.github.io/blog/tags/ddns/</link>
+      <pubDate>Tue, 05 Mar 2024 07:33:25 -0500</pubDate>
+      <guid>https://dsunn.github.io/blog/tags/ddns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ipv6</title>
+      <link>https://dsunn.github.io/blog/tags/ipv6/</link>
+      <pubDate>Tue, 05 Mar 2024 07:33:25 -0500</pubDate>
+      <guid>https://dsunn.github.io/blog/tags/ipv6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ros</title>
+      <link>https://dsunn.github.io/blog/tags/ros/</link>
+      <pubDate>Tue, 05 Mar 2024 07:33:25 -0500</pubDate>
+      <guid>https://dsunn.github.io/blog/tags/ros/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Clash</title>
+      <link>https://dsunn.github.io/blog/tags/clash/</link>
+      <pubDate>Tue, 19 Sep 2023 20:47:03 -0400</pubDate>
+      <guid>https://dsunn.github.io/blog/tags/clash/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Video</title>
+      <link>https://dsunn.github.io/blog/tags/video/</link>
+      <pubDate>Mon, 12 Jun 2023 23:07:47 -0400</pubDate>
+      <guid>https://dsunn.github.io/blog/tags/video/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
