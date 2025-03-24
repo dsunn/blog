@@ -4,65 +4,478 @@
     <title>Whatever blog</title>
     <link>https://dsunn.github.io/blog/</link>
     <description>Recent content on Whatever blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Mar 2025 14:18:21 +0800</lastBuildDate>
-    <atom:link href="https://dsunn.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Mar 2025 14:18:21 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vyos</title>
       <link>https://dsunn.github.io/blog/post/vyos/</link>
       <pubDate>Sat, 22 Mar 2025 14:18:21 +0800</pubDate>
+      
       <guid>https://dsunn.github.io/blog/post/vyos/</guid>
-      <description>&lt;p&gt;vyos的命令行界面是基于shell的，没有图形界面, 但是可以用tab自动补全.&#xA;本文的vyos命令是基于vyos的vyos-rolling-nightly-builds的1.5.x版本.&lt;/p&gt;&#xA;&lt;p&gt;pve安装vyos:&#xA;下载nightly-build: &lt;a href=&#34;https://github.com/vyos/vyos-nightly-build/releases&#34;&gt;https://github.com/vyos/vyos-nightly-build/releases&lt;/a&gt;&#xA;pve的虚拟机设置和安装(略), 建议内存2G, 磁盘10G或更大, 因为vyos可以运行容器, vyos用podman管理容器.&lt;/p&gt;&#xA;&lt;p&gt;vm运行后, 用vyos:vyos登录. 用命令&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;install image&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装vyos.&lt;/p&gt;&#xA;&lt;p&gt;设置ssh登录:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set service ssh port &amp;#39;22&amp;#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;创建用户dave:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system login user dave full-name dave&#xA;set system login user dave authentication plaintext-password &amp;#39;your-password&amp;#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;建议ssh密钥登录:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system login user dave authentication public-keys dave@laptop key &amp;#39;your-public-key&amp;#39;&#xA;set system login user dave authentication public-keys dave@laptop type &amp;#39;ssh-rsa&amp;#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;禁用默认的vyos用户:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system login user vyos disable&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置系统的hostname:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system host-name &amp;#39;vyos&amp;#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置时区:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system time-zone &amp;#39;Asia/Shanghai&amp;#39;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置ntp:&lt;/p&gt;</description>
+      <description>
+        
+          
+            &lt;p&gt;vyos的命令行界面是基于shell的，没有图形界面, 但是可以用tab自动补全.
+本文的vyos命令是基于vyos的vyos-rolling-nightly-builds的1.5.x版本.&lt;/p&gt;
+&lt;p&gt;pve安装vyos:
+下载nightly-build: &lt;a href=&#34;https://github.com/vyos/vyos-nightly-build/releases&#34;&gt;https://github.com/vyos/vyos-nightly-build/releases&lt;/a&gt;
+pve的虚拟机设置和安装(略), 建议内存2G, 磁盘10G或更大, 因为vyos可以运行容器, vyos用podman管理容器.&lt;/p&gt;
+&lt;p&gt;vm运行后, 用vyos:vyos登录. 用命令&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;install image
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装vyos.&lt;/p&gt;
+&lt;p&gt;设置ssh登录:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set service ssh port &amp;#39;22&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;创建用户dave:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system login user dave full-name dave
+set system login user dave authentication plaintext-password &amp;#39;your-password&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;建议ssh密钥登录:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system login user dave authentication public-keys dave@laptop key &amp;#39;your-public-key&amp;#39;
+set system login user dave authentication public-keys dave@laptop type &amp;#39;ssh-rsa&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;禁用默认的vyos用户:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system login user vyos disable
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置系统的hostname:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system host-name &amp;#39;vyos&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置时区:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set system time-zone &amp;#39;Asia/Shanghai&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置ntp:&lt;/p&gt;
+          
+          
+        
+      </description>
     </item>
+    
     <item>
       <title>All about dns</title>
       <link>https://dsunn.github.io/blog/post/all_about_dns/</link>
       <pubDate>Tue, 05 Mar 2024 08:00:07 -0500</pubDate>
+      
       <guid>https://dsunn.github.io/blog/post/all_about_dns/</guid>
-      <description>&lt;p&gt;谈谈我的dns在一些特殊的网络架构中的思路&amp;hellip;&#xA;目的:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;走节点的连接, 其dns请求不发到国内的dns服务器&lt;/li&gt;&#xA;&lt;li&gt;减少不必要的dns请求&lt;/li&gt;&#xA;&lt;li&gt;尽量避免所谓的dns leak&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;我的内部网络:&lt;/p&gt;&#xA;&lt;p&gt;主路由 ros, 旁路网关 clash on debain, mosdns server, 交换机, 及各种终端;&#xA;其中clash所在的debian, 网关为ros, 其他设备的网关为clash所在的debian;&#xA;内网到内网的通信基本上会经交换机转发抵达.&lt;/p&gt;&#xA;&lt;p&gt;ros:&lt;/p&gt;&#xA;&lt;p&gt;ros上开启dns服务, 上游为ISP的ipv4和ipv6服务器, 开启Allow Remote Requests, (这条开启是仅仅让mosdns访问的, 后面详解)&#xA;ros通过dhcp_server通知各终端把dns和网关都指向clash及clash_dns, 除clash自己.&lt;/p&gt;&#xA;&lt;p&gt;clash:&lt;/p&gt;&#xA;&lt;p&gt;clash开启dns服务(我用的fake_ip, 当然不用fake_ip也行, 不影响前述目的), clash_dns的唯一上游, 是mosdns; 同时, clash 的 fallback_dns关闭&lt;/p&gt;&#xA;&lt;p&gt;mosdns:&lt;/p&gt;&#xA;&lt;p&gt;mosdns按direct-list(即cn_sites)的域名进行分流, 命中该list的, 请求发到上游ros_dns, ros_dns会向它的上游, 也就是向各ISP_dns请求; 而没有命中该list的, 也就是走节点的, mosdns把请求发给上游8.8.8.8(建议dot/doh); mosdns同样不采用fallback_dns的策略.&lt;/p&gt;&#xA;&lt;p&gt;我们来看一下数据包的路径: mosdns发给ros的请求, 因为都是内网设备, 将直接由交换机转发, 而不经过mosdns的网关, 即clash所在的debian; 而mosdns发给8.8.8.8(我是用dot)的请求, 会按网关要求, 发给clash所在的debian, debian会转发给clash, 由clash加密封装后, 按规则走指定的节点. 当然clash最后也是通过debian的网关, 即ros, 再发到节点.&lt;/p&gt;&#xA;&lt;p&gt;各终端设备:&lt;/p&gt;&#xA;&lt;p&gt;终端设备的dns, 是近观ros dhcp_server的通知, 设置为clash_dns, 而clash_dns_server, 我是设置为fake_ip模式, 当然也可以不设置为fake_ip模式, 后面我会说fake_ip模式的好处.&lt;/p&gt;</description>
+      <description>
+        
+          
+            &lt;p&gt;谈谈我的dns在一些特殊的网络架构中的思路&amp;hellip;
+目的:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;走节点的连接, 其dns请求不发到国内的dns服务器&lt;/li&gt;
+&lt;li&gt;减少不必要的dns请求&lt;/li&gt;
+&lt;li&gt;尽量避免所谓的dns leak&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;我的内部网络:&lt;/p&gt;
+&lt;p&gt;主路由 ros, 旁路网关 clash on debain, mosdns server, 交换机, 及各种终端;
+其中clash所在的debian, 网关为ros, 其他设备的网关为clash所在的debian;
+内网到内网的通信基本上会经交换机转发抵达.&lt;/p&gt;
+&lt;p&gt;ros:&lt;/p&gt;
+&lt;p&gt;ros上开启dns服务, 上游为ISP的ipv4和ipv6服务器, 开启Allow Remote Requests, (这条开启是仅仅让mosdns访问的, 后面详解)
+ros通过dhcp_server通知各终端把dns和网关都指向clash及clash_dns, 除clash自己.&lt;/p&gt;
+&lt;p&gt;clash:&lt;/p&gt;
+&lt;p&gt;clash开启dns服务(我用的fake_ip, 当然不用fake_ip也行, 不影响前述目的), clash_dns的唯一上游, 是mosdns; 同时, clash 的 fallback_dns关闭&lt;/p&gt;
+&lt;p&gt;mosdns:&lt;/p&gt;
+&lt;p&gt;mosdns按direct-list(即cn_sites)的域名进行分流, 命中该list的, 请求发到上游ros_dns, ros_dns会向它的上游, 也就是向各ISP_dns请求; 而没有命中该list的, 也就是走节点的, mosdns把请求发给上游8.8.8.8(建议dot/doh); mosdns同样不采用fallback_dns的策略.&lt;/p&gt;
+&lt;p&gt;我们来看一下数据包的路径: mosdns发给ros的请求, 因为都是内网设备, 将直接由交换机转发, 而不经过mosdns的网关, 即clash所在的debian; 而mosdns发给8.8.8.8(我是用dot)的请求, 会按网关要求, 发给clash所在的debian, debian会转发给clash, 由clash加密封装后, 按规则走指定的节点. 当然clash最后也是通过debian的网关, 即ros, 再发到节点.&lt;/p&gt;
+&lt;p&gt;各终端设备:&lt;/p&gt;
+&lt;p&gt;终端设备的dns, 是近观ros dhcp_server的通知, 设置为clash_dns, 而clash_dns_server, 我是设置为fake_ip模式, 当然也可以不设置为fake_ip模式, 后面我会说fake_ip模式的好处.&lt;/p&gt;
+          
+          
+        
+      </description>
     </item>
+    
     <item>
       <title>cloudflare ddns的routeros脚本</title>
       <link>https://dsunn.github.io/blog/post/mikrotik_cf_ddns/</link>
       <pubDate>Tue, 05 Mar 2024 07:33:25 -0500</pubDate>
+      
       <guid>https://dsunn.github.io/blog/post/mikrotik_cf_ddns/</guid>
-      <description>&lt;p&gt;在参考了j大佬的&lt;a href=&#34;https://www.digs.eu.org/2024/01/04/ROS%20cloudflare%20DDNS%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC/&#34;&gt;博客&lt;/a&gt;和这位作者的&lt;a href=&#34;https://gist.githubusercontent.com/kolobus/18680f8fb01ce3003cb9a3f82c9d30e1/raw/cf8ecd84fc0e5dccb7298422c7d8c40410c345a3/cf-ddns.rsc&#34;&gt;脚本&lt;/a&gt;的脚本后, 魔改的.&lt;/p&gt;&#xA;&lt;p&gt;适用在cloudflare上更新ipv4和ipv6的动态ip; 和原作者不同的是, 我的脚本是直接从ros接口上取相应ip, 其实我这脚本是放在ppp profile-on up-script中, 在拨号完成后执行一次, 而不是定时反复执行, 故相应修改了代码.&lt;/p&gt;&#xA;&lt;p&gt;token, zone_id, record_id等请先行获取, 获取方法在前述j大佬博客中有所提及.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Cloudflare Dynamic DNS update script&#xA;# Required policy: read, write, test, policy&#xA;# Add this script to scheduler&#xA;# Install DigiCert root CA or disable check-certificate&#xA;# Modified from https://gist.github.com/kolobus/18680f8fb01ce3003cb9a3f82c9d30e1&#xA;# Configuration ---------------------------------------------------------------------&#xA;&#xA;:local TOKEN &amp;#34;&amp;#34;&#xA;&#xA;:local ZONEIDv6 &amp;#34;&amp;#34;&#xA;:local RECORDIDv6 &amp;#34;&amp;#34;&#xA;:local RECORDNAMEv6 &amp;#34;&amp;#34;&#xA;:local IP6NEW&#xA;&#xA;:local ZONEIDv4 &amp;#34;&amp;#34;&#xA;:local RECORDIDv4 &amp;#34;&amp;#34;&#xA;:local RECORDNAMEv4 &amp;#34;&amp;#34;&#xA;:local IP4NEW&#xA;&#xA;:local WANIF &amp;#34;&amp;#34;&#xA;&#xA;#------------------------------------------------------------------------------------&#xA;&#xA;&#xA;&#xA;&#xA;:if ([/interface get $WANIF value-name=running]) do={&#xA;&#xA;    # IPv6 check&#xA;&#xA;    :local &amp;#34;IP6NEW&amp;#34; [/ipv6/address get [:pick [find dynamic global interface=$WANIF] 0 ] address]&#xA;    :set &amp;#34;IP6NEW&amp;#34; [:pick $&amp;#34;IP6NEW&amp;#34; 0 [:find $&amp;#34;IP6NEW&amp;#34; &amp;#34;/&amp;#34;]]&#xA;&#xA;        :local url &amp;#34;https://api.cloudflare.com/client/v4/zones/$ZONEIDv6/dns_records/$RECORDIDv6/&amp;#34;&#xA;&#xA;        :local cfapi [/tool fetch http-method=put mode=https url=$url check-certificate=no output=user as-value \&#xA;            http-header-field=&amp;#34;Authorization: Bearer $TOKEN&amp;#34; \&#xA;            http-data=&amp;#34;{\&amp;#34;type\&amp;#34;:\&amp;#34;AAAA\&amp;#34;,\&amp;#34;name\&amp;#34;:\&amp;#34;$RECORDNAMEv6\&amp;#34;,\&amp;#34;content\&amp;#34;:\&amp;#34;$IP6NEW\&amp;#34;,\&amp;#34;ttl\&amp;#34;:120,\&amp;#34;proxied\&amp;#34;:false}&amp;#34;]&#xA;&#xA;        :log info &amp;#34;CF-DDNS: $RECORDNAMEv6 is now $IP6NEW&amp;#34;&#xA;&#xA;&#xA;   # IPv4 check&#xA;&#xA;    :local ipaddr [/ip address get [/ip address find interface=$WANIF] address]&#xA;    :set IP4NEW [:pick $ipaddr 0 ([len $ipaddr] -3)]&#xA;&#xA;        :local url &amp;#34;https://api.cloudflare.com/client/v4/zones/$ZONEIDv4/dns_records/$RECORDIDv4/&amp;#34;&#xA;&#xA;        :local cfapi [/tool fetch http-method=put mode=https url=$url check-certificate=no output=user as-value \&#xA;            http-header-field=&amp;#34;Authorization: Bearer $TOKEN&amp;#34; \&#xA;            http-data=&amp;#34;{\&amp;#34;type\&amp;#34;:\&amp;#34;A\&amp;#34;,\&amp;#34;name\&amp;#34;:\&amp;#34;$RECORDNAMEv4\&amp;#34;,\&amp;#34;content\&amp;#34;:\&amp;#34;$IP4NEW\&amp;#34;,\&amp;#34;ttl\&amp;#34;:120,\&amp;#34;proxied\&amp;#34;:false}&amp;#34;]&#xA;&#xA;        :log info &amp;#34;CF-DDNS: $RECORDNAMEv4 is now $IP4NEW&amp;#34;&#xA;&#xA;&#xA;} else={&#xA;&#xA;    :log info &amp;#34;CF-DDNS: $WANIF is not currently running, quitting&amp;#34;&#xA;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+      <description>
+        
+          
+            &lt;p&gt;在参考了j大佬的&lt;a href=&#34;https://www.digs.eu.org/2024/01/04/ROS%20cloudflare%20DDNS%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC/&#34;&gt;博客&lt;/a&gt;和这位作者的&lt;a href=&#34;https://gist.githubusercontent.com/kolobus/18680f8fb01ce3003cb9a3f82c9d30e1/raw/cf8ecd84fc0e5dccb7298422c7d8c40410c345a3/cf-ddns.rsc&#34;&gt;脚本&lt;/a&gt;的脚本后, 魔改的.&lt;/p&gt;
+&lt;p&gt;适用在cloudflare上更新ipv4和ipv6的动态ip; 和原作者不同的是, 我的脚本是直接从ros接口上取相应ip, 其实我这脚本是放在ppp profile-on up-script中, 在拨号完成后执行一次, 而不是定时反复执行, 故相应修改了代码.&lt;/p&gt;
+&lt;p&gt;token, zone_id, record_id等请先行获取, 获取方法在前述j大佬博客中有所提及.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Cloudflare Dynamic DNS update script
+# Required policy: read, write, test, policy
+# Add this script to scheduler
+# Install DigiCert root CA or disable check-certificate
+# Modified from https://gist.github.com/kolobus/18680f8fb01ce3003cb9a3f82c9d30e1
+# Configuration ---------------------------------------------------------------------
+
+:local TOKEN &amp;#34;&amp;#34;
+
+:local ZONEIDv6 &amp;#34;&amp;#34;
+:local RECORDIDv6 &amp;#34;&amp;#34;
+:local RECORDNAMEv6 &amp;#34;&amp;#34;
+:local IP6NEW
+
+:local ZONEIDv4 &amp;#34;&amp;#34;
+:local RECORDIDv4 &amp;#34;&amp;#34;
+:local RECORDNAMEv4 &amp;#34;&amp;#34;
+:local IP4NEW
+
+:local WANIF &amp;#34;&amp;#34;
+
+#------------------------------------------------------------------------------------
+
+
+
+
+:if ([/interface get $WANIF value-name=running]) do={
+
+    # IPv6 check
+
+    :local &amp;#34;IP6NEW&amp;#34; [/ipv6/address get [:pick [find dynamic global interface=$WANIF] 0 ] address]
+    :set &amp;#34;IP6NEW&amp;#34; [:pick $&amp;#34;IP6NEW&amp;#34; 0 [:find $&amp;#34;IP6NEW&amp;#34; &amp;#34;/&amp;#34;]]
+
+        :local url &amp;#34;https://api.cloudflare.com/client/v4/zones/$ZONEIDv6/dns_records/$RECORDIDv6/&amp;#34;
+
+        :local cfapi [/tool fetch http-method=put mode=https url=$url check-certificate=no output=user as-value \
+            http-header-field=&amp;#34;Authorization: Bearer $TOKEN&amp;#34; \
+            http-data=&amp;#34;{\&amp;#34;type\&amp;#34;:\&amp;#34;AAAA\&amp;#34;,\&amp;#34;name\&amp;#34;:\&amp;#34;$RECORDNAMEv6\&amp;#34;,\&amp;#34;content\&amp;#34;:\&amp;#34;$IP6NEW\&amp;#34;,\&amp;#34;ttl\&amp;#34;:120,\&amp;#34;proxied\&amp;#34;:false}&amp;#34;]
+
+        :log info &amp;#34;CF-DDNS: $RECORDNAMEv6 is now $IP6NEW&amp;#34;
+
+
+   # IPv4 check
+
+    :local ipaddr [/ip address get [/ip address find interface=$WANIF] address]
+    :set IP4NEW [:pick $ipaddr 0 ([len $ipaddr] -3)]
+
+        :local url &amp;#34;https://api.cloudflare.com/client/v4/zones/$ZONEIDv4/dns_records/$RECORDIDv4/&amp;#34;
+
+        :local cfapi [/tool fetch http-method=put mode=https url=$url check-certificate=no output=user as-value \
+            http-header-field=&amp;#34;Authorization: Bearer $TOKEN&amp;#34; \
+            http-data=&amp;#34;{\&amp;#34;type\&amp;#34;:\&amp;#34;A\&amp;#34;,\&amp;#34;name\&amp;#34;:\&amp;#34;$RECORDNAMEv4\&amp;#34;,\&amp;#34;content\&amp;#34;:\&amp;#34;$IP4NEW\&amp;#34;,\&amp;#34;ttl\&amp;#34;:120,\&amp;#34;proxied\&amp;#34;:false}&amp;#34;]
+
+        :log info &amp;#34;CF-DDNS: $RECORDNAMEv4 is now $IP4NEW&amp;#34;
+
+
+} else={
+
+    :log info &amp;#34;CF-DDNS: $WANIF is not currently running, quitting&amp;#34;
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+          
+          
+        
+      </description>
     </item>
+    
     <item>
       <title>debian搭建clash的透明代理(Tproxy)(nftables转发)</title>
       <link>https://dsunn.github.io/blog/post/clash_nft/</link>
       <pubDate>Tue, 19 Sep 2023 20:47:03 -0400</pubDate>
+      
       <guid>https://dsunn.github.io/blog/post/clash_nft/</guid>
-      <description>&lt;p&gt;ref debian搭建clash的透明代理(Tproxy)(iptables转发)&lt;a href=&#34;https://dsunn.github.io/blog/post/clash/&#34;&gt;https://dsunn.github.io/blog/post/clash/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;本篇对上述用iptables来转发局域网流量到clash的方法, 用linux内置的nftables来代替.&lt;/p&gt;&#xA;&lt;p&gt;修改/etc/nftables.conf, 在其最后加入下列设置.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;table inet clash&#xA;delete table inet clash&#xA;&#xA;table inet clash {&#xA;    set local_addr {&#xA;        type ipv4_addr&#xA;        flags interval&#xA;        elements = {&#xA;            10.0.0.0/8,&#xA;            127.0.0.0/8,&#xA;            169.254.0.0/16,&#xA;            172.16.0.0/12,&#xA;            192.168.0.0/16,&#xA;            240.0.0.0/4,&#xA;            0.0.0.0/8&#xA;        }&#xA;    }&#xA;&#xA;    set clashhost_addr {&#xA;        type ipv4_addr&#xA;        flags interval&#xA;        elements = {&#xA;            192.168.10.89/32&#xA;        }&#xA;    }&#xA;&#xA;    chain clash-tproxy {&#xA;        ip daddr @local_addr return&#xA;        ip saddr @clashhost_addr return&#xA;        meta l4proto { tcp, udp } meta mark set 1 tproxy to :7893 accept&#xA;    }&#xA;&#xA;    chain clash-mark {&#xA;        ip daddr @local_addr return&#xA;        ip daddr @clashhost_addr return&#xA;        meta mark set 1&#xA;    }&#xA;&#xA;    chain mangle-prerouting {&#xA;        type filter hook prerouting priority mangle; policy accept;&#xA;        meta l4proto { tcp, udp } ct direction original jump clash-tproxy&#xA;    }&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在系统上使能nftables&lt;/p&gt;</description>
+      <description>
+        
+          
+            &lt;p&gt;ref debian搭建clash的透明代理(Tproxy)(iptables转发)&lt;a href=&#34;https://dsunn.github.io/blog/post/clash/&#34;&gt;https://dsunn.github.io/blog/post/clash/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本篇对上述用iptables来转发局域网流量到clash的方法, 用linux内置的nftables来代替.&lt;/p&gt;
+&lt;p&gt;修改/etc/nftables.conf, 在其最后加入下列设置.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;table inet clash
+delete table inet clash
+
+table inet clash {
+    set local_addr {
+        type ipv4_addr
+        flags interval
+        elements = {
+            10.0.0.0/8,
+            127.0.0.0/8,
+            169.254.0.0/16,
+            172.16.0.0/12,
+            192.168.0.0/16,
+            240.0.0.0/4,
+            0.0.0.0/8
+        }
+    }
+
+    set clashhost_addr {
+        type ipv4_addr
+        flags interval
+        elements = {
+            192.168.10.89/32
+        }
+    }
+
+    chain clash-tproxy {
+        ip daddr @local_addr return
+        ip saddr @clashhost_addr return
+        meta l4proto { tcp, udp } meta mark set 1 tproxy to :7893 accept
+    }
+
+    chain clash-mark {
+        ip daddr @local_addr return
+        ip daddr @clashhost_addr return
+        meta mark set 1
+    }
+
+    chain mangle-prerouting {
+        type filter hook prerouting priority mangle; policy accept;
+        meta l4proto { tcp, udp } ct direction original jump clash-tproxy
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在系统上使能nftables&lt;/p&gt;
+          
+          
+        
+      </description>
     </item>
+    
     <item>
       <title>Ffmpeg提取字幕文件</title>
       <link>https://dsunn.github.io/blog/post/ffmpeg/</link>
       <pubDate>Mon, 12 Jun 2023 23:07:47 -0400</pubDate>
+      
       <guid>https://dsunn.github.io/blog/post/ffmpeg/</guid>
-      <description>&lt;p&gt;ffmpeg -i video.mkv -vn -an -codec:s:0 srt subtitle.srt&lt;/p&gt;</description>
+      <description>
+        
+          
+            &lt;p&gt;ffmpeg -i video.mkv -vn -an -codec:s:0 srt subtitle.srt&lt;/p&gt;
+          
+          
+        
+      </description>
     </item>
+    
     <item>
       <title>debian LXC搭建modsns</title>
       <link>https://dsunn.github.io/blog/post/mosdns/</link>
       <pubDate>Mon, 05 Jun 2023 09:41:28 -0400</pubDate>
+      
       <guid>https://dsunn.github.io/blog/post/mosdns/</guid>
-      <description>&lt;p&gt;修改于6/5/2023&lt;/p&gt;&#xA;&lt;p&gt;搭建环境: PVE LXC debian 11, 网关clash(科学环境)&#xA;项目地址: &lt;a href=&#34;https://github.com/IrineSistiana/mosdns&#34;&gt;https://github.com/IrineSistiana/mosdns&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;下载并copy 二进制文件mosdns到 /usr/bin/&#xA;新建目录: /etc/mosdns, 下载并copy一众规则文件到该目录, 配置文件config.yaml也放这里&lt;/p&gt;&#xA;&lt;p&gt;关闭systemd-resolved&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl disable systemd-resolved&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;新建/etc/systemd/system/mosdns.service&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# /etc/systemd/system/mosdns.service&#xA;[Unit]&#xA;Description=A DNS forwarder&#xA;ConditionFileIsExecutable=/usr/bin/mosdns&#xA;&#xA;[Service]&#xA;User=root&#xA;StartLimitInterval=5&#xA;StartLimitBurst=10&#xA;ExecStart=/usr/bin/mosdns &amp;#34;start&amp;#34; &amp;#34;-c&amp;#34; &amp;#34;/etc/mosdns/config.yaml&amp;#34; &amp;#34;-d&amp;#34; &amp;#34;/etc/mosdns&amp;#34;&#xA;Restart=always&#xA;RestartSec=120&#xA;EnvironmentFile=-/etc/sysconfig/mosdns&#xA;&#xA;[Install]&#xA;WantedBy=multi-user.target&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;开机自启/启动运行&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl enable mosdns&#xA;systemctl start mosdns&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我个人的配置文件如下(v5), (不使用fallback, 仅以direct文件分流):&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;## mosdns v5 conf&#xA;&#xA;&#xA;log:&#xA;  level: debug&#xA;  # file: &amp;#34;/etc/mosdns/logs/mosdns.log&amp;#34;&#xA;  # production: false&#xA;&#xA;&#xA;plugins:&#xA;  - tag: cache&#xA;    type: cache&#xA;    args:&#xA;      size: 409600&#xA;      lazy_cache_ttl: 259200&#xA;      dump_file: ./cache.dump&#xA;      dump_interval: 600&#xA;&#xA;&#xA;#规则txt文件 在https://github.com/Loyalsoldier/v2ray-rules-dat下载&#xA;  - tag: domain_cn&#xA;    type: domain_set&#xA;    args:&#xA;      exps:                         # 域名表达式。&#xA;        - &amp;#39;xn--4gq62f52gdss.com&amp;#39;&#xA;        - &amp;#39;mycai.ml&amp;#39;&#xA;        # - &amp;#34;google.com&amp;#34;&#xA;        # - &amp;#34;regexp:.+\.google\.com$&amp;#34;&#xA;      files:                          # 从文件载入&#xA;        - &amp;#39;./direct-list.txt&amp;#39;&#xA;&#xA;&#xA;  - tag: ads&#xA;    type: domain_set&#xA;    args:&#xA;      files:&#xA;        - &amp;#39;./oisd_big_domains.txt&amp;#39;   #basic 文件可能better&#xA;        - &amp;#39;./reject-list.txt&amp;#39;&#xA;&#xA;  # 转发至本地服务器的插件&#xA;  - tag: forward_local&#xA;    type: forward&#xA;    args:&#xA;      concurrent: 1&#xA;      upstreams:&#xA;        - tag: ros_udp   #ros主路由dns(配置了ISP的v4/6dns和223,114)&#xA;          addr: 192.168.10.251&#xA;          dial_addr: 192.168.10.251&#xA;&#xA;  # 转发至远程服务器的插件&#xA;  - tag: forward_remote&#xA;    type: forward&#xA;    args:&#xA;      concurrent: 1&#xA;      upstreams:&#xA;        - tag: google_dot&#xA;          # addr: &amp;#34;https://dns.google/dns-query&amp;#34;&#xA;          addr: &amp;#34;tls://dns.google&amp;#34;&#xA;          dial_addr: &amp;#34;8.8.8.8&amp;#34;&#xA;          bootstrap: &amp;#34;8.8.8.8&amp;#34;&#xA;          idle_timeout: 30&#xA;          enable_pipeline: false&#xA;          enable_http3: false&#xA;          max_conns: 2&#xA;          insecure_skip_verify: false&#xA;          so_mark: 0&#xA;          bind_to_device: &amp;#34;&amp;#34;&#xA;        - tag: cf_dot&#xA;          # addr: &amp;#39;https://cloudflare-dns.com/dns-query&amp;#39;&#xA;          addr: &amp;#39;tls://1.1.1.1:853&amp;#39;&#xA;          dial_addr: &amp;#39;1.1.1.1&amp;#39;&#xA;          bootstrap: &amp;#34;1.1.1.1&amp;#34;&#xA;          idle_timeout: 30&#xA;          enable_pipeline: false&#xA;          enable_http3: false&#xA;          max_conns: 2&#xA;          insecure_skip_verify: false&#xA;          so_mark: 0&#xA;          bind_to_device: &amp;#34;&amp;#34;&#xA;&#xA;&#xA;&#xA;  - tag: main&#xA;    type: sequence&#xA;    args:&#xA;      # # ads blocked in adgh, so not here in mosdns&#xA;      # - matches:             # 如果&#xA;      #     - qname $ads # 如果请求的域名在广告列表内。&#xA;      #   exec: reject 3       # 执行 直接返回 NXDOMAIN(3) 屏蔽。&#xA;      - exec: $cache      # 然后。查找 cache。&#xA;      - matches:             # 如果&#xA;          - has_resp         # 有应答了(上一步 cache 找到应答)&#xA;        exec: accept         # 结束。&#xA;      # 上一步没有找到缓存，就会到这一步，转发至 local/remote 分流 获取应答。&#xA;      - matches: &#xA;          - qname $domain_cn&#xA;        exec: $forward_local&#xA;      - matches: has_resp   #has_wanted_ans / has_resp&#xA;        exec: accept&#xA;      # - exec: prefer_ipv4&#xA;      - exec: $forward_remote&#xA;      - exec: accept&#xA;&#xA;&#xA;  # 启动 udp 和 tcp 服务器。&#xA;  - tag: udp_server&#xA;    type: udp_server&#xA;    args:&#xA;      entry: main # 收到的请求会执行上面的逻辑&#xA;      listen: :53&#xA;  - tag: tcp_server&#xA;    type: tcp_server&#xA;    args:&#xA;      entry: main&#xA;      listen: :53&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+      <description>
+        
+          
+            &lt;p&gt;修改于6/5/2023&lt;/p&gt;
+&lt;p&gt;搭建环境: PVE LXC debian 11, 网关clash(科学环境)
+项目地址: &lt;a href=&#34;https://github.com/IrineSistiana/mosdns&#34;&gt;https://github.com/IrineSistiana/mosdns&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载并copy 二进制文件mosdns到 /usr/bin/
+新建目录: /etc/mosdns, 下载并copy一众规则文件到该目录, 配置文件config.yaml也放这里&lt;/p&gt;
+&lt;p&gt;关闭systemd-resolved&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl disable systemd-resolved
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;新建/etc/systemd/system/mosdns.service&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# /etc/systemd/system/mosdns.service
+[Unit]
+Description=A DNS forwarder
+ConditionFileIsExecutable=/usr/bin/mosdns
+
+[Service]
+User=root
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/usr/bin/mosdns &amp;#34;start&amp;#34; &amp;#34;-c&amp;#34; &amp;#34;/etc/mosdns/config.yaml&amp;#34; &amp;#34;-d&amp;#34; &amp;#34;/etc/mosdns&amp;#34;
+Restart=always
+RestartSec=120
+EnvironmentFile=-/etc/sysconfig/mosdns
+
+[Install]
+WantedBy=multi-user.target
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;开机自启/启动运行&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl enable mosdns
+systemctl start mosdns
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我个人的配置文件如下(v5), (不使用fallback, 仅以direct文件分流):&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;## mosdns v5 conf
+
+
+log:
+  level: debug
+  # file: &amp;#34;/etc/mosdns/logs/mosdns.log&amp;#34;
+  # production: false
+
+
+plugins:
+  - tag: cache
+    type: cache
+    args:
+      size: 409600
+      lazy_cache_ttl: 259200
+      dump_file: ./cache.dump
+      dump_interval: 600
+
+
+#规则txt文件 在https://github.com/Loyalsoldier/v2ray-rules-dat下载
+  - tag: domain_cn
+    type: domain_set
+    args:
+      exps:                         # 域名表达式。
+        - &amp;#39;xn--4gq62f52gdss.com&amp;#39;
+        - &amp;#39;mycai.ml&amp;#39;
+        # - &amp;#34;google.com&amp;#34;
+        # - &amp;#34;regexp:.+\.google\.com$&amp;#34;
+      files:                          # 从文件载入
+        - &amp;#39;./direct-list.txt&amp;#39;
+
+
+  - tag: ads
+    type: domain_set
+    args:
+      files:
+        - &amp;#39;./oisd_big_domains.txt&amp;#39;   #basic 文件可能better
+        - &amp;#39;./reject-list.txt&amp;#39;
+
+  # 转发至本地服务器的插件
+  - tag: forward_local
+    type: forward
+    args:
+      concurrent: 1
+      upstreams:
+        - tag: ros_udp   #ros主路由dns(配置了ISP的v4/6dns和223,114)
+          addr: 192.168.10.251
+          dial_addr: 192.168.10.251
+
+  # 转发至远程服务器的插件
+  - tag: forward_remote
+    type: forward
+    args:
+      concurrent: 1
+      upstreams:
+        - tag: google_dot
+          # addr: &amp;#34;https://dns.google/dns-query&amp;#34;
+          addr: &amp;#34;tls://dns.google&amp;#34;
+          dial_addr: &amp;#34;8.8.8.8&amp;#34;
+          bootstrap: &amp;#34;8.8.8.8&amp;#34;
+          idle_timeout: 30
+          enable_pipeline: false
+          enable_http3: false
+          max_conns: 2
+          insecure_skip_verify: false
+          so_mark: 0
+          bind_to_device: &amp;#34;&amp;#34;
+        - tag: cf_dot
+          # addr: &amp;#39;https://cloudflare-dns.com/dns-query&amp;#39;
+          addr: &amp;#39;tls://1.1.1.1:853&amp;#39;
+          dial_addr: &amp;#39;1.1.1.1&amp;#39;
+          bootstrap: &amp;#34;1.1.1.1&amp;#34;
+          idle_timeout: 30
+          enable_pipeline: false
+          enable_http3: false
+          max_conns: 2
+          insecure_skip_verify: false
+          so_mark: 0
+          bind_to_device: &amp;#34;&amp;#34;
+
+
+
+  - tag: main
+    type: sequence
+    args:
+      # # ads blocked in adgh, so not here in mosdns
+      # - matches:             # 如果
+      #     - qname $ads # 如果请求的域名在广告列表内。
+      #   exec: reject 3       # 执行 直接返回 NXDOMAIN(3) 屏蔽。
+      - exec: $cache      # 然后。查找 cache。
+      - matches:             # 如果
+          - has_resp         # 有应答了(上一步 cache 找到应答)
+        exec: accept         # 结束。
+      # 上一步没有找到缓存，就会到这一步，转发至 local/remote 分流 获取应答。
+      - matches: 
+          - qname $domain_cn
+        exec: $forward_local
+      - matches: has_resp   #has_wanted_ans / has_resp
+        exec: accept
+      # - exec: prefer_ipv4
+      - exec: $forward_remote
+      - exec: accept
+
+
+  # 启动 udp 和 tcp 服务器。
+  - tag: udp_server
+    type: udp_server
+    args:
+      entry: main # 收到的请求会执行上面的逻辑
+      listen: :53
+  - tag: tcp_server
+    type: tcp_server
+    args:
+      entry: main
+      listen: :53
+&lt;/code&gt;&lt;/pre&gt;
+          
+          
+        
+      </description>
     </item>
+    
     <item>
       <title>Ros通过dhcp6下发ipv6 dns的设定</title>
       <link>https://dsunn.github.io/blog/post/ros_dhcp6/</link>
       <pubDate>Mon, 05 Jun 2023 09:32:08 -0400</pubDate>
+      
       <guid>https://dsunn.github.io/blog/post/ros_dhcp6/</guid>
-      <description>&lt;p&gt;修改于6/5/2023&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/ipv6 dhcp-server option&#xA; add code=23 name=dns value=0xfd80000000000000ccf2bbfffe0abcf1&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此外, ros的ipv6-ND中不勾选advertise dns, 勾选other config.&lt;/p&gt;</description>
+      <description>
+        
+          
+            &lt;p&gt;修改于6/5/2023&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/ipv6 dhcp-server option
+ add code=23 name=dns value=0xfd80000000000000ccf2bbfffe0abcf1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此外, ros的ipv6-ND中不勾选advertise dns, 勾选other config.&lt;/p&gt;
+          
+          
+        
+      </description>
     </item>
+    
     <item>
       <title>debian搭建clash的透明代理(Tproxy)(iptables转发)</title>
       <link>https://dsunn.github.io/blog/post/clash/</link>
       <pubDate>Mon, 05 Jun 2023 08:36:36 -0400</pubDate>
+      
       <guid>https://dsunn.github.io/blog/post/clash/</guid>
-      <description>&lt;p&gt;修改于9/20/2023&lt;/p&gt;&#xA;&lt;p&gt;一. clash程序&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;root运行&lt;/li&gt;&#xA;&lt;li&gt;下载clash premium (&lt;a href=&#34;https://github.com/Dreamacro/clash/releases/tag/premium&#34;&gt;https://github.com/Dreamacro/clash/releases/tag/premium&lt;/a&gt;) 解压保存为/usr/local/bin/clash&lt;/li&gt;&#xA;&lt;li&gt;设置为systemd deamon&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;编辑/lib/systemd/system/clash.service&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#/lib/systemd/system/clash.service&#xA;&#xA;Description=A rule based proxy tunnel in Go  &#xA;After=network.target  &#xA;[Service]  &#xA;Type=simple  &#xA;Restart=on-abort  &#xA;ExecStart=/usr/local/bin/clash  &#xA;[Install]  &#xA;WantedBy=multi-user.target  &#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;默认运行目录为~/.config/clash, config.yaml要存放在工作目录中&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl daemon-reload  &#xA;systemctl enable clash  &#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;二. 透明代理&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;开启ipv4/ipv6的转发&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &amp;#34;net.ipv4.ip_forward = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p  &#xA;echo &amp;#34;net.ipv6.conf.all.forwarding = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;关闭systemd-resolved 服务, 让clash dns占有53端口&#xA;systemctl disable systemd-resolved&lt;br&gt;&#xA;/etc/reslov.conf里我是设置为主路由(ros)的dns&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;iptables持久化&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;apt install iptables-persistent netfilter-persistent  &#xA;netfilter-persistent save  &#xA;netfilter-persistent start  &#xA;iptables-save  &amp;gt; /etc/iptables/rules.v4  &#xA;ip6tables-save  &amp;gt; /etc/iptables/rules.v6  &#xA;&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;&#xA;&lt;li&gt;加载恢复&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;iptables-restore  &amp;lt; /etc/iptables/rules.v4  &#xA;ip6tables-restore  &amp;lt; /etc/iptables/rules.v6  &#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;三. iptables&#xA;(以下代码中192.168.10.87是我的clash host, 模式为tproxy)&lt;/p&gt;</description>
+      <description>
+        
+          
+            &lt;p&gt;修改于9/20/2023&lt;/p&gt;
+&lt;p&gt;一. clash程序&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;root运行&lt;/li&gt;
+&lt;li&gt;下载clash premium (&lt;a href=&#34;https://github.com/Dreamacro/clash/releases/tag/premium&#34;&gt;https://github.com/Dreamacro/clash/releases/tag/premium&lt;/a&gt;) 解压保存为/usr/local/bin/clash&lt;/li&gt;
+&lt;li&gt;设置为systemd deamon&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;编辑/lib/systemd/system/clash.service&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#/lib/systemd/system/clash.service
+
+Description=A rule based proxy tunnel in Go  
+After=network.target  
+[Service]  
+Type=simple  
+Restart=on-abort  
+ExecStart=/usr/local/bin/clash  
+[Install]  
+WantedBy=multi-user.target  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;默认运行目录为~/.config/clash, config.yaml要存放在工作目录中&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl daemon-reload  
+systemctl enable clash  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;二. 透明代理&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开启ipv4/ipv6的转发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &amp;#34;net.ipv4.ip_forward = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p  
+echo &amp;#34;net.ipv6.conf.all.forwarding = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;关闭systemd-resolved 服务, 让clash dns占有53端口
+systemctl disable systemd-resolved&lt;br&gt;
+/etc/reslov.conf里我是设置为主路由(ros)的dns&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;iptables持久化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;apt install iptables-persistent netfilter-persistent  
+netfilter-persistent save  
+netfilter-persistent start  
+iptables-save  &amp;gt; /etc/iptables/rules.v4  
+ip6tables-save  &amp;gt; /etc/iptables/rules.v6  
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;加载恢复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;iptables-restore  &amp;lt; /etc/iptables/rules.v4  
+ip6tables-restore  &amp;lt; /etc/iptables/rules.v6  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;三. iptables
+(以下代码中192.168.10.87是我的clash host, 模式为tproxy)&lt;/p&gt;
+          
+          
+        
+      </description>
     </item>
+    
   </channel>
 </rss>
