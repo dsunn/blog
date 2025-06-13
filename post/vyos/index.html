@@ -107,7 +107,7 @@
     <span class="post_date">
       Mar 22, 2025	  
     </span>
-    <span class="post_time"> · 8 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/vyos/' title="vyos" class="post_tag button button_translucent">vyos
+    <span class="post_time"> · 9 min read</span><span>&nbsp;· <a href='https://dsunn.github.io/blog/tags/vyos/' title="vyos" class="post_tag button button_translucent">vyos
         </a><a href='https://dsunn.github.io/blog/tags/router/' title="router" class="post_tag button button_translucent">router
         </a>
     </span>
@@ -146,7 +146,8 @@
   </span>
   </div>
 
-    <div class="post_body"><p>vyos的命令行界面是基于shell的，没有图形界面, 但是可以用tab自动补全.
+    <div class="post_body"><p>modified: 2025-06-13T15:08</p>
+<p>vyos的命令行界面是基于shell的，没有图形界面, 但是可以用tab自动补全.
 本文的vyos命令是基于vyos的vyos-rolling-nightly-builds的1.5.x版本.</p>
 <p>pve安装vyos:
 下载nightly-build: <a href="https://github.com/vyos/vyos-nightly-build/releases">https://github.com/vyos/vyos-nightly-build/releases</a>
@@ -179,9 +180,16 @@ set service ntp server 203.107.6.88
 set firewall group interface-group WAN interface &#39;eth1&#39;
 </code></pre><p>设置网络组(可选):</p>
 <pre tabindex="0"><code>set firewall group network-group LAN-v4 network &#39;192.168.10.0/24&#39;
-</code></pre><p>设置接口ip:</p>
+</code></pre><p>设置接口ip:
+Lan口:</p>
 <pre tabindex="0"><code>set interfaces ethernet eth0 address 192.168.10.1/24
-set interfaces ethernet eth1 address dhcp
+set interfaces ethernet eth0 description &#39;lan&#39;
+set interfaces ethernet eth0 offload gro
+set interfaces ethernet eth0 offload gso
+set interfaces ethernet eth0 offload sg
+set interfaces ethernet eth0 offload tso
+</code></pre><p>Wan口:</p>
+<pre tabindex="0"><code>set interfaces ethernet eth1 address dhcp
 </code></pre><p>当eth1是pppoe时:</p>
 <pre tabindex="0"><code>set interfaces pppoe pppoe1 authentication password &#39;your-password&#39;
 set interfaces pppoe pppoe1 authentication username &#39;your-username&#39;
@@ -223,8 +231,18 @@ set nat destination rule 10 translation address &#39;192.168.10.145&#39;
 set nat destination rule 10 translation port &#39;53822&#39; #可省略, 如果端口相同
 </code></pre><p>设置回流:
 由于上面masquerade(SNAT)的规则, 这里不需要设置回流.</p>
-<p>设置防火墙规则:
-设置ipv4入站(input链)规则:</p>
+<p>设置防火墙规则:</p>
+<p>设置flowtable:</p>
+<pre tabindex="0"><code>set firewall flowtable FT01 description &#39;Flow Table for the forward chain&#39;
+set firewall flowtable FT01 interface &#39;pppoe1&#39;
+set firewall flowtable FT01 offload &#39;software&#39;
+</code></pre><p>设置global-options:</p>
+<pre tabindex="0"><code>set firewall global-options apply-to-bridged-traffic invalid-connections #允许容器的流量 也需要这条
+set firewall global-options state-policy established action &#39;accept&#39;
+set firewall global-options state-policy invalid action &#39;drop&#39;
+set firewall global-options state-policy offload offload-target &#39;FT01&#39;
+set firewall global-options state-policy related action &#39;accept&#39;
+</code></pre><p>设置ipv4入站(input链)规则:</p>
 <pre tabindex="0"><code>set firewall ipv4 name WAN_LOCAL default-action &#39;drop&#39; #默认拒绝
 set firewall ipv4 name WAN_LOCAL rule 10 action &#39;accept&#39; #允许已建立和相关连接
 set firewall ipv4 name WAN_LOCAL rule 10 state &#39;established&#39;
@@ -250,22 +268,33 @@ set firewall ipv6 name WAN_LOCAL rule 40 destination port &#39;11133&#39;
 set firewall ipv6 name WAN_LOCAL rule 40 protocol &#39;udp&#39;
 </code></pre><p>设置ipv4转发(forward链)规则:</p>
 <pre tabindex="0"><code>set firewall ipv4 name WAN_IN default-action &#39;drop&#39; #默认拒绝
-set firewall ipv4 name WAN_IN rule 10 action &#39;accept&#39; #允许已建立和相关连接
-set firewall ipv4 name WAN_IN rule 10 state &#39;established&#39;
-set firewall ipv4 name WAN_IN rule 10 state &#39;related&#39;
-set firewall ipv4 name WAN_IN rule 20 action &#39;accept&#39; #允许已DNAT的连接
-set firewall ipv4 name WAN_IN rule 20 connection-status nat &#39;destination&#39;
-set firewall ipv4 name WAN_IN rule 20 state &#39;new&#39;
+set firewall ipv4 name WAN_IN rule 10 action &#39;offload&#39; #启用offload
+set firewall ipv4 name WAN_IN rule 10 offload-target &#39;FT01&#39; #指定offload-target
+set firewall ipv4 name WAN_IN rule 10 state &#39;established&#39; #允许已建立的连接
+set firewall ipv4 name WAN_IN rule 10 state &#39;related&#39; #允许相关连接
+set firewall ipv4 name WAN_IN rule 20 action &#39;accept&#39; 
+set firewall ipv4 name WAN_IN rule 20 state &#39;established&#39;
+set firewall ipv4 name WAN_IN rule 20 state &#39;related&#39;
+set firewall ipv4 name WAN_IN rule 30 action &#39;accept&#39; #允许已NAT的连接
+set firewall ipv4 name WAN_IN rule 30 connection-status nat &#39;destination&#39;
+set firewall ipv4 name WAN_IN rule 30 state &#39;new&#39;
 </code></pre><p>设置ipv6转发(forward链)规则:</p>
 <pre tabindex="0"><code>set firewall ipv6 name WAN_IN default-action &#39;drop&#39; #默认拒绝
-set firewall ipv6 name WAN_IN rule 10 action &#39;accept&#39; #允许已建立和相关连接
-set firewall ipv6 name WAN_IN rule 10 state &#39;established&#39;
-set firewall ipv6 name WAN_IN rule 10 state &#39;related&#39;
-set firewall ipv6 name WAN_IN rule 20 action &#39;accept&#39; #允许icmpv6
-set firewall ipv6 name WAN_IN rule 20 protocol &#39;icmpv6&#39;
-set firewall ipv6 name WAN_IN rule 30 action &#39;accept&#39; #允许ipsec
-set firewall ipv6 name WAN_IN rule 30 destination port &#39;500,4500&#39;
-set firewall ipv6 name WAN_IN rule 30 protocol &#39;udp&#39;
+set firewall ipv6 name WAN_IN rule 10 action &#39;offload&#39; #启用offload
+set firewall ipv6 name WAN_IN rule 10 offload-target &#39;FT01&#39; #指定offload-target
+set firewall ipv6 name WAN_IN rule 10 state &#39;established&#39; #允许已建立的连接
+set firewall ipv6 name WAN_IN rule 10 state &#39;related&#39; #允许相关连接
+set firewall ipv6 name WAN_IN rule 20 action &#39;accept&#39;
+set firewall ipv6 name WAN_IN rule 20 state &#39;established&#39;
+set firewall ipv6 name WAN_IN rule 20 state &#39;related&#39;
+set firewall ipv6 name WAN_IN rule 30 action &#39;accept&#39;
+set firewall ipv6 name WAN_IN rule 30 protocol &#39;icmpv6&#39;
+set firewall ipv6 name WAN_IN rule 40 action &#39;accept&#39;
+set firewall ipv6 name WAN_IN rule 40 destination port &#39;500,4500&#39;
+set firewall ipv6 name WAN_IN rule 40 protocol &#39;udp&#39;
+set firewall ipv6 name WAN_IN rule 50 action &#39;accept&#39; #允许已NAT的连接
+set firewall ipv6 name WAN_IN rule 50 connection-status nat &#39;destination&#39;
+set firewall ipv6 name WAN_IN rule 50 state &#39;new&#39;
 </code></pre><p>然后分别从input和forward链, 调用WAN_LOCAL和WAN_IN:</p>
 <pre tabindex="0"><code>set firewall ipv4 input filter rule 10 action &#39;jump&#39;
 set firewall ipv4 input filter rule 10 inbound-interface group &#39;WAN&#39;
@@ -425,11 +454,6 @@ vyos的容器网络, 不用映射端口到主机, 就可以使用全端口, 当�
 <li>保存配置</li>
 </ol>
 <pre tabindex="0"><code>commit
-</code></pre><p>注意!!!
-如vyos的防火墙中设置了下面这条全局规则, 经测验会阻止容器的访问:</p>
-<pre tabindex="0"><code>set firewall global-options state-policy invalid action &#39;drop&#39;
-</code></pre><p>为此, 需要另外添加一条全局规则, 允许容器的流量:</p>
-<pre tabindex="0"><code>set firewall global-options apply-to-bridged-traffic invalid-connections
 </code></pre>
     </div><div class="post_comments">
   
