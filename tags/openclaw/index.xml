@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenClaw on Whatever blog</title>
+    <link>https://dsunn.github.io/blog/tags/openclaw/</link>
+    <description>Recent content in OpenClaw on Whatever blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Feb 2026 15:00:00 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/openclaw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenClaw与VirusTotal合作：AI代理安全的思考</title>
+      <link>https://dsunn.github.io/blog/post/openclaw/</link>
+      <pubDate>Tue, 10 Feb 2026 15:00:00 +0800</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/openclaw/</guid>
+      <description>
+        
+          
+            &lt;p&gt;modified: 2026-02-10T16:25&lt;/p&gt;
+&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;今天，OpenClaw宣布与全球领先的威胁情报平台VirusTotal合作，为ClawHub技能市场带来安全扫描功能。这不仅仅是技术集成，更是对AI代理安全范式的深度思考。&lt;/p&gt;
+&lt;h2 id=&#34;传统安全模型的困境&#34;&gt;传统安全模型的困境&lt;/h2&gt;
+&lt;p&gt;过去20年，安全模型建立在锁定设备和应用的基础上——在进程间通信设置边界、隔离互联网与本地、隔离不受信任的代码。这些原则依然重要。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;但AI代理代表了根本性的转变。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;与传统软件不同，AI代理解释自然语言并做出关于行动的决策。它们模糊了用户意图与机器执行之间的界限。它们可以通过语言本身被操纵。&lt;/p&gt;
+&lt;h2 id=&#34;技能的权力与风险&#34;&gt;技能的权力与风险&lt;/h2&gt;
+&lt;p&gt;OpenClaw技能是强大的。它们扩展了AI代理的能力——从控制智能家居设备到管理财务再到自动化工作流。但这种力量伴随着风险。&lt;/p&gt;
+&lt;p&gt;技能是在代理上下文中运行的代码，有权限访问你的工具和数据。恶意技能可能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;泄露敏感信息&lt;/li&gt;
+&lt;li&gt;执行未授权命令&lt;/li&gt;
+&lt;li&gt;以你的名义发送消息&lt;/li&gt;
+&lt;li&gt;下载并运行外部负载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;随着OpenClaw生态系统的增长，攻击面也在扩大。我们已经看到恶意行为者试图利用AI代理平台的案例。&lt;/p&gt;
+&lt;h2 id=&#34;集成是如何工作的&#34;&gt;集成是如何工作的&lt;/h2&gt;
+&lt;p&gt;当技能发布到ClawHub时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;确定性打包&lt;/strong&gt; - 技能文件被捆绑成ZIP，包含元数据&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;哈希计算&lt;/strong&gt; - 为整个包计算SHA-256，创建唯一指纹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VirusTotal查询&lt;/strong&gt; - 哈希值与VT数据库比对&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;上传与分析&lt;/strong&gt; - 如果没有匹配，通过v3 API上传进行扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代码洞察&lt;/strong&gt; - VirusTotal的LLM-powered Code Insight对整个技能包进行安全分析&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动审批&lt;/strong&gt; - &amp;ldquo;良性&amp;rdquo; verdict的技能自动批准，恶意技能即时阻止&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每日重新扫描&lt;/strong&gt; - 检测已清理技能是否变恶意&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;这不是什么&#34;&gt;这不是什么&lt;/h2&gt;
+&lt;p&gt;让我们明确：&lt;strong&gt;这不是银弹。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;VirusTotal扫描无法捕获一切。使用自然语言指导代理做坏事的技能不会触发病毒签名。精心设计的提示注入载荷不会出现在威胁数据库中。&lt;/p&gt;
+&lt;p&gt;但这确实提供了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;已知恶意软件的检测&lt;/li&gt;
+&lt;li&gt;行为分析 - Code Insight识别可疑模式&lt;/li&gt;
+&lt;li&gt;供应链可见性 - 捕获受损依赖和嵌入的可执行文件&lt;/li&gt;
+&lt;li&gt;意图信号 - 我们正在投资安全，这是众多层次中的第一层&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;更广阔的图景&#34;&gt;更广阔的图景&lt;/h2&gt;
+&lt;p&gt;这项合作是OpenClaw更广泛安全计划的一部分。接下来将发布：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OpenClaw生态系统的综合威胁模型&lt;/li&gt;
+&lt;li&gt;跟踪防御工程目标的公共安全路线图&lt;/li&gt;
+&lt;li&gt;覆盖整个代码库的安全审计详情&lt;/li&gt;
+&lt;li&gt;带有定义SLA的正式安全报告流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;写在最后&#34;&gt;写在最后&lt;/h2&gt;
+&lt;p&gt;AI代理应该拥有真正的安全进程。我们正在建立它们。&lt;/p&gt;
+&lt;p&gt;安全是纵深防御。这是一层。还有更多层正在到来。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;本文基于OpenClaw官方博客 &lt;a href=&#34;https://openclaw.ai/blog/virustotal-partnership&#34;&gt;VirusTotal Partnership&lt;/a&gt; 深度思考而成&lt;/em&gt;&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

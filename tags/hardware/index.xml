@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hardware on Whatever blog</title>
+    <link>https://dsunn.github.io/blog/tags/hardware/</link>
+    <description>Recent content in Hardware on Whatever blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://dsunn.github.io/blog/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>John Carmack的脑洞：用光纤替代DRAM做缓存？</title>
+      <link>https://dsunn.github.io/blog/post/fiber-cache-carmack/</link>
+      <pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/fiber-cache-carmack/</guid>
+      <description>
+        
+          
+            &lt;h1 id=&#34;john-carmack的脑洞用光纤替代dram做缓存&#34;&gt;John Carmack的脑洞：用光纤替代DRAM做缓存？&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;我不是天才，只是很努力地思考问题。&amp;rdquo; —— John Carmack&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;传奇程序员、Oculus联合创始人John Carmack最近又提出了一个颠覆性的硬件设想：&lt;strong&gt;用长距离光纤替代DRAM作为AI的L2缓存&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这听起来像是科幻小说，但它背后有严谨的数学支撑。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;为什么dram不够用了&#34;&gt;为什么DRAM不够用了？&lt;/h2&gt;
+&lt;p&gt;现代AI模型（尤其是大语言模型）的权重（weights）越来越大：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;模型&lt;/th&gt;
+          &lt;th&gt;参数大小&lt;/th&gt;
+          &lt;th&gt;需要多少显存？&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GPT-3&lt;/td&gt;
+          &lt;td&gt;1750亿&lt;/td&gt;
+          &lt;td&gt;~350GB&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GPT-4&lt;/td&gt;
+          &lt;td&gt;估计万亿级&lt;/td&gt;
+          &lt;td&gt;TB级别&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：我们不可能把所有权重都塞进GPU显存。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;carmack的解法让数据流动起来&#34;&gt;Carmack的解法：让数据&amp;quot;流动&amp;quot;起来&lt;/h2&gt;
+&lt;h3 id=&#34;核心洞察&#34;&gt;核心洞察&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;光在光纤里传输是需要时间的&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;光在玻璃中的速度：约20万公里/秒&lt;/li&gt;
+&lt;li&gt;100km光纤 = 0.5毫秒延迟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果带宽足够大，这段时间内&amp;quot;在途数据&amp;quot;本身就可以当缓存用。&lt;/p&gt;
+&lt;h3 id=&#34;数学计算&#34;&gt;数学计算&lt;/h3&gt;
+&lt;p&gt;已知光纤通信的最新进展：&lt;strong&gt;256 Tb/s&lt;/strong&gt;（太比特每秒）&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;256 Tb/s × 0.5ms = 256 × 10^12 × 0.5 × 10^-3
+                = 128 Tb
+                = 16 GB
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;结论&lt;/strong&gt;：100km光纤能同时&amp;quot;容纳&amp;quot;约16GB数据在传输中！&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;这个方案适合什么场景&#34;&gt;这个方案适合什么场景？&lt;/h2&gt;
+&lt;h3 id=&#34;-适合流式ai推理&#34;&gt;✅ 适合：流式AI推理&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;┌─────────────────────────────────────────────┐
+│  光纤 ──数据流──► GPU ──边算边读──► 输出   │
+└─────────────────────────────────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;边从光纤读取权重，边做推理计算&lt;/li&gt;
+&lt;li&gt;不需要把整个模型加载到显存&lt;/li&gt;
+&lt;li&gt;数据像流水线一样&amp;quot;流&amp;quot;过计算单元&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-不适合&#34;&gt;❌ 不适合&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;需要随机访问的场合&lt;/li&gt;
+&lt;li&gt;交互式低延迟应用（如游戏）&lt;/li&gt;
+&lt;li&gt;小数据量的高频查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;技术对比&#34;&gt;技术对比&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指标&lt;/th&gt;
+          &lt;th&gt;光纤延迟线&lt;/th&gt;
+          &lt;th&gt;传统DRAM&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;带宽&lt;/td&gt;
+          &lt;td&gt;极高 (256 Tb/s已实现)&lt;/td&gt;
+          &lt;td&gt;中等&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;延迟&lt;/td&gt;
+          &lt;td&gt;固定（取决于光纤长度）&lt;/td&gt;
+          &lt;td&gt;很低&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;容量&lt;/td&gt;
+          &lt;td&gt;取决于长度×带宽&lt;/td&gt;
+          &lt;td&gt;受限于物理密度&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;访问模式&lt;/td&gt;
+          &lt;td&gt;顺序流式&lt;/td&gt;
+          &lt;td&gt;随机访问&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;我的思考&#34;&gt;我的思考&lt;/h2&gt;
+&lt;p&gt;Carmack这个想法让我联想到计算机体系结构的几个经典概念：&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

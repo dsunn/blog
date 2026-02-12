@@ -155,12 +155,17 @@
       <div class="excerpt_footer">
         <div class="pale">
           
-            <!-- raw HTML omitted -->
+            <p>ref debian搭建clash的透明代理(Tproxy)(iptables转发)<a href="https://dsunn.github.io/blog/post/clash/">https://dsunn.github.io/blog/post/clash/</a></p>
+<p>本篇对上述用iptables来转发局域网流量到clash的方法, 用linux内置的nftables来代替.</p>
+<p>修改/etc/nftables.conf, 在其最后加入下列设置.</p>
+<pre tabindex="0"><code>table inet clash
+delete table inet clash
 <p>table inet clash {
 set local_addr {
 type ipv4_addr
 flags interval
-elements = { …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+elements = { …</code></pre></p>
+
           
           <br>
           <a href="https://dsunn.github.io/blog/post/clash_nft/" title="Read More" class="excerpt_more button">Read More</a>
@@ -227,11 +232,20 @@ elements = { …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
       <div class="excerpt_footer">
         <div class="pale">
           
-            <!-- raw HTML omitted -->
+            <p>修改于9/20/2023</p>
+<p>一. clash程序</p>
+<ul>
+<li>root运行</li>
+<li>下载clash premium (<a href="https://github.com/Dreamacro/clash/releases/tag/premium">https://github.com/Dreamacro/clash/releases/tag/premium</a>) 解压保存为/usr/local/bin/clash</li>
+<li>设置为systemd deamon</li>
+</ul>
+<p>编辑/lib/systemd/system/clash.service</p>
+<pre tabindex="0"><code>#/lib/systemd/system/clash.service
 <p>Description=A rule based proxy tunnel in Go<br>
 After=network.target<br>
 [Service]<br>
-Type=simple …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+Type=simple …</code></pre></p>
+
           
           <br>
           <a href="https://dsunn.github.io/blog/post/clash/" title="Read More" class="excerpt_more button">Read More</a>
@@ -254,6 +268,12 @@ Type=simple …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
     <h2 class="mt-4">Featured Posts</h2>
     <ul>
       <li>
+        <a href="https://dsunn.github.io/blog/post/ai-dialup-window/" class="nav-link" title="AI Dial-Up Era: The Last Window to Truly Understand AI">AI Dial-Up Era: The Last Window to Truly Understand AI</a>
+      </li>
+      <li>
+        <a href="https://dsunn.github.io/blog/post/openclaw/" class="nav-link" title="OpenClaw与VirusTotal合作：AI代理安全的思考">OpenClaw与VirusTotal合作：AI代理安全的思考</a>
+      </li>
+      <li>
         <a href="https://dsunn.github.io/blog/post/vyos/" class="nav-link" title="Vyos">Vyos</a>
       </li>
       <li>
@@ -271,6 +291,15 @@ Type=simple …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
       <li>
         <a href="https://dsunn.github.io/blog/post/mosdns/" class="nav-link" title="debian LXC搭建modsns">debian LXC搭建modsns</a>
       </li>
+    </ul>
+    <h2 class="mt-4">Recent Posts</h2>
+    <ul class="flex-column">
+      <li>
+        <a href="https://dsunn.github.io/blog/post/polymarket-ai-trading/" class="nav-link" title="AI Agent 眼中的 Polymarket：预测市场自动交易初探">AI Agent 眼中的 Polymarket：预测市场自动交易初探</a>
+      </li>
+      <li>
+        <a href="https://dsunn.github.io/blog/post/fiber-cache-carmack/" class="nav-link" title="John Carmack的脑洞：用光纤替代DRAM做缓存？">John Carmack的脑洞：用光纤替代DRAM做缓存？</a>
+      </li>
       <li>
         <a href="https://dsunn.github.io/blog/post/ros_dhcp6/" class="nav-link" title="Ros通过dhcp6下发ipv6 dns的设定">Ros通过dhcp6下发ipv6 dns的设定</a>
       </li>
@@ -278,15 +307,17 @@ Type=simple …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
         <a href="https://dsunn.github.io/blog/post/clash/" class="nav-link" title="debian搭建clash的透明代理(Tproxy)(iptables转发)">debian搭建clash的透明代理(Tproxy)(iptables转发)</a>
       </li>
     </ul>
-    <h2 class="mt-4">Recent Posts</h2>
-    <ul class="flex-column">
-    </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
       <nav class="tags_nav">
         <a href='https://dsunn.github.io/blog/categories/technology/' class="post_tag button button_translucent" title="technology">
           TECHNOLOGY
-          <span class="button_tally">8</span>
+          <span class="button_tally">11</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/categories/ai-trading/' class="post_tag button button_translucent" title="ai trading">
+          AI TRADING
+          <span class="button_tally">1</span>
         </a>
         
         
@@ -298,6 +329,16 @@ Type=simple …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
         <a href='https://dsunn.github.io/blog/tags/dns/' class="post_tag button button_translucent" title="dns">
           DNS
           <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/tz/' class="post_tag button button_translucent" title="tz">
+          TZ
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/ai/' class="post_tag button button_translucent" title="ai">
+          AI
+          <span class="button_tally">3</span>
         </a>
         
         <a href='https://dsunn.github.io/blog/tags/clash/' class="post_tag button button_translucent" title="clash">
@@ -315,8 +356,43 @@ Type=simple …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://dsunn.github.io/blog/tags/ai-security/' class="post_tag button button_translucent" title="ai security">
+          AI SECURITY
+          <span class="button_tally">1</span>
+        </a>
+        
         <a href='https://dsunn.github.io/blog/tags/ddns/' class="post_tag button button_translucent" title="ddns">
           DDNS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/delay-line-cache/' class="post_tag button button_translucent" title="delay-line-cache">
+          DELAY-LINE-CACHE
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/fiber/' class="post_tag button button_translucent" title="fiber">
+          FIBER
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/hardware/' class="post_tag button button_translucent" title="hardware">
+          HARDWARE
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/john-carmack/' class="post_tag button button_translucent" title="john carmack">
+          JOHN CARMACK
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/openclaw/' class="post_tag button button_translucent" title="openclaw">
+          OPENCLAW
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/polymarket/' class="post_tag button button_translucent" title="polymarket">
+          POLYMARKET
           <span class="button_tally">1</span>
         </a>
         
@@ -325,13 +401,33 @@ Type=simple …<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
           <span class="button_tally">1</span>
         </a>
         
+        <a href='https://dsunn.github.io/blog/tags/trading/' class="post_tag button button_translucent" title="trading">
+          TRADING
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/understanding/' class="post_tag button button_translucent" title="understanding">
+          UNDERSTANDING
+          <span class="button_tally">1</span>
+        </a>
+        
         <a href='https://dsunn.github.io/blog/tags/video/' class="post_tag button button_translucent" title="video">
           VIDEO
           <span class="button_tally">1</span>
         </a>
         
+        <a href='https://dsunn.github.io/blog/tags/virustotal/' class="post_tag button button_translucent" title="virustotal">
+          VIRUSTOTAL
+          <span class="button_tally">1</span>
+        </a>
+        
         <a href='https://dsunn.github.io/blog/tags/vyos/' class="post_tag button button_translucent" title="vyos">
           VYOS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/window/' class="post_tag button button_translucent" title="window">
+          WINDOW
           <span class="button_tally">1</span>
         </a>
         

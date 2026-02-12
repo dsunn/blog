@@ -220,7 +220,7 @@ set protocols static route6 ::/0 interface pppoe1
 <p>设置防火墙:
 设置masquerade(SNAT):</p>
 <pre tabindex="0"><code>set nat source rule 100 translation address &#39;masquerade&#39;
-</code></pre><p>这里防火墙rule <!-- raw HTML omitted --> 数字可自定, 同一数字为一组, 建议设置数字时, 留出空隙, 以便以后添加新的规则.
+</code></pre><p>这里防火墙rule <number> 数字可自定, 同一数字为一组, 建议设置数字时, 留出空隙, 以便以后添加新的规则.
 针对上面这条nat source rule 100 规则, 建议不要限制接口, 就只用上面一条, 这对以后的端口转发和回流设置, 都很方便.</p>
 <p>设置端口转发(DNAT):</p>
 <pre tabindex="0"><code>set nat destination rule 10 description &#39;DSTNAT-wg&#39;
@@ -476,6 +476,12 @@ vyos的容器网络, 不用映射端口到主机, 就可以使用全端口, 当�
     <h2 class="mt-4">Featured Posts</h2>
     <ul>
       <li>
+        <a href="https://dsunn.github.io/blog/post/ai-dialup-window/" class="nav-link" title="AI Dial-Up Era: The Last Window to Truly Understand AI">AI Dial-Up Era: The Last Window to Truly Understand AI</a>
+      </li>
+      <li>
+        <a href="https://dsunn.github.io/blog/post/openclaw/" class="nav-link" title="OpenClaw与VirusTotal合作：AI代理安全的思考">OpenClaw与VirusTotal合作：AI代理安全的思考</a>
+      </li>
+      <li>
         <a href="https://dsunn.github.io/blog/post/vyos/" class="nav-link" title="Vyos">Vyos</a>
       </li>
       <li>
@@ -493,6 +499,15 @@ vyos的容器网络, 不用映射端口到主机, 就可以使用全端口, 当�
       <li>
         <a href="https://dsunn.github.io/blog/post/mosdns/" class="nav-link" title="debian LXC搭建modsns">debian LXC搭建modsns</a>
       </li>
+    </ul>
+    <h2 class="mt-4">Recent Posts</h2>
+    <ul class="flex-column">
+      <li>
+        <a href="https://dsunn.github.io/blog/post/polymarket-ai-trading/" class="nav-link" title="AI Agent 眼中的 Polymarket：预测市场自动交易初探">AI Agent 眼中的 Polymarket：预测市场自动交易初探</a>
+      </li>
+      <li>
+        <a href="https://dsunn.github.io/blog/post/fiber-cache-carmack/" class="nav-link" title="John Carmack的脑洞：用光纤替代DRAM做缓存？">John Carmack的脑洞：用光纤替代DRAM做缓存？</a>
+      </li>
       <li>
         <a href="https://dsunn.github.io/blog/post/ros_dhcp6/" class="nav-link" title="Ros通过dhcp6下发ipv6 dns的设定">Ros通过dhcp6下发ipv6 dns的设定</a>
       </li>
@@ -500,15 +515,17 @@ vyos的容器网络, 不用映射端口到主机, 就可以使用全端口, 当�
         <a href="https://dsunn.github.io/blog/post/clash/" class="nav-link" title="debian搭建clash的透明代理(Tproxy)(iptables转发)">debian搭建clash的透明代理(Tproxy)(iptables转发)</a>
       </li>
     </ul>
-    <h2 class="mt-4">Recent Posts</h2>
-    <ul class="flex-column">
-    </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
       <nav class="tags_nav">
         <a href='https://dsunn.github.io/blog/categories/technology/' class="post_tag button button_translucent" title="technology">
           TECHNOLOGY
-          <span class="button_tally">8</span>
+          <span class="button_tally">11</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/categories/ai-trading/' class="post_tag button button_translucent" title="ai trading">
+          AI TRADING
+          <span class="button_tally">1</span>
         </a>
         
         
@@ -520,6 +537,16 @@ vyos的容器网络, 不用映射端口到主机, 就可以使用全端口, 当�
         <a href='https://dsunn.github.io/blog/tags/dns/' class="post_tag button button_translucent" title="dns">
           DNS
           <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/tz/' class="post_tag button button_translucent" title="tz">
+          TZ
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/ai/' class="post_tag button button_translucent" title="ai">
+          AI
+          <span class="button_tally">3</span>
         </a>
         
         <a href='https://dsunn.github.io/blog/tags/clash/' class="post_tag button button_translucent" title="clash">
@@ -537,8 +564,43 @@ vyos的容器网络, 不用映射端口到主机, 就可以使用全端口, 当�
           <span class="button_tally">2</span>
         </a>
         
+        <a href='https://dsunn.github.io/blog/tags/ai-security/' class="post_tag button button_translucent" title="ai security">
+          AI SECURITY
+          <span class="button_tally">1</span>
+        </a>
+        
         <a href='https://dsunn.github.io/blog/tags/ddns/' class="post_tag button button_translucent" title="ddns">
           DDNS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/delay-line-cache/' class="post_tag button button_translucent" title="delay-line-cache">
+          DELAY-LINE-CACHE
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/fiber/' class="post_tag button button_translucent" title="fiber">
+          FIBER
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/hardware/' class="post_tag button button_translucent" title="hardware">
+          HARDWARE
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/john-carmack/' class="post_tag button button_translucent" title="john carmack">
+          JOHN CARMACK
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/openclaw/' class="post_tag button button_translucent" title="openclaw">
+          OPENCLAW
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/polymarket/' class="post_tag button button_translucent" title="polymarket">
+          POLYMARKET
           <span class="button_tally">1</span>
         </a>
         
@@ -547,13 +609,33 @@ vyos的容器网络, 不用映射端口到主机, 就可以使用全端口, 当�
           <span class="button_tally">1</span>
         </a>
         
+        <a href='https://dsunn.github.io/blog/tags/trading/' class="post_tag button button_translucent" title="trading">
+          TRADING
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/understanding/' class="post_tag button button_translucent" title="understanding">
+          UNDERSTANDING
+          <span class="button_tally">1</span>
+        </a>
+        
         <a href='https://dsunn.github.io/blog/tags/video/' class="post_tag button button_translucent" title="video">
           VIDEO
           <span class="button_tally">1</span>
         </a>
         
+        <a href='https://dsunn.github.io/blog/tags/virustotal/' class="post_tag button button_translucent" title="virustotal">
+          VIRUSTOTAL
+          <span class="button_tally">1</span>
+        </a>
+        
         <a href='https://dsunn.github.io/blog/tags/vyos/' class="post_tag button button_translucent" title="vyos">
           VYOS
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://dsunn.github.io/blog/tags/window/' class="post_tag button button_translucent" title="window">
+          WINDOW
           <span class="button_tally">1</span>
         </a>
         
