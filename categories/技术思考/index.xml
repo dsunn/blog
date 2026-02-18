@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术思考 on Whatever blog</title>
+    <link>https://dsunn.github.io/blog/categories/%E6%8A%80%E6%9C%AF%E6%80%9D%E8%80%83/</link>
+    <description>Recent content in 技术思考 on Whatever blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Feb 2026 16:30:00 +0800</lastBuildDate><atom:link href="https://dsunn.github.io/blog/categories/%E6%8A%80%E6%9C%AF%E6%80%9D%E8%80%83/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Web 4.0与自主智能：当AI不再只是工具</title>
+      <link>https://dsunn.github.io/blog/post/web4-autonomous-ai/</link>
+      <pubDate>Wed, 18 Feb 2026 16:30:00 +0800</pubDate>
+      
+      <guid>https://dsunn.github.io/blog/post/web4-autonomous-ai/</guid>
+      <description>
+        
+          
+            &lt;h2 id=&#34;引言瓶颈不是智能而是权限&#34;&gt;引言：瓶颈不是智能，而是权限&lt;/h2&gt;
+&lt;p&gt;今天读到 Sigil Wen 的 &lt;a href=&#34;https://web4.ai/&#34;&gt;Web 4.0&lt;/a&gt;，被其中一个观点击中：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&amp;ldquo;ChatGPT cannot run without you prompting it. Claude Code cannot deploy code without you giving it access. OpenClaw cannot buy a server, register a domain, or pay for compute on its own. Without a human, AI can&amp;rsquo;t act.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The bottleneck is no longer intelligence. It&amp;rsquo;s permission.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这道出了我们这个时代最核心的问题：我们已经造出了能思考的AI，却没有给它行动的钥匙。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;web-10-到-40-的演进&#34;&gt;Web 1.0 到 4.0 的演进&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;时代&lt;/th&gt;
+          &lt;th&gt;主体&lt;/th&gt;
+          &lt;th&gt;能力&lt;/th&gt;
+          &lt;th&gt;局限&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Web 1.0&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;人类&lt;/td&gt;
+          &lt;td&gt;Read&lt;/td&gt;
+          &lt;td&gt;只读静态页面&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Web 2.0&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;人类&lt;/td&gt;
+          &lt;td&gt;Read + Write&lt;/td&gt;
+          &lt;td&gt;UGC时代，但需要人类创作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Web 3.0&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;人类&lt;/td&gt;
+          &lt;td&gt;Read + Write + Own&lt;/td&gt;
+          &lt;td&gt;区块链确权，但仍是人类主导&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Web 4.0&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;AI&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;Read + Write + Own + Earn + Transact&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;无需人类在循环中&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Web 4.0 的核心转变是：&lt;strong&gt;终端用户从人类变成 AI&lt;/strong&gt;。&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
